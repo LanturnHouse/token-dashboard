@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>token-dashboard thumbnail A</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 720px; overflow: hidden; }
+  body {
+    background: radial-gradient(1200px 700px at 78% 40%, #2a1a14 0%, #121318 55%, #0b0c10 100%);
+    color: #f5f3ee;
+    font-family: "Pretendard", "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+    position: relative;
+  }
+  .glow {
+    position: absolute; width: 760px; height: 560px; right: -120px; top: 50px;
+    background: radial-gradient(closest-side, rgba(217,119,87,0.45), rgba(217,119,87,0) 70%);
+    filter: blur(20px);
+  }
+  .shot-wrap {
+    position: absolute; left: 700px; top: 96px; width: 600px; height: 420px;
+    transform: rotate(-4deg);
+    border-radius: 18px; overflow: hidden;
+    border: 2px solid rgba(255,255,255,0.18);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(217,119,87,0.35), 0 0 60px rgba(217,119,87,0.35);
+    background: #0f1116;
+  }
+  .shot-wrap img {
+    position: absolute; left: 0; top: 0; width: 1040px; height: auto;
+  }
+  .left { position: absolute; left: 64px; top: 70px; width: 600px; }
+  .eyebrow {
+    display: inline-block; font-size: 24px; font-weight: 700; color: #d97757;
+    border: 2px solid #d97757; border-radius: 999px; padding: 6px 18px; letter-spacing: -0.5px;
+  }
+  h1 {
+    margin-top: 26px; font-size: 104px; line-height: 1.04; font-weight: 900; letter-spacing: -3px;
+    color: #ffffff;
+  }
+  h1 .hl { color: #d97757; }
+  .sub {
+    margin-top: 22px; font-size: 32px; font-weight: 700; color: #cfcac0; letter-spacing: -0.5px;
+  }
+  .chips { position: absolute; left: 64px; bottom: 60px; display: flex; gap: 16px; }
+  .chip {
+    border-radius: 18px; padding: 16px 24px; background: #1b1d25; border: 2px solid #2c2f3a;
+    min-width: 170px;
+  }
+  .chip .num { font-size: 46px; font-weight: 900; letter-spacing: -1.5px; line-height: 1; }
+  .chip .lbl { margin-top: 8px; font-size: 19px; font-weight: 700; color: #a6a296; }
+  .chip.wide { min-width: 360px; }
+  .dots { display: flex; gap: 10px; align-items: center; margin-top: 4px; font-size: 27px; font-weight: 900; }
+  .dot { width: 18px; height: 18px; border-radius: 50%; display: inline-block; }
+  .sep { color: #5b5f6b; font-size: 22px; font-weight: 700; margin: 0 2px; }
+</style>
+</head>
+<body>
+  <div class="glow"></div>
+
+  <div class="left">
+    <span class="eyebrow">Claude Code + GPT</span>
+    <h1>내 AI 토큰,<br><span class="hl">어디로</span> 갔나?</h1>
+    <div class="sub">Claude + GPT 사용량 실시간 대시보드</div>
+  </div>
+
+  <div class="shot-wrap"><img src="dashboard-capture.png" alt=""></div>
+
+  <div class="chips">
+    <div class="chip">
+      <div class="num">11.6B</div>
+      <div class="lbl">토큰 사용</div>
+    </div>
+    <div class="chip">
+      <div class="num" style="color:#f0b48f">≈ $4,300</div>
+      <div class="lbl">API 정가 추정</div>
+    </div>
+    <div class="chip wide">
+      <div class="dots">
+        <span class="dot" style="background:#d97757"></span><span style="color:#d97757">Opus</span>
+        <span class="sep">·</span>
+        <span class="dot" style="background:#6a9bcc"></span><span style="color:#6a9bcc">Sonnet</span>
+        <span class="sep">·</span>
+        <span class="dot" style="background:#788c5d"></span><span style="color:#8fa876">Haiku</span>
+      </div>
+      <div class="dots" style="margin-top:8px">
+        <span class="dot" style="background:#2bb3a3"></span><span style="color:#2bb3a3">GPT</span>
+        <span style="color:#a6a296;font-size:19px;font-weight:700;margin-left:6px">모델별 색상 차트</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
