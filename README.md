@@ -63,6 +63,23 @@ Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데�
 
 가림 처리는 서버에서 합니다. 브라우저로 나가는 API 응답 자체에 실제 값이 들어가지 않습니다.
 
+## Windows 실행 파일 (token-dashboard.exe)
+
+Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
+
+1. GitHub Releases 에서 `token-dashboard.exe` 를 받습니다.
+2. 파일을 더블클릭합니다. 기본 브라우저가 **http://localhost:7777** 을 자동으로 엽니다. 창을 닫으면 대시보드가 종료됩니다.
+3. 처음 실행하면 Windows SmartScreen 에 **"알 수 없는 게시자"** 경고가 뜰 수 있습니다. 이 프로그램은 코드 서명이 없기 때문입니다. **추가 정보** → **실행** 을 누르면 됩니다.
+4. `config.json` 과 `.cache/` 는 exe 가 있는 폴더에 만들어집니다. 설정을 바꾸려면 그 파일을 편집하세요.
+
+옵션:
+
+- `token-dashboard.exe --demo` : 데모 모드로 실행합니다. 기본 포트는 **7778** 이며, `PORT` 환경변수 또는 `config.json` 의 `demoPort` 로 바꿀 수 있습니다.
+- `token-dashboard.exe --no-open` : 브라우저를 자동으로 열지 않습니다.
+- 포트가 이미 사용 중이면 안내 메시지를 보여 주고 10초 후 종료합니다. 다른 포트를 `PORT` 환경변수나 `config.json` 에서 지정하세요.
+
+직접 빌드하려면 Node.js 24 와 Windows 에서 `build.bat` 을 실행합니다. 결과물은 `dist/token-dashboard.exe` 입니다. 빌드는 Node 내장 SEA(Single Executable Applications) 기능과 `postject` (npx 로 받음)를 씁니다.
+
 ## 설정
 
 ### `config.json`
@@ -159,6 +176,8 @@ public/             화면 (index.html, app.js, style.css)
 config.json         설정
 start.bat           Windows 실행 스크립트
 demo.bat            Windows 데모 실행 스크립트 (포트 7778)
+build.bat           Windows 실행 파일 빌드 (dist/token-dashboard.exe)
+build/              빌드 스크립트 (번들러, SEA 설정, build.ps1)
 docs/images/        README 스크린샷
 docs/specs/         설계 메모 (SPEC, SPEC-v2, SPEC-v3)
 docs/youtube/       데모 영상 제작 자료
@@ -211,6 +230,7 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 
 - **Run:** `node server.js` (or `start.bat` on Windows), then open http://localhost:7777. Node 20+ recommended; developed and tested on Node 24.
 - **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths and prompts for screen recording.
+- **Windows exe:** download `token-dashboard.exe` from GitHub Releases and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`.
 - **Cost figures** are estimates at API list prices. They are not your subscription bill.
 - **Config:** `config.json` (`port`, `host`, `claudeDir`, `codexDir`, `codexPricing`) and env vars `PORT`, `CODEX_DIR`, `DASHBOARD_CACHE`, `DEMO`.
 - **Design notes:** `docs/specs/` (SPEC, SPEC-v2, SPEC-v3). Parts of these are outdated (e.g. PIN login).
