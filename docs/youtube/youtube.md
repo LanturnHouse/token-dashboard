@@ -39,7 +39,12 @@ Claude Code를 쓰다 보면 "이번 달 토큰이 대체 어디로 갔지?" 싶
 - 읽기 전용: ~/.claude, ~/.codex 기록을 읽기만 하며 데이터를 수정하거나 입력을 보내지 않습니다.
 - 의존성 0개: Node.js 내장 모듈만 사용합니다. npm install이 필요 없습니다.
 
-실행 방법
+바로 실행하기 (Windows, 설치 불필요)
+- 다운로드: https://github.com/LanturnHouse/token-dashboard/releases/latest
+- zip을 풀고 token-dashboard.exe 를 더블클릭하면 브라우저가 자동으로 열립니다.
+- 서명되지 않은 파일이라 SmartScreen 경고가 뜨면 '추가 정보 → 실행'을 누르세요.
+
+소스로 실행하기
 1. Node.js 20 이상을 설치합니다 (24 권장).
 2. 저장소를 받습니다.
    git clone https://github.com/LanturnHouse/token-dashboard
