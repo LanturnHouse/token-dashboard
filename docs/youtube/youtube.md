@@ -40,7 +40,7 @@ Claude Code를 쓰다 보면 "이번 달 토큰이 대체 어디로 갔지?" 싶
 - 의존성 0개: Node.js 내장 모듈만 사용합니다. npm install이 필요 없습니다.
 
 실행 방법
-1. Node.js 24 이상을 설치합니다.
+1. Node.js 20 이상을 설치합니다 (24 권장).
 2. 저장소를 받습니다.
    git clone https://github.com/LanturnHouse/token-dashboard
    cd token-dashboard
