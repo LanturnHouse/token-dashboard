@@ -15,7 +15,7 @@ GitHub: https://github.com/LanturnHouse/token-dashboard
 | 4 | Claude Code 서브에이전트 토큰·작업시간·비용 한 번에 보기 | 37자 |
 | 5 | Claude Code 토큰 비용 약 $4,300? 실시간 대시보드로 확인 | 40자 |
 
-추천 이유: "Claude Code"와 "토큰"이 앞에 오고, "어디로 샜나?"가 호기심을 자극합니다. 3번은 썸네일 A의 헤드라인과 가장 잘 맞습니다.
+추천 이유: "Claude Code"와 "토큰"이 앞에 오고, "어디로 샜나?"가 호기심을 자극합니다. 채택한 썸네일 B("토큰, 얼마나 썼나?" + 11.6B)와 맞추려면 2번 또는 5번도 잘 어울립니다.
 
 ---
 
@@ -110,6 +110,6 @@ Claude만 쓰시나요, GPT도 같이 쓰시나요? 여러분의 토큰 사용 �
 
 ## 6. 썸네일 파일
 
-- `D:/token-dashboard/docs/youtube/thumbnail.png` (추천): 헤드라인 "내 AI 토큰, 어디로 갔나?" + 기울어진 대시보드 캡처 + 모델 색 칩
-- `D:/token-dashboard/docs/youtube/thumbnail-b.png`: "토큰, 얼마나 썼나?" + 큰 11.6B 숫자 + 대시보드 캡처 전체 폭
+- `D:/token-dashboard/docs/youtube/thumbnail.png` (미사용 대안): 헤드라인 "내 AI 토큰, 어디로 갔나?" + 기울어진 대시보드 캡처 + 모델 색 칩
+- `D:/token-dashboard/docs/youtube/thumbnail-b.png` (**채택**): "토큰, 얼마나 썼나?" + 큰 11.6B 숫자 + 대시보드 캡처 전체 폭
 - 소스: `thumbnail.html`, `thumbnail-b.html` (둘 다 1280x720). 캡처 이미지: `dashboard-capture.png` (데모 서버 localhost:7778 에서 캡처)
