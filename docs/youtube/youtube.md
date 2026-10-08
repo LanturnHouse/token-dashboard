@@ -22,10 +22,6 @@ GitHub: https://github.com/LanturnHouse/token-dashboard
 ## 2. 설명란 (description)
 
 ```
-Claude Code를 쓰다 보면 "이번 달 토큰이 대체 어디로 갔지?" 싶을 때가 있습니다.
-이 영상은 Claude Code와 OpenAI Codex(GPT) 사용 기록을 한 화면에서 실시간으로 보여주는
-로컬 대시보드 'token-dashboard'를 소개합니다.
-
 이 대시보드가 보여주는 것
 - 세션별, 서브에이전트별 토큰 사용량과 작업 시간
 - 지금 작업 중인 세션 (실시간으로 시간이 올라가는 카드)
