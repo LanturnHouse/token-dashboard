@@ -2,9 +2,9 @@
 
 로컬에 남은 Claude Code / OpenAI Codex(GPT) 사용 기록을 읽어 토큰 사용량, 작업 시간, 실행 중인 세션을 한 화면에 보여주는 **읽기 전용** 로컬 웹 대시보드입니다.
 
-[![demo](https://img.youtube.com/vi/ouR9nL3lefw/maxresdefault.jpg)](https://youtu.be/ouR9nL3lefw)
+[![demo](https://img.youtube.com/vi/CYhLtgvjr_0/maxresdefault.jpg)](https://youtu.be/CYhLtgvjr_0)
 
-데모 영상: https://youtu.be/ouR9nL3lefw
+데모 영상: https://youtu.be/CYhLtgvjr_0
 
 **⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.0.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
 
@@ -236,6 +236,6 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 - **Cost figures** are estimates at API list prices. They are not your subscription bill.
 - **Config:** `config.json` (`port`, `host`, `claudeDir`, `codexDir`, `codexPricing`) and env vars `PORT`, `CODEX_DIR`, `DASHBOARD_CACHE`, `DEMO`.
 - **Design notes:** `docs/specs/` (SPEC, SPEC-v2, SPEC-v3). Parts of these are outdated (e.g. PIN login).
-- **Demo video:** https://youtu.be/ouR9nL3lefw
+- **Demo video:** https://youtu.be/CYhLtgvjr_0
 
 License: MIT.
