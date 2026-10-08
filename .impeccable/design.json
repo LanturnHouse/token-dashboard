@@ -7,7 +7,7 @@
       "night-ground": {
         "role": "neutral",
         "displayName": "Night Ground",
-        "canonical": "#0b1220",
+        "canonical": "#161616",
         "purpose": "Page background and sticky top bar (dark default).",
         "tonalRamp": [
           "#050b18",
@@ -23,7 +23,7 @@
       "night-surface": {
         "role": "neutral",
         "displayName": "Night Surface",
-        "canonical": "#111a2c",
+        "canonical": "#1e1e1e",
         "purpose": "Cells, live cards, drawer, sticky table header.",
         "tonalRamp": [
           "#040a1b",
@@ -39,11 +39,11 @@
       "night-surface-raised": {
         "role": "neutral",
         "displayName": "Raised Surface",
-        "canonical": "#17233b",
+        "canonical": "#262626",
         "purpose": "Hover fills, chart and gauge tracks, tooltip.",
         "tonalRamp": [
           "#030a1f",
-          "#17233b",
+          "#262626",
           "#32405a",
           "#4f5e7a",
           "#71819e",
@@ -55,7 +55,7 @@
       "hairline": {
         "role": "neutral",
         "displayName": "Hairline",
-        "canonical": "#1f2b42",
+        "canonical": "#2e2e2e",
         "purpose": "1px grid gaps and row rules.",
         "tonalRamp": [
           "#030a1e",
@@ -71,7 +71,7 @@
       "hairline-strong": {
         "role": "neutral",
         "displayName": "Strong Hairline",
-        "canonical": "#2d3c58",
+        "canonical": "#3d3d3d",
         "purpose": "Control borders, table header rule, day separators.",
         "tonalRamp": [
           "#020921",
@@ -87,7 +87,7 @@
       "ink": {
         "role": "neutral",
         "displayName": "Ink",
-        "canonical": "#e4ebf5",
+        "canonical": "#ececec",
         "purpose": "Primary text and values.",
         "tonalRamp": [
           "#070b12",
@@ -103,7 +103,7 @@
       "ink-secondary": {
         "role": "neutral",
         "displayName": "Secondary Ink",
-        "canonical": "#aebcd2",
+        "canonical": "#bdbdbd",
         "purpose": "Supporting values, prompt text, idle badge.",
         "tonalRamp": [
           "#040b1a",
@@ -119,7 +119,7 @@
       "ink-muted": {
         "role": "neutral",
         "displayName": "Muted Ink",
-        "canonical": "#95a3bb",
+        "canonical": "#a3a3a3",
         "purpose": "Labels, axes, metadata, 종료 stamp.",
         "tonalRamp": [
           "#030b1b",
@@ -167,7 +167,7 @@
       "focus-steel": {
         "role": "neutral",
         "displayName": "Focus Steel",
-        "canonical": "#9dbbe6",
+        "canonical": "#b5b5b5",
         "purpose": "Focus, selection, pressed states, gauge fill.",
         "tonalRamp": [
           "#000827",
@@ -199,7 +199,7 @@
       "day-ground": {
         "role": "neutral",
         "displayName": "Daylight Night Ground",
-        "canonical": "#e3ecf5",
+        "canonical": "#ebebeb",
         "purpose": "Light-theme value of night-ground (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#060c11",
@@ -215,7 +215,7 @@
       "day-surface": {
         "role": "neutral",
         "displayName": "Daylight Night Surface",
-        "canonical": "#f5f9fd",
+        "canonical": "#fafafa",
         "purpose": "Light-theme value of night-surface (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#090b0e",
@@ -231,7 +231,7 @@
       "day-surface-raised": {
         "role": "neutral",
         "displayName": "Daylight Raised Surface",
-        "canonical": "#e8eff7",
+        "canonical": "#f0f0f0",
         "purpose": "Light-theme value of night-surface-raised (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#070c11",
@@ -241,13 +241,13 @@
           "#7b8188",
           "#9fa5ad",
           "#c4cbd3",
-          "#e8eff7"
+          "#f0f0f0"
         ]
       },
       "day-hairline": {
         "role": "neutral",
         "displayName": "Daylight Hairline",
-        "canonical": "#c7d5e4",
+        "canonical": "#d6d6d6",
         "purpose": "Light-theme value of hairline (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#040c16",
@@ -263,7 +263,7 @@
       "day-hairline-strong": {
         "role": "neutral",
         "displayName": "Daylight Strong Hairline",
-        "canonical": "#a7b9cf",
+        "canonical": "#b8b8b8",
         "purpose": "Light-theme value of hairline-strong (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#020b1a",
@@ -279,7 +279,7 @@
       "day-ink": {
         "role": "neutral",
         "displayName": "Daylight Ink",
-        "canonical": "#11203a",
+        "canonical": "#1a1a1a",
         "purpose": "Light-theme value of ink (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#010921",
@@ -295,7 +295,7 @@
       "day-ink-secondary": {
         "role": "neutral",
         "displayName": "Daylight Secondary Ink",
-        "canonical": "#33455f",
+        "canonical": "#3d3d3d",
         "purpose": "Light-theme value of ink-secondary (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#010a20",
@@ -311,7 +311,7 @@
       "day-ink-muted": {
         "role": "neutral",
         "displayName": "Daylight Muted Ink",
-        "canonical": "#4b5d77",
+        "canonical": "#575757",
         "purpose": "Light-theme value of ink-muted (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#010a1f",
@@ -359,7 +359,7 @@
       "day-focus-steel": {
         "role": "neutral",
         "displayName": "Daylight Focus Steel",
-        "canonical": "#2d5a94",
+        "canonical": "#4a4a4a",
         "purpose": "Light-theme value of focus-steel (prefers-color-scheme: light, or data-theme=\"light\").",
         "tonalRamp": [
           "#000236",
@@ -674,7 +674,7 @@
       "refersTo": "button",
       "description": "Quiet outlined button (drawer 닫기).",
       "html": "<button class=\"ds-btn\">닫기</button>",
-      "css": ".ds-btn{background:transparent;color:var(--ink,#e4ebf5);border:1px solid var(--line-2,#2d3c58);border-radius:3px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}.ds-btn:hover{background:var(--surface-2,#17233b)}.ds-btn:focus-visible{outline:2px solid var(--focus,#9dbbe6);outline-offset:2px}"
+      "css": ".ds-btn{background:transparent;color:var(--ink,#ececec);border:1px solid var(--line-2,#3d3d3d);border-radius:3px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}.ds-btn:hover{background:var(--surface-2,#262626)}.ds-btn:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
     },
     {
       "name": "Filter chips",
@@ -682,7 +682,7 @@
       "refersTo": "chip",
       "description": "Session filters; the active chip takes a focus-steel border and 18% fill.",
       "html": "<div class=\"ds-chips\"><button class=\"ds-chip ds-chip-on\" aria-pressed=\"true\">전체</button><button class=\"ds-chip\">작업 중</button><button class=\"ds-chip\">오늘</button><button class=\"ds-chip\">7일</button></div>",
-      "css": ".ds-chips{display:flex;gap:6px}.ds-chip{background:transparent;border:1px solid var(--line-2,#2d3c58);color:var(--ink-2,#aebcd2);border-radius:3px;padding:3px 10px;font:inherit;font-size:12.5px;cursor:pointer}.ds-chip:hover{background:var(--surface-2,#17233b);color:var(--ink,#e4ebf5)}.ds-chip:focus-visible{outline:2px solid var(--focus,#9dbbe6);outline-offset:2px}.ds-chip-on{color:var(--ink,#e4ebf5);border-color:var(--focus,#9dbbe6);background:color-mix(in srgb,var(--focus,#9dbbe6) 18%,transparent)}"
+      "css": ".ds-chips{display:flex;gap:6px}.ds-chip{background:transparent;border:1px solid var(--line-2,#3d3d3d);color:var(--ink-2,#bdbdbd);border-radius:3px;padding:3px 10px;font:inherit;font-size:12.5px;cursor:pointer}.ds-chip:hover{background:var(--surface-2,#262626);color:var(--ink,#ececec)}.ds-chip:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}.ds-chip-on{color:var(--ink,#ececec);border-color:var(--focus,#b5b5b5);background:color-mix(in srgb,var(--focus,#b5b5b5) 18%,transparent)}"
     },
     {
       "name": "Provider toggle",
@@ -690,7 +690,7 @@
       "refersTo": "segmented-toggle",
       "description": "Claude / GPT / 전체 segmented control in the top bar; shown only when both providers exist.",
       "html": "<div class=\"ds-seg\"><button>Claude</button><button>GPT</button><button aria-pressed=\"true\">전체</button></div>",
-      "css": ".ds-seg{display:inline-flex;border:1px solid var(--line-2,#2d3c58);border-radius:3px;overflow:hidden}.ds-seg button{font:inherit;font-size:12px;padding:5px 12px;border:0;background:transparent;color:var(--muted,#95a3bb);cursor:pointer}.ds-seg button+button{border-left:1px solid var(--line-2,#2d3c58)}.ds-seg button:hover{color:var(--ink,#e4ebf5)}.ds-seg button[aria-pressed=\"true\"]{color:var(--ink,#e4ebf5);font-weight:600;background:color-mix(in srgb,var(--focus,#9dbbe6) 18%,transparent)}.ds-seg button:focus-visible{outline:2px solid var(--focus,#9dbbe6);outline-offset:-2px}"
+      "css": ".ds-seg{display:inline-flex;border:1px solid var(--line-2,#3d3d3d);border-radius:3px;overflow:hidden}.ds-seg button{font:inherit;font-size:12px;padding:5px 12px;border:0;background:transparent;color:var(--muted,#a3a3a3);cursor:pointer}.ds-seg button+button{border-left:1px solid var(--line-2,#3d3d3d)}.ds-seg button:hover{color:var(--ink,#ececec)}.ds-seg button[aria-pressed=\"true\"]{color:var(--ink,#ececec);font-weight:600;background:color-mix(in srgb,var(--focus,#b5b5b5) 18%,transparent)}.ds-seg button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:-2px}"
     },
     {
       "name": "Search field",
@@ -698,7 +698,7 @@
       "refersTo": "search-input",
       "description": "Sessions search.",
       "html": "<input class=\"ds-search\" type=\"search\" placeholder=\"제목, 프로젝트, 경로, 모델 검색\">",
-      "css": ".ds-search{background:transparent;color:var(--ink,#e4ebf5);border:1px solid var(--line-2,#2d3c58);border-radius:3px;padding:6px 10px;min-width:270px;font:inherit;outline:none}.ds-search::placeholder{color:var(--muted,#95a3bb);opacity:1}.ds-search:focus{border-color:var(--focus,#9dbbe6);outline:2px solid var(--focus,#9dbbe6);outline-offset:1px}"
+      "css": ".ds-search{background:transparent;color:var(--ink,#ececec);border:1px solid var(--line-2,#3d3d3d);border-radius:3px;padding:6px 10px;min-width:270px;font:inherit;outline:none}.ds-search::placeholder{color:var(--muted,#a3a3a3);opacity:1}.ds-search:focus{border-color:var(--focus,#b5b5b5);outline:2px solid var(--focus,#b5b5b5);outline-offset:1px}"
     },
     {
       "name": "Status badges",
@@ -706,7 +706,7 @@
       "refersTo": "badge-ended",
       "description": "작업 중 (pulsing mint dot), 대기 (hollow ring), 종료 (tilted stamp).",
       "html": "<div class=\"ds-badges\"><span class=\"ds-badge ds-busy\"><i></i>작업 중</span><span class=\"ds-badge ds-idle\"><i></i>대기</span><span class=\"ds-badge ds-ended\">종료</span></div>",
-      "css": ".ds-badges{display:flex;gap:16px;align-items:center}.ds-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-2,#aebcd2)}.ds-badge i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;box-sizing:border-box}.ds-busy{color:var(--live,#5be3c0)}.ds-busy i{animation:ds-pulse 3s ease-in-out infinite}.ds-idle i{background:transparent;border:1px solid currentColor}.ds-ended{color:var(--muted,#95a3bb);font-size:11px;letter-spacing:.04em;border:1px solid currentColor;border-radius:2px;padding:0 6px;line-height:1.5;transform:rotate(-4deg)}@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.35}}@media (prefers-reduced-motion:reduce){.ds-busy i{animation:none}}"
+      "css": ".ds-badges{display:flex;gap:16px;align-items:center}.ds-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-2,#bdbdbd)}.ds-badge i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;box-sizing:border-box}.ds-busy{color:var(--live,#5be3c0)}.ds-busy i{animation:ds-pulse 3s ease-in-out infinite}.ds-idle i{background:transparent;border:1px solid currentColor}.ds-ended{color:var(--muted,#a3a3a3);font-size:11px;letter-spacing:.04em;border:1px solid currentColor;border-radius:2px;padding:0 6px;line-height:1.5;transform:rotate(-4deg)}@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.35}}@media (prefers-reduced-motion:reduce){.ds-busy i{animation:none}}"
     },
     {
       "name": "Advisory banner",
@@ -714,7 +714,7 @@
       "refersTo": "advisory-banner",
       "description": "특보: shown only when the last hour exceeds 2x the average of nonzero hours in the 48-hour window.",
       "html": "<div class=\"ds-adv\"><span>특보 · 최근 60분 토큰 사용량이 평소의 2.4배 (119.0M)</span><button>이번 시간 닫기</button></div>",
-      "css": ".ds-adv{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;padding:10px 16px;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);border-radius:3px;background:color-mix(in srgb,var(--advisory,#ff9f43) 11%,transparent);color:var(--advisory,#ff9f43);font-size:14px;font-weight:600}.ds-adv button{background:transparent;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);color:inherit;border-radius:3px;padding:3px 10px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}.ds-adv button:hover{background:color-mix(in srgb,var(--advisory,#ff9f43) 16%,transparent)}.ds-adv button:focus-visible{outline:2px solid var(--focus,#9dbbe6);outline-offset:2px}"
+      "css": ".ds-adv{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;padding:10px 16px;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);border-radius:3px;background:color-mix(in srgb,var(--advisory,#ff9f43) 11%,transparent);color:var(--advisory,#ff9f43);font-size:14px;font-weight:600}.ds-adv button{background:transparent;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);color:inherit;border-radius:3px;padding:3px 10px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}.ds-adv button:hover{background:color-mix(in srgb,var(--advisory,#ff9f43) 16%,transparent)}.ds-adv button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
     },
     {
       "name": "지금 reading",
@@ -722,7 +722,7 @@
       "refersTo": "cell",
       "description": "Forecast-temperature reading with a model-ink split bar and a hairline fact list.",
       "html": "<section class=\"ds-now\"><h2>지금</h2><div class=\"ds-reading\">119.0M</div><div class=\"ds-cap\">최근 60분</div><div class=\"ds-split\"><i style=\"flex-grow:5;background:#d97757\"></i><i style=\"flex-grow:4;background:#6a9bcc\"></i><i style=\"flex-grow:1;background:#788c5d\"></i></div><dl class=\"ds-facts\"><dt>오늘 토큰</dt><dd>474.4M</dd><dt>작업 중</dt><dd><b>3</b> · 대기 7</dd></dl></section>",
-      "css": ".ds-now{background:var(--surface,#111a2c);color:var(--ink,#e4ebf5);padding:20px 22px;font-variant-numeric:tabular-nums;max-width:420px}.ds-now h2{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}.ds-reading{font-size:clamp(3rem,5.2vw,4.75rem);font-weight:300;line-height:1;letter-spacing:-.03em;margin:14px 0 8px}.ds-cap{color:var(--muted,#95a3bb);font-size:12px;margin-bottom:14px}.ds-split{display:flex;height:4px;background:var(--surface-2,#17233b);border-radius:2px;overflow:hidden;margin-bottom:16px}.ds-split i{display:block}.ds-facts{display:grid;grid-template-columns:auto 1fr;margin:0;font-size:13px}.ds-facts dt,.ds-facts dd{margin:0;padding:8px 0;border-top:1px solid var(--line,#1f2b42)}.ds-facts dt{color:var(--muted,#95a3bb)}.ds-facts dd{text-align:right}.ds-facts b{color:var(--live,#5be3c0);font-weight:700}"
+      "css": ".ds-now{background:var(--surface,#1e1e1e);color:var(--ink,#ececec);padding:20px 22px;font-variant-numeric:tabular-nums;max-width:420px}.ds-now h2{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}.ds-reading{font-size:clamp(3rem,5.2vw,4.75rem);font-weight:300;line-height:1;letter-spacing:-.03em;margin:14px 0 8px}.ds-cap{color:var(--muted,#a3a3a3);font-size:12px;margin-bottom:14px}.ds-split{display:flex;height:4px;background:var(--surface-2,#262626);border-radius:2px;overflow:hidden;margin-bottom:16px}.ds-split i{display:block}.ds-facts{display:grid;grid-template-columns:auto 1fr;margin:0;font-size:13px}.ds-facts dt,.ds-facts dd{margin:0;padding:8px 0;border-top:1px solid var(--line,#2e2e2e)}.ds-facts dt{color:var(--muted,#a3a3a3)}.ds-facts dd{text-align:right}.ds-facts b{color:var(--live,#5be3c0);font-weight:700}"
     },
     {
       "name": "Live session card",
@@ -730,14 +730,14 @@
       "refersTo": "live-card",
       "description": "Square, hairline-ruled card in the live grid; raises on hover; idle swatches dim to 0.55.",
       "html": "<div class=\"ds-live\" tabindex=\"0\"><div class=\"ds-top\"><span class=\"ds-on\"><i></i>작업 중</span><span class=\"ds-meta\">경과 1시간 13분</span></div><h3>세션 31</h3><div class=\"ds-meta\">project-C · <i class=\"ds-sw\"></i>opus-5-5</div><div class=\"ds-foot\"><span>세션 토큰 <b>56.7M</b></span><span>추정 비용 <b>$14.26</b></span></div></div>",
-      "css": ".ds-live{background:var(--surface,#111a2c);color:var(--ink,#e4ebf5);padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line,#1f2b42);border-left:1px solid var(--line,#1f2b42);cursor:pointer;max-width:420px;font-variant-numeric:tabular-nums}.ds-live:hover{background:var(--surface-2,#17233b)}.ds-live:focus-visible{outline:2px solid var(--focus,#9dbbe6);outline-offset:-2px}.ds-live h3{margin:0;font-size:14px;font-weight:600}.ds-top,.ds-foot{display:flex;justify-content:space-between;gap:8px}.ds-on{display:inline-flex;align-items:center;gap:6px;color:var(--live,#5be3c0);font-weight:600;font-size:12px}.ds-on i{width:6px;height:6px;border-radius:50%;background:currentColor}.ds-meta,.ds-foot{color:var(--muted,#95a3bb);font-size:12px}.ds-foot b{color:var(--ink,#e4ebf5);font-weight:600}.ds-sw{display:inline-block;width:9px;height:9px;border-radius:2px;background:#d97757;margin-right:6px;vertical-align:-1px}"
+      "css": ".ds-live{background:var(--surface,#1e1e1e);color:var(--ink,#ececec);padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line,#2e2e2e);border-left:1px solid var(--line,#2e2e2e);cursor:pointer;max-width:420px;font-variant-numeric:tabular-nums}.ds-live:hover{background:var(--surface-2,#262626)}.ds-live:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:-2px}.ds-live h3{margin:0;font-size:14px;font-weight:600}.ds-top,.ds-foot{display:flex;justify-content:space-between;gap:8px}.ds-on{display:inline-flex;align-items:center;gap:6px;color:var(--live,#5be3c0);font-weight:600;font-size:12px}.ds-on i{width:6px;height:6px;border-radius:50%;background:currentColor}.ds-meta,.ds-foot{color:var(--muted,#a3a3a3);font-size:12px}.ds-foot b{color:var(--ink,#ececec);font-weight:600}.ds-sw{display:inline-block;width:9px;height:9px;border-radius:2px;background:#d97757;margin-right:6px;vertical-align:-1px}"
     }
   ],
   "narrative": {
     "northStar": "The Night Forecast Office",
-    "overview": "The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a night-sky navy ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.\n\nColor is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is navy, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.\n\nThe page is built to stay open all day on a side monitor. Motion is limited to slow opacity pulses on live signals and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.",
+    "overview": "The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.\n\nColor is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.\n\nThe page is built to stay open all day on a side monitor. Motion is limited to slow opacity pulses on live signals and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.",
     "keyCharacteristics": [
-      "Night-sky navy ground with a slightly lighter work surface, divided by 1px hairlines.",
+      "Dark neutral gray ground (no blue cast, per the user) with a slightly lighter work surface, divided by 1px hairlines.",
       "One 12-column cell grid that every panel and the live-session cards lock to.",
       "Mint reserved for running now; amber reserved for 특보.",
       "Fixed model-family inks, identical everywhere, brightest when active.",

@@ -2,29 +2,29 @@
 name: AI 토큰 사용량 대시보드
 description: A local token-usage monitor read like a weather service reads the sky - a large 지금 reading, a 48-hour hourly strip, and a 특보 only when the burn is abnormal.
 colors:
-  night-ground: "#0b1220"
-  night-surface: "#111a2c"
-  night-surface-raised: "#17233b"
-  hairline: "#1f2b42"
-  hairline-strong: "#2d3c58"
-  ink: "#e4ebf5"
-  ink-secondary: "#aebcd2"
-  ink-muted: "#95a3bb"
+  night-ground: "#161616"
+  night-surface: "#1e1e1e"
+  night-surface-raised: "#262626"
+  hairline: "#2e2e2e"
+  hairline-strong: "#3d3d3d"
+  ink: "#ececec"
+  ink-secondary: "#bdbdbd"
+  ink-muted: "#a3a3a3"
   live-mint: "#5be3c0"
   advisory-amber: "#ff9f43"
-  focus-steel: "#9dbbe6"
+  focus-steel: "#b5b5b5"
   error-red: "#ff8080"
-  day-ground: "#e3ecf5"
-  day-surface: "#f5f9fd"
-  day-surface-raised: "#e8eff7"
-  day-hairline: "#c7d5e4"
-  day-hairline-strong: "#a7b9cf"
-  day-ink: "#11203a"
-  day-ink-secondary: "#33455f"
-  day-ink-muted: "#4b5d77"
+  day-ground: "#ebebeb"
+  day-surface: "#fafafa"
+  day-surface-raised: "#f0f0f0"
+  day-hairline: "#d6d6d6"
+  day-hairline-strong: "#b8b8b8"
+  day-ink: "#1a1a1a"
+  day-ink-secondary: "#3d3d3d"
+  day-ink-muted: "#575757"
   day-live-mint: "#08775a"
   day-advisory-amber: "#a94a07"
-  day-focus-steel: "#2d5a94"
+  day-focus-steel: "#4a4a4a"
   day-error-red: "#b91c1c"
   ink-opus: "#d97757"
   ink-sonnet: "#6a9bcc"
@@ -140,14 +140,14 @@ components:
 
 **Creative North Star: "The Night Forecast Office"**
 
-The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a night-sky navy ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.
+The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.
 
-Color is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is navy, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.
+Color is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.
 
 The page is built to stay open all day on a side monitor. Motion is limited to slow opacity pulses on live signals and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.
 
 **Key Characteristics:**
-- Night-sky navy ground with a slightly lighter work surface, divided by 1px hairlines.
+- Dark neutral gray ground (no blue cast, per the user) with a slightly lighter work surface, divided by 1px hairlines.
 - One 12-column cell grid that every panel and the live-session cards lock to.
 - Mint reserved for running now; amber reserved for 특보.
 - Fixed model-family inks, identical everywhere, brightest when active.
@@ -156,7 +156,7 @@ The page is built to stay open all day on a side monitor. Motion is limited to s
 
 ## Colors
 
-A night-sky navy neutral field carrying two reserved signal colors and a fixed legend of model-family inks.
+A dark neutral gray field carrying two reserved signal colors and a fixed legend of model-family inks.
 
 ### Primary
 - **Running Mint** (`live-mint`; daylight `day-live-mint`): the only "running now" signal. Used on the 작업 중 badge and its pulsing dot, the running-session count in the 지금 facts, and the current-hour outline, tick and 지금 label on the hourly strip. Never decorative, never a generic accent.
