@@ -5,3 +5,5 @@ node_modules/
 Thumbs.db
 dist/
 video-build/
+.impeccable/questions/
+.impeccable/review/

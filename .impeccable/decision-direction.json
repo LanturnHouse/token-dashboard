@@ -1,0 +1,131 @@
+{
+  "title": "대시보드 리디자인: 시각 세계 선택",
+  "question": "추첨으로 '기상청 동네예보'가 배정됐습니다. 그대로 갈지, 대안을 고를지, 다시 굴릴지 정해 주세요.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "기상청 동네예보 — 토큰 일기예보",
+      "kicker": "THE ROLL",
+      "lineage": "기상청·날씨앱의 '지금 날씨 + 시간별 예보' 화면",
+      "thesis": "토큰 사용을 날씨처럼 읽는다: 지금 상태는 크게, 48시간은 시간별 예보 띠로, 과속은 '특보'로.",
+      "palette": ["#0B1220", "#131D30", "#E6EDF7", "#5BE3C0", "#FF9F43"],
+      "materials": ["밤하늘 남색 바탕", "시간별 강수 강도 띠", "특보 배너"],
+      "viewport": "좌측 '지금' 블록(최근 1시간 토큰을 큰 숫자로, 오늘 합계·추정 비용·실행 중 세션 수), 우측 48시간 시간별 예보 띠(모델 색 스택), 그 아래 실행 중 세션 카드, 일별 차트·모델 점유율, 세션 표.",
+      "risk": "날씨 은유가 과하면 장난처럼 보임 — 은유는 레이아웃이 아니라 '지금/예보/특보' 세 가지 읽기 방식에만 쓴다.",
+      "raised": [
+        {"from": "challenger-ticket-wallet", "raise": "종료된 세션은 사라지지 않고 '종료' 도장이 찍힌 상태로 남는다."},
+        {"from": "challenger-crouwel", "raise": "모든 패널이 하나의 12칸 셀 그리드에 정확히 맞물린다."},
+        {"from": "challenger-transit", "raise": "모델 색은 노선 색처럼 어디서나 동일하고, 작업 중일 때만 가장 밝다."},
+        {"from": "challenger-orienteering", "raise": "민트 한 색은 오직 '지금 실행 중'에만 쓴다."},
+        {"from": "challenger-annual", "raise": "구획은 그림자 없이 1px 헤어라인으로만 나눈다."}
+      ],
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "상단 바 · 토글", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "지금 (최근 1시간)", "x": 0, "y": 1, "w": 4, "h": 3, "accent": true},
+        {"label": "48시간 예보 띠", "x": 4, "y": 1, "w": 8, "h": 3, "accent": true},
+        {"label": "실행 중 세션", "x": 0, "y": 4, "w": 12, "h": 2},
+        {"label": "30일 일별", "x": 0, "y": 6, "w": 8, "h": 2},
+        {"label": "모델 점유율", "x": 8, "y": 6, "w": 4, "h": 2},
+        {"label": "세션 표", "x": 0, "y": 8, "w": 12, "h": 2}
+      ]}
+    },
+    {
+      "id": "challenger-split-flap",
+      "label": "역 출발 안내판 (스플릿 플랩)",
+      "verdict": "competitive",
+      "lineage": "기차역·공항 출발 안내판",
+      "thesis": "세션을 출발편처럼: 실행 중·대기·종료가 한 판에 행으로 서고, 바뀐 칸만 넘어간다.",
+      "palette": ["#0D0D0F", "#1C1C20", "#F2F2F2", "#FFB000", "#C8463D"],
+      "materials": ["검은 플랩 면", "흰 응축 산세리프", "호박색 행 램프"],
+      "viewport": "맨 위에 '출발 안내판' — 세션 행(상태·제목·모델·토큰·작업시간), 그 아래 요약 숫자 띠와 차트.",
+      "case": "옆 모니터에서 '지금 뭐가 도나'를 읽는 데는 가장 강함. 다만 사용량 추이(차트)는 안내판 문법 밖이라 제품 명확성에서 근소하게 짐.",
+      "risk": "글자 넘김 애니메이션을 아끼지 않으면 상시 켜두는 탭에서 무겁고 산만해짐.",
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-split-flap-concourse-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/signals-instruments-split-flap-concourse.webp",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "상단 바", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "출발 안내판 (세션 행)", "x": 0, "y": 1, "w": 12, "h": 4, "accent": true},
+        {"label": "요약 숫자 띠", "x": 0, "y": 5, "w": 12, "h": 1},
+        {"label": "일별·시간별", "x": 0, "y": 6, "w": 8, "h": 4},
+        {"label": "모델", "x": 8, "y": 6, "w": 4, "h": 4}
+      ]}
+    },
+    {
+      "id": "challenger-ticket-wallet",
+      "label": "제트기 시대 항공권 지갑",
+      "verdict": "declined",
+      "lineage": "1960년대 항공권 쿠폰북",
+      "thesis": "세션을 쿠폰처럼 찢어 쓰는 여정.",
+      "palette": ["#1B2A52", "#C8102E", "#F7F5EF", "#6B4C9A"],
+      "materials": ["카본 복사지", "VOID 도장"],
+      "viewport": "세션별 쿠폰 한 장씩.",
+      "case": "옆 모니터 흘끗 보기와 맞지 않고 밝은 종이 바탕이 다크 기본과 충돌.",
+      "risk": "인쇄물 코스튬이 됨.",
+      "kept": "상태는 지워지지 않고 찍힌다 → 종료 세션에 '종료' 도장."
+    },
+    {
+      "id": "challenger-crouwel",
+      "label": "크라우얼 그리드 타입 견본",
+      "verdict": "declined",
+      "lineage": "Wim Crouwel 격자 포스터",
+      "thesis": "보이는 구성 격자 위의 거대한 숫자.",
+      "palette": ["#FFFFFF", "#1F4FFF", "#111111"],
+      "materials": ["모눈 헤어라인"],
+      "viewport": "격자 위에 거대한 토큰 숫자.",
+      "case": "포스터가 되어 작업 화면으로 안 읽힘.",
+      "risk": "정보 밀도 붕괴.",
+      "kept": "하나의 셀 그리드에 모든 패널을 맞물림."
+    },
+    {
+      "id": "challenger-transit",
+      "label": "자정 지하철 노선도 법랑 벽화",
+      "verdict": "declined",
+      "lineage": "지하철 노선도",
+      "thesis": "세션·서브에이전트를 노선과 환승으로.",
+      "palette": ["#0F1F45", "#E03C31", "#2D6FD6", "#F2A900", "#2E9E5B"],
+      "materials": ["법랑", "45° 노선"],
+      "viewport": "세션이 노선, 에이전트가 역.",
+      "case": "에이전트 1,000개 규모에서 도식이 읽히지 않음.",
+      "risk": "장식 도식이 됨.",
+      "kept": "노선 색의 절대 일관성 → 모델 색 규율."
+    },
+    {
+      "id": "challenger-orienteering",
+      "label": "오리엔티어링 지도와 범례",
+      "verdict": "declined",
+      "lineage": "ISOM 오리엔티어링 지도",
+      "thesis": "지형은 고정, 보라색 코스만 위에 탄다.",
+      "palette": ["#FFFFFF", "#A8B86B", "#F5D76E", "#9B4F96"],
+      "materials": ["등고선", "보라 코스"],
+      "viewport": "지도 위 코스.",
+      "case": "지도 은유가 사용량 데이터와 무관.",
+      "risk": "억지 은유.",
+      "kept": "한 색은 '활성'에만 예약 → 민트는 실행 중 전용."
+    },
+    {
+      "id": "challenger-annual",
+      "label": "디자인 연감 도판 섹션",
+      "verdict": "declined",
+      "lineage": "디자인 연감 인쇄 도판",
+      "thesis": "레지스트레이션 마크와 헤어라인의 정밀함.",
+      "palette": ["#F5F4F6", "#16181A", "#DCDDF3"],
+      "materials": ["비도공지", "헤어라인"],
+      "viewport": "연감 지면.",
+      "case": "밝은 지면이 다크 기본과 충돌, 작업 화면이 아님.",
+      "risk": "에디토리얼 코스튬.",
+      "kept": "그림자 없이 1px 헤어라인으로 구획."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code"},
+  "canon": true,
+  "canonCard": {
+    "label": "카테고리 표준 (Grafana/Vercel식 다크 대시보드)",
+    "thesis": "사용량 대시보드가 늘 내놓는 모습을 최고 완성도로.",
+    "palette": ["#0A0A0B", "#18181B", "#FAFAFA", "#3B82F6"],
+    "materials": ["카드 그리드", "깔끔한 차트"],
+    "viewport": "KPI 카드 줄, 차트 두 개, 표 — 익숙한 배치.",
+    "risk": "지금과 크게 다르지 않고 다른 대시보드와 구분이 안 됨."
+  },
+  "steer": true
+}

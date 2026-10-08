@@ -3,12 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
   <title>AI 토큰 사용량 대시보드</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <div class="brand"><span class="logo" aria-hidden="true">◆</span><span>AI 토큰 사용량 대시보드</span></div>
+    <div class="brand">AI 토큰 사용량 대시보드</div>
     <div class="top-actions">
       <div id="provider" class="seg" role="group" aria-label="제공자 선택" hidden>
         <button type="button" data-provider="claude" aria-pressed="false">Claude</button>
@@ -21,91 +22,103 @@
 
   <main class="wrap">
     <div id="banner" class="banner" hidden></div>
+    <div id="advisory" class="advisory" role="status" hidden></div>
 
-    <section id="kpis" class="kpis" aria-label="요약">
-      <div class="kpi"><div class="kpi-label">불러오는 중</div><div class="kpi-value">…</div></div>
-    </section>
+    <div class="grid">
+      <section class="cell c4 now" aria-labelledby="now-h">
+        <h2 id="now-h">지금</h2>
+        <div id="now-val" class="reading" aria-live="off">…</div>
+        <div id="now-caption" class="now-caption muted small">불러오는 중</div>
+        <div id="now-vs" class="now-vs small"></div>
+        <div id="now-bar" class="split" aria-hidden="true"></div>
+        <dl id="now-facts" class="facts"><div><dt>불러오는 중</dt><dd>…</dd></div></dl>
+        <details class="breakdown">
+          <summary>입력 · 출력 · 캐시 분해</summary>
+          <div id="now-break"></div>
+        </details>
+      </section>
 
-    <section id="rate" class="card rate" aria-label="GPT 사용 한도" hidden>
-      <div class="card-head"><h2>GPT 사용 한도 <span class="muted small">Codex 요금제 기준</span></h2></div>
-      <div id="rate-body" class="rate-body"></div>
-    </section>
+      <section class="cell c8 hourly" aria-labelledby="hourly-h">
+        <div class="cell-head">
+          <h2 id="hourly-h">시간별 토큰 <span class="muted small">최근 48시간</span></h2>
+          <div id="hourly-legend" class="legend"></div>
+        </div>
+        <div id="hourly-chart" class="chart hourly-chart"></div>
+      </section>
 
-    <section class="card">
-      <div class="card-head">
-        <h2>현재 작업 중</h2>
-      </div>
-      <div id="live" class="live-grid"></div>
-    </section>
+      <section class="cell c12" aria-labelledby="live-h">
+        <div class="cell-head">
+          <h2 id="live-h">현재 작업 중</h2>
+        </div>
+        <div id="live" class="live-grid"></div>
+      </section>
 
-    <section class="charts-row">
-      <div class="card c-daily">
-        <div class="card-head">
-          <h2>일별 토큰 <span class="muted small">최근 30일</span></h2>
+      <section class="cell c8 c-daily" aria-labelledby="daily-h">
+        <div class="cell-head">
+          <h2 id="daily-h">일별 토큰 <span class="muted small">최근 30일</span></h2>
           <div id="daily-legend" class="legend"></div>
         </div>
         <div id="daily-chart" class="chart"></div>
-      </div>
+      </section>
 
-      <div class="card">
-        <div class="card-head">
-          <h2>시간별 토큰 <span class="muted small">최근 48시간</span></h2>
-          <div id="hourly-legend" class="legend"></div>
-        </div>
-        <div id="hourly-chart" class="chart"></div>
-      </div>
-
-      <div class="card c-models">
-        <div class="card-head">
-          <h2>모델별 점유율</h2>
+      <section class="cell c4" aria-labelledby="share-h">
+        <div class="cell-head">
+          <h2 id="share-h">모델별 점유율</h2>
           <div id="model-legend" class="legend"></div>
         </div>
         <div id="model-share" class="chart"></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="card">
-      <div class="card-head sessions-head">
-        <h2>세션 목록 <span id="sess-count" class="muted small"></span></h2>
-        <div class="controls">
-          <input id="q" type="search" placeholder="제목, 프로젝트, 경로, 모델 검색" autocomplete="off" aria-label="세션 검색">
-          <div id="filters" class="filters" role="group" aria-label="세션 필터">
-            <button type="button" class="chip active" data-filter="all" aria-pressed="true">전체</button>
-            <button type="button" class="chip" data-filter="live" aria-pressed="false">실행중</button>
-            <button type="button" class="chip" data-filter="today" aria-pressed="false">오늘</button>
-            <button type="button" class="chip" data-filter="week" aria-pressed="false">7일</button>
+      <section id="rate" class="cell c12 rate" aria-label="GPT 사용 한도" hidden>
+        <div class="cell-head">
+          <h2>GPT 사용 한도 <span class="muted small">Codex 요금제 기준</span></h2>
+        </div>
+        <div id="rate-body" class="rate-body"></div>
+      </section>
+
+      <section class="cell c12 sessions" aria-labelledby="sess-h">
+        <div class="cell-head sessions-head">
+          <h2 id="sess-h">세션 목록 <span id="sess-count" class="muted small"></span></h2>
+          <div class="controls">
+            <input id="q" type="search" placeholder="제목, 프로젝트, 경로, 모델 검색" autocomplete="off" aria-label="세션 검색">
+            <div id="filters" class="filters" role="group" aria-label="세션 필터">
+              <button type="button" class="chip active" data-filter="all" aria-pressed="true">전체</button>
+              <button type="button" class="chip" data-filter="live" aria-pressed="false">작업 중</button>
+              <button type="button" class="chip" data-filter="today" aria-pressed="false">오늘</button>
+              <button type="button" class="chip" data-filter="week" aria-pressed="false">7일</button>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="table-wrap">
-        <table class="sess" data-table="sess">
-          <thead>
-            <tr>
-              <th data-sort="status" data-type="num"><button type="button"><span class="arr"></span>상태</button></th>
-              <th data-sort="title" data-type="text"><button type="button"><span class="arr"></span>제목</button></th>
-              <th data-sort="project" data-type="text"><button type="button"><span class="arr"></span>프로젝트</button></th>
-              <th data-sort="model" data-type="text"><button type="button"><span class="arr"></span>모델</button></th>
-              <th data-sort="own" data-type="num" class="num"><button type="button"><span class="arr"></span>토큰(본인)</button></th>
-              <th data-sort="agentCount" data-type="num" class="num"><button type="button"><span class="arr"></span>에이전트 수</button></th>
-              <th data-sort="agentTokens" data-type="num" class="num"><button type="button"><span class="arr"></span>에이전트 토큰</button></th>
-              <th data-sort="total" data-type="num" class="num"><button type="button"><span class="arr"></span>합계</button></th>
-              <th data-sort="cost" data-type="num" class="num c-cost"><button type="button"><span class="arr"></span>추정 비용</button></th>
-              <th data-sort="activeMs" data-type="num" class="num"><button type="button"><span class="arr"></span>작업시간</button></th>
-              <th data-sort="wallMs" data-type="num" class="num"><button type="button"><span class="arr"></span>경과</button></th>
-              <th data-sort="lastTs" data-type="num" class="num"><button type="button"><span class="arr"></span>마지막 활동</button></th>
-            </tr>
-          </thead>
-          <tbody id="sess-body">
-            <tr><td colspan="12" class="empty">불러오는 중…</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+        <div class="table-wrap sess-wrap">
+          <table class="sess" data-table="sess">
+            <thead>
+              <tr>
+                <th data-sort="status" data-type="num"><button type="button"><span class="arr"></span>상태</button></th>
+                <th data-sort="title" data-type="text"><button type="button"><span class="arr"></span>제목</button></th>
+                <th data-sort="project" data-type="text"><button type="button"><span class="arr"></span>프로젝트</button></th>
+                <th data-sort="model" data-type="text"><button type="button"><span class="arr"></span>모델</button></th>
+                <th data-sort="own" data-type="num" class="num"><button type="button"><span class="arr"></span>토큰(본인)</button></th>
+                <th data-sort="agentCount" data-type="num" class="num"><button type="button"><span class="arr"></span>에이전트 수</button></th>
+                <th data-sort="agentTokens" data-type="num" class="num"><button type="button"><span class="arr"></span>에이전트 토큰</button></th>
+                <th data-sort="total" data-type="num" class="num"><button type="button"><span class="arr"></span>합계</button></th>
+                <th data-sort="cost" data-type="num" class="num c-cost"><button type="button"><span class="arr"></span>추정 비용</button></th>
+                <th data-sort="activeMs" data-type="num" class="num"><button type="button"><span class="arr"></span>작업시간</button></th>
+                <th data-sort="wallMs" data-type="num" class="num"><button type="button"><span class="arr"></span>경과</button></th>
+                <th data-sort="lastTs" data-type="num" class="num"><button type="button"><span class="arr"></span>마지막 활동</button></th>
+              </tr>
+            </thead>
+            <tbody id="sess-body">
+              <tr><td colspan="12" class="empty">불러오는 중…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-    <details id="pricing" class="card pricing" hidden>
-      <summary>가격표 (API 정가 기준 추정)</summary>
-      <div id="pricing-body"></div>
-    </details>
+      <details id="pricing" class="cell c12 pricing" hidden>
+        <summary>가격표 (API 정가 기준 추정)</summary>
+        <div id="pricing-body"></div>
+      </details>
+    </div>
   </main>
 
   <div id="overlay" class="overlay" hidden></div>

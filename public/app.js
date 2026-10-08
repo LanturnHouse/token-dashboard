@@ -14,6 +14,11 @@
     opus: '#d97757', sonnet: '#6a9bcc', haiku: '#788c5d', fable: '#b07cc6', other: '#888888',
     'gpt-astra': '#d4a72c', 'gpt-sol': '#2bb3a3', 'gpt-terra': '#c06c84', 'gpt-luna': '#5cc8e8', 'gpt-other': '#9a9a6a'
   };
+  // ?theme=light|dark overrides prefers-color-scheme (CSS keys off data-theme on <html>).
+  // ?force-advisory=1 renders the 특보 banner with the current numbers (dev check, harmless, shipped).
+  var QS = (function () { try { return new URLSearchParams(location.search); } catch (e) { return { get: function () { return null; } }; } })();
+  if (QS.get('theme') === 'light' || QS.get('theme') === 'dark') document.documentElement.setAttribute('data-theme', QS.get('theme'));
+  var FORCE_ADVISORY = QS.get('force-advisory') === '1';
   var PROVIDER_KEY = 'cud.provider';   // localStorage: 'claude' | 'codex' | 'all'
   var PROVIDER_LABEL = { claude: 'Claude', codex: 'GPT' };
   var REFRESH_MS = 5000;     // 전체 데이터 갱신 주기
@@ -46,7 +51,8 @@
     again: false,               // 요청 중 갱신/제공자 변경이 생기면 끝난 뒤 한 번 더 요청
     provider: loadProvider(),   // 전체 | Claude | GPT 선택 (claude | codex | all)
     providerMulti: false,       // 두 개 이상 제공자가 감지되었을 때만 토글 표시
-    error: ''
+    error: '',
+    advDismissed: null   // 특보를 닫은 시간 키 (메모리에만 보관)
   };
 
   function loadProvider() {
@@ -180,9 +186,9 @@
   }
   function modelColor(model) { return FAMILY_COLOR[family(model)]; }
   function shortModel(model) { return model ? String(model).replace(/^claude-/, '') : '-'; }
-  function modelTag(model) {
+  function modelTag(model, dim) {
     if (!model) return '<span class="muted">-</span>';
-    return '<span class="model"><i class="sw" style="background:' + modelColor(model) + '"></i>' +
+    return '<span class="model"><i class="sw" style="background:' + modelColor(model) + (dim ? ';opacity:.55' : '') + '"></i>' +
       esc(shortModel(model)) + '</span>';
   }
 
@@ -257,7 +263,7 @@
     return costCell(v);
   }
   function costText(v, unk) {
-    if (unk) return hasCost(v) && Number(v) > 0 ? fmtCost(v) + ' + 단가 미설정 모델 제외' : '단가 미설정';
+    if (unk) return hasCost(v) && Number(v) > 0 ? fmtCost(v) + ' (GPT 일부 단가 미설정 제외)' : '단가 미설정';
     return hasCost(v) ? fmtCost(v) : '-';
   }
   function numHTML(n) {
@@ -436,6 +442,10 @@
     return '<th data-sort="' + key + '" data-type="' + type + '"' + (cls ? ' class="' + cls + '"' : '') + '>' +
       '<button type="button"><span class="arr"></span>' + esc(label) + '</button></th>';
   }
+  // 정렬 표시: 라벨 왼쪽의 작은 SVG 쉐브론 (활성: 방향 표시, 비활성: 흐리게 위아래)
+  var CHEV_UP = '<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 6.5 5 3.5 8 6.5"/></svg>';
+  var CHEV_DOWN = '<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5"/></svg>';
+  var CHEV_IDLE = '<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 4 5 1.8 8 4M2 6 5 8.2 8 6"/></svg>';
   function updateSortHeaders() {
     document.querySelectorAll('th[data-sort]').forEach(function (th) {
       var table = th.closest('table');
@@ -445,7 +455,7 @@
       var on = !!st && key === st.key;
       th.setAttribute('aria-sort', on ? (st.dir > 0 ? 'ascending' : 'descending') : 'none');
       var arr = th.querySelector('.arr');
-      if (arr) arr.textContent = on ? (st.dir > 0 ? '▲' : '▼') : '';
+      if (arr) arr.innerHTML = on ? (st.dir > 0 ? CHEV_UP : CHEV_DOWN) : CHEV_IDLE;
     });
   }
 
@@ -469,45 +479,95 @@
     $('updated').textContent = gen ? '갱신 ' + fmtClock(gen) : '';
   }
 
-  function chip(label, v) {
-    return '<span class="chip-s" title="' + esc(fmtExact(v)) + '">' + esc(label) + ' <b>' + esc(fmtNum(v)) + '</b></span>';
-  }
-  function tokenKpi(label, t) {
+  // ---------- 렌더: 지금 블록 / 특보 ----------
+  function tokVal(t) {
     var cost = '';
     if (hasCost(t.cost) || t.costUnknown) {
       var txt = t.costUnknown
-        ? (hasCost(t.cost) && t.cost > 0 ? '≈ ' + esc(fmtCost(t.cost)) + ' <span class="cost-unk">+ GPT 단가 미설정 일부 제외</span>' : '<span class="cost-unk">GPT 단가 미설정</span>')
+        ? (hasCost(t.cost) && t.cost > 0 ? '≈ ' + esc(fmtCost(t.cost)) + ' <span class="cost-unk">(GPT 일부 단가 미설정 제외)</span>' : '<span class="cost-unk">GPT 단가 미설정</span>')
         : '≈ ' + esc(fmtCost(t.cost));
-      cost = '<div class="kpi-cost" title="' + esc(COST_NOTE) + '">' + txt +
-        ' <span class="muted">추정 비용</span></div>';
+      cost = '<span class="fact-cost" title="' + esc(COST_NOTE) + '">' + txt + ' <span class="muted">추정 비용</span></span>';
     }
-    return '<div class="kpi"><div class="kpi-label">' + esc(label) + '</div>' +
-      '<div class="kpi-value" title="' + esc(fmtExact(t.total)) + ' 토큰">' + esc(fmtNum(t.total)) + '</div>' +
-      cost +
-      '<div class="chips">' +
-      chip('입력', t.input) + chip('출력', t.output) + chip('캐시 쓰기', t.cacheCreate) + chip('캐시 읽기', t.cacheRead) +
-      '</div></div>';
+    return '<span title="' + esc(fmtExact(t.total)) + ' 토큰">' + esc(fmtNum(t.total)) + '</span>' + cost;
   }
-  function renderKpis() {
-    var sum = state.summary || {};
+  function factRow(label, valueHTML) {
+    return '<div><dt>' + esc(label) + '</dt><dd>' + valueHTML + '</dd></div>';
+  }
+  // 최근 60분 판독: summary.last60 (없으면 이번 시간으로 대체)
+  function last60Of(sum, items) {
+    var l = isObj(sum.last60) ? sum.last60 : null;
+    if (l) return { total: num(l.total), parts: famNums(l.byFamily), cost: l.cost };
+    var cur = items[items.length - 1] || { total: 0, parts: {} };
+    return { total: cur.total, parts: cur.parts || {}, cost: null };
+  }
+  // 평소 기준: 48시간 창에서 0이 아닌 '지난' 시간들의 평균 (진행 중인 이번 시간 제외)
+  function baselineAvg(items) {
+    var s = 0, n = 0;
+    items.slice(0, -1).forEach(function (it) { if (it.total > 0) { s += it.total; n++; } });
+    return n ? s / n : 0;
+  }
+  // 지금 블록: 최근 60분 토큰(큰 수치), 평소 대비, 모델별 비율 막대, 요약 수치, 입력/출력/캐시 분해
+  function renderNow(sum, items) {
     var totals = sum.totals || {};
     var today = sum.today || {};
     var liveList = (Array.isArray(sum.live) ? sum.live : []).filter(isObj).map(sessView);
+    var busyN = liveList.filter(function (s) { return s.status === 'busy'; }).length;
+    var idleN = liveList.length - busyN;
     state.liveKpi = {
       base: num(today.activeMs),
       busy: liveList.filter(function (s) { return s.status === 'busy'; }).map(function (s) { return s.lastTs; })
     };
-    $('kpis').innerHTML = [
-      tokenKpi('오늘 토큰', tok(today.tokens)),
-      tokenKpi('7일 토큰', tok(sum.last7d)),
-      tokenKpi('전체 토큰', tok(totals.tokens)),
-      '<div class="kpi"><div class="kpi-label">오늘 작업시간</div>' +
-        '<div class="kpi-value" data-live-kpi>' + esc(fmtDur(today.activeMs)) + '</div>' +
-        '<div class="kpi-sub">활성 시간 기준</div></div>',
-      '<div class="kpi"><div class="kpi-label">실행 중 세션</div>' +
-        '<div class="kpi-value">' + liveList.length + '</div>' +
-        '<div class="kpi-sub">전체 세션 ' + esc(fmtExact(totals.sessions)) + '개 · 에이전트 ' + esc(fmtExact(totals.agents)) + '개</div></div>'
-    ].join('');
+    var l60 = last60Of(sum, items);
+    var curT = l60.total;
+    var reading = $('now-val');
+    setText(reading, fmtNum(curT));
+    reading.title = fmtExact(curT) + ' 토큰';
+    $('now-caption').textContent = '최근 60분' + (curT > 0 ? '' : ' · 사용 없음');
+    var avg = baselineAvg(items);
+    var vs = $('now-vs');
+    var ratio = avg > 0 ? curT / avg : null;
+    vs.textContent = ratio == null ? '평소 기록 없음' : '평소의 ' + ratio.toFixed(1) + '배';
+    vs.classList.toggle('hot', ratio != null && ratio > 2);
+    vs.title = ratio == null ? '' : '최근 60분 ÷ 지난 48시간 중 사용이 있던 시간의 평균 (' + fmtNum(avg) + ')';
+    var parts = l60.parts;
+    $('now-bar').innerHTML = curT > 0
+      ? FAMILIES.filter(function (f) { return num(parts[f]) > 0; }).map(function (f) {
+        return '<i style="flex-grow:' + num(parts[f]) + ';background:' + FAMILY_COLOR[f] + '" title="' +
+          esc(FAMILY_LABEL[f] + ' ' + fmtNum(parts[f])) + '"></i>';
+      }).join('')
+      : '';
+    $('now-facts').innerHTML =
+      factRow('오늘 토큰', tokVal(tok(today.tokens))) +
+      factRow('7일 토큰', tokVal(tok(sum.last7d))) +
+      factRow('전체 토큰', tokVal(tok(totals.tokens))) +
+      factRow('오늘 작업시간', '<span data-live-kpi>' + esc(fmtDur(today.activeMs)) + '</span>') +
+      factRow('작업 중', '<span class="live-n">' + busyN + '</span> · 대기 ' + idleN) +
+      factRow('전체 세션', esc(fmtExact(totals.sessions)) + '개 <span class="muted">· 에이전트 ' + esc(fmtExact(totals.agents)) + '개</span>');
+    var brows = [['오늘', tok(today.tokens)], ['7일', tok(sum.last7d)], ['전체', tok(totals.tokens)]];
+    $('now-break').innerHTML = '<div class="table-wrap"><table class="mini"><thead><tr><th></th>' +
+      '<th class="num">입력</th><th class="num">출력</th><th class="num">캐시 쓰기</th><th class="num">캐시 읽기</th>' +
+      '</tr></thead><tbody>' +
+      brows.map(function (r) {
+        var t = r[1];
+        return '<tr><th scope="row">' + r[0] + '</th>' + [t.input, t.output, t.cacheCreate, t.cacheRead].map(function (v) {
+          return '<td class="num" title="' + esc(fmtExact(v)) + ' 토큰">' + esc(fmtNum(v)) + '</td>';
+        }).join('') + '</tr>';
+      }).join('') + '</tbody></table></div>';
+  }
+  // 특보: 최근 60분 토큰이 48시간 중 0이 아닌 '지난' 시간 평균의 2배를 넘을 때만 표시 (이번 시간 안에서만 닫기)
+  function renderAdvisory(items, sum) {
+    var el = $('advisory');
+    var curT = last60Of(sum, items).total;
+    var avg = baselineAvg(items);
+    var hot = curT > 0 && avg > 0 && curT > 2 * avg;
+    var show = (hot && state.advDismissed !== hourKey(new Date())) || FORCE_ADVISORY;
+    el.hidden = !show;
+    if (!show) { el.setAttribute('data-txt', ''); return; }
+    var txt = '특보 · 최근 60분 토큰 사용량이 평소의 ' + (avg > 0 ? (curT / avg).toFixed(1) + '배' : '— (평소 기록 없음)') + ' (' + fmtNum(curT) + ')';
+    if (el.getAttribute('data-txt') === txt) return; // 같은 내용이면 버튼 포커스 유지를 위해 다시 쓰지 않음
+    el.setAttribute('data-txt', txt);
+    el.innerHTML = '<span>' + esc(txt) + '</span>' +
+      '<button type="button" class="adv-close" data-adv-close>이번 시간 닫기</button>';
   }
 
   // 가격표 (summary.pricing.table): 값이 없으면 영역 숨김
@@ -590,25 +650,25 @@
     var list = (Array.isArray(sum.live) ? sum.live : []).filter(isObj).map(sessView);
     var el = $('live');
     if (!list.length) {
-      el.innerHTML = '<div class="empty">현재 실행 중인 세션이 없습니다.</div>';
+      el.innerHTML = '<div class="empty">현재 작업 중인 세션이 없습니다.</div>';
       return;
     }
     el.innerHTML = list.map(function (s) {
       var agents = (Array.isArray(s.raw.runningAgents) ? s.raw.runningAgents : agentsOf(s.id, s.raw).filter(function (a) { return !!a.running; })).filter(isObj);
       var t0 = s.startedAt || s.firstTs;
       var elapsed = t0 ? Date.now() - t0 : s.wallMs;
-      return '<article class="live-card" data-open="' + esc(s.id) + '" tabindex="0">' +
+      return '<article class="live-card' + (s.status === 'busy' ? '' : ' is-idle') + '" data-open="' + esc(s.id) + '" tabindex="0">' +
         '<div class="live-top">' + badge(statusInfo(s.status)) + ' ' +
           '<span class="pbadge pb-' + s.provider + '">' + PROVIDER_LABEL[s.provider] + '</span>' +
         '<span class="muted small">경과 <span' + (t0 ? ' data-live-wall="' + esc(t0) + '"' : '') + '>' +
         esc(fmtDur(elapsed)) + '</span></span></div>' +
         '<h3 title="' + esc(s.title) + '">' + esc(s.title) + '</h3>' +
-        '<div class="meta">' + esc(s.project) + ' · ' + modelTag(s.model) + '</div>' +
+        '<div class="meta">' + esc(s.project) + ' · ' + modelTag(s.model, s.status !== 'busy') + '</div>' +
         (s.cwd ? '<div class="path" title="' + esc(s.cwd) + '">' + esc(s.cwd) + '</div>' : '') +
         (s.lastPrompt ? '<blockquote class="prompt">' + esc(clip(stripTags(s.lastPrompt), 300)) + '</blockquote>' : '') +
         '<div class="live-foot"><span>세션 토큰 <b>' + numHTML(s.total) + '</b></span>' +
         (hasCost(s.cost) || s.costUnknown ? '<span class="c-live-cost" title="' + esc(COST_NOTE) + '">추정 비용 <b>' + costHTML(s.cost, s.costUnknown) + '</b></span>' : '') +
-        '<span>실행 중 에이전트 ' + agents.length + '</span></div>' +
+        '<span>작업 중 에이전트 ' + agents.length + '</span></div>' +
         (agents.length ? '<ul class="agents-mini">' + agents.map(function (a) {
           return '<li><b>' + esc(a.agentType || 'agent') + '</b> ' +
             esc(clip(stripTags(a.description || ''), 80)) + '</li>';
@@ -622,12 +682,25 @@
     var w = el ? Math.floor(el.clientWidth) : 0;
     return w >= 200 ? w : 640;
   }
-  function niceMax(v) {
-    if (!(v > 0)) return 1;
-    var p = Math.pow(10, Math.floor(Math.log(v) / Math.LN10));
-    var m = v / p;
-    var n = m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10;
-    return n * p;
+  // 축 눈금: 최댓값이 플롯의 80% 이상을 채우도록 눈금 간격과 개수(4~6)를 계산한다.
+  // 간격 후보: 1, 1.5, 2, 2.5, 3, 4, 5, 6, 8 x 10^k
+  var TICK_STEPS = [1, 1.5, 2, 2.5, 3, 4, 5, 6, 8];
+  function niceScale(v) {
+    if (!(v > 0)) return { max: 1, step: 0.25, n: 4 };
+    var p0 = Math.floor(Math.log(v) / Math.LN10), best = null;
+    for (var e = p0 - 1; e <= p0; e++) {
+      for (var i = 0; i < TICK_STEPS.length; i++) {
+        var st = TICK_STEPS[i] * Math.pow(10, e);
+        var k = Math.ceil(v / st - 1e-9);
+        if (k < 4 || k > 6) continue;
+        var fill = v / (k * st);
+        if (fill < 0.8) continue;
+        if (!best || k < best.n || (k === best.n && fill > best.fill)) best = { max: k * st, step: st, n: k, fill: fill };
+      }
+    }
+    if (best) return best;
+    var m = Math.pow(10, p0 + 1);
+    return { max: m, step: m / 4, n: 4 };
   }
   function tipParts(parts) {
     return FAMILIES.filter(function (f) { return parts[f] > 0; })
@@ -643,26 +716,29 @@
     return { label: label, total: total, parts: parts, tip: tip };
   }
   // o.fill: 컨테이너(position:relative)를 채우도록 SVG를 절대 배치 (레이아웃 피드백 방지)
+  // o.outlineLast: 마지막(현재) 항목만 막대 윤곽 + "지금" 라벨 + 민트 기준선 틱
   function stackedBars(items, o) {
     var W = o.width, H = o.height;
-    var pl = 46, pr = 8, pt = 10, pb = 24;
+    var pl = 46, pr = o.outlineLast ? 12 : 8, pt = o.outlineLast ? 24 : 10, pb = 24;
     var iw = W - pl - pr, ih = H - pt - pb;
     var max = 0;
     items.forEach(function (it) { if (it.total > max) max = it.total; });
-    var yMax = niceMax(max);
+    var sc = niceScale(max), yMax = sc.max;
     var n = Math.max(1, items.length);
     var slot = iw / n;
     var bw = Math.max(1, slot * 0.72);
     var out = [];
-    for (var g = 0; g <= 4; g++) {
-      var gy = pt + ih - ih * g / 4;
+    for (var g = 0; g <= sc.n; g++) {
+      var gy = pt + ih - ih * g / sc.n;
       out.push('<line class="grid" x1="' + pl + '" x2="' + (W - pr) + '" y1="' + gy + '" y2="' + gy + '"/>');
       out.push('<text class="axis" x="' + (pl - 6) + '" y="' + (gy + 4) + '" text-anchor="end">' +
-        esc(fmtNum(yMax * g / 4)) + '</text>');
+        esc(fmtNum(sc.step * g)) + '</text>');
     }
+    var cur = null;
     items.forEach(function (it, i) {
       var x = pl + i * slot + (slot - bw) / 2;
       var base = pt + ih;
+      var isCur = o.outlineLast && i === items.length - 1;
       if (it.total > 0) {
         FAMILIES.forEach(function (f) {
           var v = (it.parts && it.parts[f]) || 0;
@@ -675,11 +751,30 @@
       }
       out.push('<rect class="hit" x="' + (pl + i * slot).toFixed(1) + '" y="' + pt + '" width="' +
         slot.toFixed(1) + '" height="' + ih + '" data-tip="' + esc(it.tip) + '"/>');
-      if (i % (o.labelEvery || 1) === 0) {
+      if (it.boundary && i > 0) {
+        out.push('<line class="day-sep" x1="' + (pl + i * slot).toFixed(1) + '" x2="' + (pl + i * slot).toFixed(1) +
+          '" y1="' + pt + '" y2="' + (pt + ih) + '"/>');
+      }
+      if (isCur) cur = { x: x, top: base };
+      var showLabel = o.labelEvery ? i % o.labelEvery === 0 : it.show !== false;
+      if (showLabel) {
         out.push('<text class="axis" x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - 6) +
           '" text-anchor="middle">' + esc(it.label) + '</text>');
       }
     });
+    if (cur) {
+      // 현재 열의 막대 + 약간의 여유 높이만 윤곽선으로 표시하고, 위에 "지금", 아래 기준선에 민트 틱
+      var by = pt + ih, pad = 3, head = 6;
+      var ry = Math.max(2, Math.min(cur.top - head, by - 10));
+      var rx = cur.x - pad, rw = bw + pad * 2;
+      var cx = cur.x + bw / 2;
+      var anchor = cx > W - 18 ? 'end' : 'middle';
+      var lx = anchor === 'end' ? Math.min(W - 2, cx + bw / 2 + pad) : cx;
+      out.push('<g class="cur"><rect class="cur-box" x="' + rx.toFixed(1) + '" y="' + ry.toFixed(1) + '" width="' + rw.toFixed(1) +
+        '" height="' + (by - ry).toFixed(1) + '"/>' +
+        '<text class="cur-label" x="' + lx.toFixed(1) + '" y="' + (ry - 5).toFixed(1) + '" text-anchor="' + anchor + '">지금</text>' +
+        '<line class="cur-tick" x1="' + (rx - 2).toFixed(1) + '" x2="' + (rx + rw + 2).toFixed(1) + '" y1="' + by + '" y2="' + by + '"/></g>');
+    }
     if (max === 0) {
       out.push('<text class="axis" x="' + (W / 2) + '" y="' + (pt + ih / 2) + '" text-anchor="middle">기록 없음</text>');
     }
@@ -703,8 +798,8 @@
       var len = max > 0 ? Math.max(2, barW * r.value / max) : 0;
       var pct = sum > 0 ? Math.round(r.value / sum * 100) : 0;
       out.push('<text class="hl" x="0" y="' + (cy + 4) + '">' + esc(r.label) + '</text>');
-      out.push('<rect class="track" x="' + labelW + '" y="' + (cy - 8) + '" width="' + barW + '" height="16" rx="4"/>');
-      out.push('<rect x="' + labelW + '" y="' + (cy - 8) + '" width="' + len.toFixed(1) + '" height="16" rx="4" fill="' +
+      out.push('<rect class="track" x="' + labelW + '" y="' + (cy - 8) + '" width="' + barW + '" height="16" rx="2"/>');
+      out.push('<rect x="' + labelW + '" y="' + (cy - 8) + '" width="' + len.toFixed(1) + '" height="16" rx="2" fill="' +
         r.color + '"><title>' + esc(r.label + ': ' + fmtExact(r.value) + ' 토큰') + '</title></rect>');
       out.push('<text class="hv" x="' + (labelW + barW + 8) + '" y="' + (cy + 4) + '">' +
         esc(fmtNum(r.value)) + ' · ' + pct + '%' + (r.unk && !(num(r.cost) > 0) ? ' · 단가 미설정' : hasCost(r.cost) ? ' · ' + esc(fmtCost(r.cost)) + (r.unk ? ' +' : '') : '') + '</text>');
@@ -722,16 +817,16 @@
     watchDailySize();
   }
   // 카드 크기가 바뀌면(오른쪽 열 높이 변화, 창 크기 변경 등) 실제 크기로 다시 그려 SVG가 찌그러지지 않게 한다.
-  var dailyObserver = null;
+  var sizeObserver = null;
   function watchDailySize() {
-    if (dailyObserver || typeof ResizeObserver === 'undefined') return;
-    var el = $('daily-chart');
-    if (!el) return;
-    dailyObserver = new ResizeObserver(function () {
-      var w = widthOf(el), h = Math.max(220, Math.floor(el.clientHeight || 0));
-      if (w !== el._drawnW || h !== el._drawnH) renderDaily(state.summary || {});
+    if (sizeObserver || typeof ResizeObserver === 'undefined') return;
+    sizeObserver = new ResizeObserver(function () {
+      var d = $('daily-chart'), h = $('hourly-chart');
+      if (d && (widthOf(d) !== d._drawnW || Math.max(220, Math.floor(d.clientHeight || 0)) !== d._drawnH)) renderDaily(state.summary || {});
+      if (h && (widthOf(h) !== h._drawnW || Math.max(220, Math.floor(h.clientHeight || 0)) !== h._drawnH)) renderHourly(state.summary || {});
     });
-    dailyObserver.observe(el);
+    if ($('daily-chart')) sizeObserver.observe($('daily-chart'));
+    if ($('hourly-chart')) sizeObserver.observe($('hourly-chart'));
   }
   function renderDaily(sum) {
     var map = {};
@@ -752,7 +847,8 @@
     $('daily-legend').innerHTML = legendHTML(sumParts(items), effProvider());
   }
   // 시간별: hourlyByFamily가 있으면 family 색 스택, 없으면 회색 막대(구버전 백엔드)
-  function renderHourly(sum) {
+  // 48시간 항목 배열 (마지막 항목 = 현재 시각이 속한 시간). step: 시간 라벨 간격. 자정은 날짜로 표시
+  function buildHourly(sum, step) {
     var hmap = {};
     keyedEntries(sum.hourly).forEach(function (e) { hmap[e.key] = e; });
     var hbf = isObj(sum.hourlyByFamily) ? sum.hourlyByFamily : null;
@@ -762,7 +858,8 @@
     for (var i = 47; i >= 0; i--) {
       var d = new Date(now - i * HOUR_MS);
       var k = hourKey(d);
-      var label = pad(d.getHours()) + '시';
+      var h = d.getHours();
+      var label = h === 0 ? shortDate(d) : pad(h) + '시';
       var it, cost = null;
       if (hbf && isObj(hbf[k])) {
         var parts = famNums(hbf[k]);
@@ -774,10 +871,20 @@
       }
       if (cost == null && hasCost(hcost[k])) cost = Number(hcost[k]);
       if (cost != null) it.tip += ' · 추정 ' + fmtCost(cost);
+      it.show = h === 0 || h % step === 0;
+      it.boundary = h === 0;
       items.push(it);
     }
+    return items;
+  }
+  // 시간별 차트: 자정 경계에 날짜 라벨과 구분선, 현재 시간 열만 풀 잉크 + 민트 윤곽, 지난 시간은 같은 색상의 55% 불투명도
+  function renderHourly(sum) {
     var el = $('hourly-chart');
-    el.innerHTML = stackedBars(items, { width: widthOf(el), height: 200, labelEvery: 6, label: '최근 48시간 시간별 토큰' });
+    var w = widthOf(el);
+    var h = Math.max(220, Math.floor(el.clientHeight || 0));
+    el._drawnW = w; el._drawnH = h;
+    var items = buildHourly(sum, w < 560 ? 12 : 6);
+    el.innerHTML = stackedBars(items, { width: w, height: h, label: '최근 48시간 시간별 토큰', outlineLast: true, fill: true });
     $('hourly-legend').innerHTML = legendHTML(sumParts(items), effProvider());
   }
   function renderModelShare(sum) {
@@ -787,7 +894,7 @@
     });
     // 모델이 많으면 상위 10개만 보이고 나머지는 '기타 N개'로 합친다 (카드가 지나치게 길어지는 것 방지)
     if (rows.length > 11) {
-      var rest = rows.splice(10), agg = { label: '기타 ' + rest.length + '개', value: 0, color: '#8b949e', cost: null, unk: false };
+      var rest = rows.splice(10), agg = { label: '기타 ' + rest.length + '개', value: 0, color: FAMILY_COLOR.other || '#888888', cost: null, unk: false };
       rest.forEach(function (r) {
         agg.value += r.value;
         if (hasCost(r.cost)) agg.cost = (agg.cost || 0) + Number(r.cost);
@@ -995,7 +1102,7 @@
             esc(fmtDur(a.activeMs)) + '</td>' +
           '<td class="num">' + esc(fmtTime(ts(a.firstTs))) + '</td>' +
           '<td data-cell="agent:' + k + ':status">' +
-            (running ? badge({ cls: 'busy', label: '실행 중' }) : '<span class="muted">완료</span>') + '</td>' +
+            (running ? badge({ cls: 'busy', label: '작업 중' }) : '<span class="muted">완료</span>') + '</td>' +
           '</tr>';
       }).join('') +
       '</tbody></table></div>';
@@ -1225,7 +1332,9 @@
   function renderAll() {
     renderProvider();
     renderStatus();
-    renderKpis();
+    var hourly = buildHourly(state.summary || {}, 6);
+    renderNow(state.summary || {}, hourly);
+    renderAdvisory(hourly, state.summary || {});
     renderRate(state.summary || {});
     renderLive();
     renderCharts();
@@ -1343,6 +1452,12 @@
   }
   $('sess-body').addEventListener('keydown', keyOpen);
   $('live').addEventListener('keydown', keyOpen);
+  $('advisory').addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-adv-close]') : null;
+    if (!b) return;
+    state.advDismissed = hourKey(new Date());
+    $('advisory').hidden = true;
+  });
   $('drawer-close').addEventListener('click', closeDrawer);
   $('overlay').addEventListener('click', closeDrawer);
   document.addEventListener('keydown', function (e) {
