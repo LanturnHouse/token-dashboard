@@ -716,10 +716,9 @@
     return { label: label, total: total, parts: parts, tip: tip };
   }
   // o.fill: 컨테이너(position:relative)를 채우도록 SVG를 절대 배치 (레이아웃 피드백 방지)
-  // o.outlineLast: 마지막(현재) 항목만 막대 윤곽 + "지금" 라벨 + 민트 기준선 틱
   function stackedBars(items, o) {
     var W = o.width, H = o.height;
-    var pl = 46, pr = o.outlineLast ? 12 : 8, pt = o.outlineLast ? 24 : 10, pb = 24;
+    var pl = 46, pr = 8, pt = 10, pb = 24;
     var iw = W - pl - pr, ih = H - pt - pb;
     var max = 0;
     items.forEach(function (it) { if (it.total > max) max = it.total; });
@@ -734,11 +733,9 @@
       out.push('<text class="axis" x="' + (pl - 6) + '" y="' + (gy + 4) + '" text-anchor="end">' +
         esc(fmtNum(sc.step * g)) + '</text>');
     }
-    var cur = null;
     items.forEach(function (it, i) {
       var x = pl + i * slot + (slot - bw) / 2;
       var base = pt + ih;
-      var isCur = o.outlineLast && i === items.length - 1;
       if (it.total > 0) {
         FAMILIES.forEach(function (f) {
           var v = (it.parts && it.parts[f]) || 0;
@@ -755,26 +752,12 @@
         out.push('<line class="day-sep" x1="' + (pl + i * slot).toFixed(1) + '" x2="' + (pl + i * slot).toFixed(1) +
           '" y1="' + pt + '" y2="' + (pt + ih) + '"/>');
       }
-      if (isCur) cur = { x: x, top: base };
       var showLabel = o.labelEvery ? i % o.labelEvery === 0 : it.show !== false;
       if (showLabel) {
         out.push('<text class="axis" x="' + (x + bw / 2).toFixed(1) + '" y="' + (H - 6) +
           '" text-anchor="middle">' + esc(it.label) + '</text>');
       }
     });
-    if (cur) {
-      // 현재 열의 막대 + 약간의 여유 높이만 윤곽선으로 표시하고, 위에 "지금", 아래 기준선에 민트 틱
-      var by = pt + ih, pad = 3, head = 6;
-      var ry = Math.max(2, Math.min(cur.top - head, by - 10));
-      var rx = cur.x - pad, rw = bw + pad * 2;
-      var cx = cur.x + bw / 2;
-      var anchor = cx > W - 18 ? 'end' : 'middle';
-      var lx = anchor === 'end' ? Math.min(W - 2, cx + bw / 2 + pad) : cx;
-      out.push('<g class="cur"><rect class="cur-box" x="' + rx.toFixed(1) + '" y="' + ry.toFixed(1) + '" width="' + rw.toFixed(1) +
-        '" height="' + (by - ry).toFixed(1) + '"/>' +
-        '<text class="cur-label" x="' + lx.toFixed(1) + '" y="' + (ry - 5).toFixed(1) + '" text-anchor="' + anchor + '">지금</text>' +
-        '<line class="cur-tick" x1="' + (rx - 2).toFixed(1) + '" x2="' + (rx + rw + 2).toFixed(1) + '" y1="' + by + '" y2="' + by + '"/></g>');
-    }
     if (max === 0) {
       out.push('<text class="axis" x="' + (W / 2) + '" y="' + (pt + ih / 2) + '" text-anchor="middle">기록 없음</text>');
     }
@@ -884,7 +867,7 @@
     var h = Math.max(220, Math.floor(el.clientHeight || 0));
     el._drawnW = w; el._drawnH = h;
     var items = buildHourly(sum, w < 560 ? 12 : 6);
-    el.innerHTML = stackedBars(items, { width: w, height: h, label: '최근 48시간 시간별 토큰', outlineLast: true, fill: true });
+    el.innerHTML = stackedBars(items, { width: w, height: h, label: '최근 48시간 시간별 토큰', fill: true });
     $('hourly-legend').innerHTML = legendHTML(sumParts(items), effProvider());
   }
   function renderModelShare(sum) {

@@ -140,11 +140,11 @@ components:
 
 **Creative North Star: "The Night Forecast Office"**
 
-The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.
+The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, laid out as bordered panels on one 12-column grid with 14px gutters of ground between them; each panel opens with a raised title band. Nothing casts a shadow.
 
 Color is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.
 
-The page is built to stay open all day on a side monitor. Motion is limited to slow opacity pulses on live signals and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.
+The page is built to stay open all day on a side monitor. Motion is limited to a slow opacity pulse on the 작업 중 dot and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.
 
 **Key Characteristics:**
 - Dark neutral gray ground (no blue cast, per the user) with a slightly lighter work surface, divided by 1px hairlines.
@@ -159,7 +159,7 @@ The page is built to stay open all day on a side monitor. Motion is limited to s
 A dark neutral gray field carrying two reserved signal colors and a fixed legend of model-family inks.
 
 ### Primary
-- **Running Mint** (`live-mint`; daylight `day-live-mint`): the only "running now" signal. Used on the 작업 중 badge and its pulsing dot, the running-session count in the 지금 facts, and the current-hour outline, tick and 지금 label on the hourly strip. Never decorative, never a generic accent.
+- **Running Mint** (`live-mint`; daylight `day-live-mint`): the only "running now" signal. Used on the 작업 중 badge and its pulsing dot, and the running-session count in the 지금 facts. The hourly strip carries no current-hour marker (removed at the user's request). Never decorative, never a generic accent.
 
 ### Secondary
 - **Advisory Amber** (`advisory-amber`; daylight `day-advisory-amber`): the 특보 color. Used on the advisory banner (60% mix border, 11% mix fill, full-strength text), its 이번 시간 닫기 button, and the "평소의 N배" comparison under the reading when the hour runs hot. Absent when there is no advisory.
@@ -178,7 +178,7 @@ A dark neutral gray field carrying two reserved signal colors and a fixed legend
 - **Error Red** (`error-red`): error banner and gauges at high use only.
 
 ### Named Rules
-**The Reserved Mint Rule.** Mint appears only where something is running now. If nothing is running, no mint is on screen except the current-hour marker.
+**The Reserved Mint Rule.** Mint appears only where something is running now. If nothing is running, no mint is on screen.
 
 **The Advisory-Only Amber Rule.** Amber is spent only on the 특보 and the hot-hour comparison. It is never a warning color for anything else.
 
@@ -207,7 +207,7 @@ A dark neutral gray field carrying two reserved signal colors and a fixed legend
 
 ## Layout
 
-One centered column (max 1400px; 20px side padding, 24px from 1000px, 14px under 600px). Below the top bar, an optional status banner and the 특보 sit above a single 12-column grid whose 1px gaps are filled with the hairline color, so the gaps themselves draw the dividers. Cells span 4, 8 or 12 columns from 1000px up and all cells go full width below. Row 1 is 지금 (4) beside the hourly strip (8); then 현재 작업 중 (12); then daily (8) beside model share (4); rate-limit gauges (12); sessions table (12); pricing details (12).
+One centered column (max 1400px; 20px side padding, 24px from 1000px, 14px under 600px). Below the top bar, an optional status banner and the 특보 sit above a single 12-column grid with 14px gutters; each panel is a surface with a 1px strong-hairline border, 4px radius, and a raised title band (surface-2) divided from its content by a strong hairline. Cells span 4, 8 or 12 columns from 1000px up and all cells go full width below. Row 1 is 지금 (4) beside the hourly strip (8); then 현재 작업 중 (12); then daily (8) beside model share (4); rate-limit gauges (12); sessions table (12); pricing details (12).
 
 Cells pad 20px by 22px (16px by 14px under 600px). Live-session cards bleed to the cell edges and form their own 12-column sub-grid of thirds (halves under 800px, single column under 600px); a short final row stretches its rules to the row end while keeping content the width of its neighbours. Charts fill the row height on desktop (min 220px) and fix to 240px below 1000px.
 
@@ -218,11 +218,11 @@ The sessions table never scrolls horizontally: columns are hidden in a fixed ord
 Flat. There are no box-shadows anywhere. Depth is tonal: ground, then surface, then raised surface for hover and tracks, with hairlines separating planes. The only overlay is the drawer scrim (`rgba(3, 7, 14, .6)`) behind a surface-colored drawer with a strong-hairline left edge.
 
 ### Named Rules
-**The Hairline Grid Rule.** Panels are separated by 1px lines, not by shadows, gaps of ground, or rounded card silhouettes. A new panel joins the 12-column grid as another cell.
+**The Separated Panel Rule.** Panels are separated unmistakably: a 14px gutter of ground, a 1px strong-hairline border, and a raised title band, never shadows. Inside a panel, items (facts, live cards, table rows) are divided by 1px hairlines. A new panel joins the 12-column grid as another bordered cell with a title band (user feedback: sections must read as clearly distinct).
 
 ## Shapes
 
-Square-edged. Cells and live cards have no radius at all; their edges are the grid lines. Controls take a barely-softened 3px corner (buttons, chips, search, segmented toggle, banners, tooltip, table wrapper); small badges and swatches take 2px. The only round forms are status dots (6px circles: filled for 작업 중, hollow ring for 대기). The 종료 stamp is a 1px-bordered label rotated -4deg, like an ink stamp on a ticket. The prompt quote is marked by a single 1px left rule.
+Nearly square. Panels take a 4px radius; live cards inside a panel have none, their edges are the panel's internal hairlines. Controls take a barely-softened 3px corner (buttons, chips, search, segmented toggle, banners, tooltip, table wrapper); small badges and swatches take 2px. The only round forms are status dots (6px circles: filled for 작업 중, hollow ring for 대기). The 종료 stamp is a 1px-bordered label rotated -4deg, like an ink stamp on a ticket. The prompt quote is marked by a single 1px left rule.
 
 ## Components
 
@@ -243,7 +243,7 @@ A single strong-hairline outline with internal 1px dividers; muted 12px labels; 
 - **Corner Style:** none (cells, live cards).
 - **Background:** night surface; live cards raise on hover and are keyboard-focusable with an inset focus ring.
 - **Shadow Strategy:** none (see Elevation).
-- **Border:** formed by the hairline grid; live cards draw top and left hairlines into the cell's grid.
+- **Border:** live cards draw top and left strong hairlines inside their panel.
 - **Internal Padding:** cells 20px 22px; live cards 14px 16px with 6px internal rhythm.
 
 ### Inputs / Fields
@@ -263,7 +263,7 @@ Full width above row 1, only when the last hour exceeds twice the average of the
 Headline, the display reading, a muted caption (최근 60분), the comparison line (amber when hot), a 4px model-ink split bar on a raised track, then a hairline-ruled fact list (dt muted left, dd tabular right) with the running count in mint, and a collapsible input/output/cache breakdown.
 
 ### Hourly forecast strip
-SVG stacked bars in model inks, one per hour, muted 11px axes, hairline gridlines, strong-hairline day separators with day labels. The current hour is outlined in mint (1.5px) with a mint tick and a 지금 label, pulsing slowly in opacity (3.6s). Hover lifts a 7%-ink column and shows a raised tooltip.
+SVG stacked bars in model inks, one per hour, muted 11px axes, hairline gridlines, strong-hairline day separators with day labels. Hover lifts a 7%-ink column and shows a raised tooltip.
 
 ### Sessions table
 13px, hairline row rules, sticky muted 12px header on the surface color with a strong-hairline rule. Every header is a sort button with a 10px chevron left of the label (40% opacity, full ink when sorted). Rows raise on hover and take a 13% focus-steel fill when selected.
@@ -274,12 +274,12 @@ SVG stacked bars in model inks, one per hour, muted 11px axes, hairline gridline
 ## Do's and Don'ts
 
 ### Do:
-- **Do** put every new panel into the 12-column hairline grid as a span-4, span-8 or span-12 cell.
+- **Do** put every new panel into the 12-column grid as a bordered span-4, span-8 or span-12 panel with a title band.
 - **Do** keep mint for running-now signals and amber for the 특보 only.
 - **Do** take model colors from `FAMILY_COLOR`; the same family is the same ink in every chart, legend, swatch and theme.
 - **Do** use tabular numerals for every value and right-align numbers in tables and fact lists.
 - **Do** mark ended sessions with the tilted 종료 stamp rather than fading them.
-- **Do** keep motion to slow opacity pulses and the 0.2s drawer slide, and switch it off under `prefers-reduced-motion`.
+- **Do** keep motion to the 작업 중 dot pulse and the 0.2s drawer slide, and switch it off under `prefers-reduced-motion`.
 - **Do** define colors as custom properties with both a dark (default) and a daylight value, honoring `prefers-color-scheme` and the `data-theme` override.
 
 ### Don't:

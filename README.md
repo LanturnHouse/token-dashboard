@@ -10,15 +10,33 @@
 
 ## 주요 기능
 
+- **지금**: 최근 60분 토큰을 큰 숫자로 보여주고, 그 아래에 평소(최근 48시간 중 사용량이 있던 시간의 평균) 대비 배율을 "평소의 N배"로 표시합니다. 오늘·7일·전체 토큰과 추정 비용, 오늘 작업시간, 작업 중 / 대기 세션 수도 같은 패널에 있습니다.
+- **특보**: 최근 60분 사용량이 평소의 2배를 넘으면 화면 위에 호박색 특보 배너가 뜹니다. 그 시간 동안 닫아 둘 수 있습니다.
 - **세션 / 서브에이전트별 토큰 사용량**: input, output, cache write, cache read 토큰과 합계를 세션·에이전트 단위로 집계합니다.
 - **작업 시간**: 타임스탬프 간격이 5분 이하인 구간만 더한 활성 시간(`activeMs`)과 처음부터 마지막까지의 경과 시간(`wallMs`)을 보여줍니다.
 - **현재 작업 중 패널**: 실행 중인 세션을 작업 중 / 대기 상태와 경과 시간(1초 단위로 갱신)과 함께 표시합니다.
-- **차트**: 최근 30일 일별 누적 막대(모델 계열별), 최근 48시간 시간별 막대, 모델별 점유율.
+- **차트**: 최근 48시간 시간별 막대, 최근 30일 일별 누적 막대(모델 계열별), 모델별 점유율.
 - **추정 비용**: API 정가 기준 추정치입니다. 구독 요금이 아닙니다.
 - **Claude / GPT / 전체 토글**: 두 제공자 중 보고 싶은 쪽만 볼 수 있습니다. 로그가 하나뿐이면 토글은 숨겨집니다.
 - **GPT 사용 한도 게이지**: Codex 로그에 기록된 5시간 / 주간 한도 사용률과 초기화 시각을 보여줍니다.
 - **세션 목록**: 검색, 필터(전체 / 실행 중 / 오늘 / 7일), 열 정렬. 행을 누르면 모델별·에이전트별 상세가 열립니다.
 - **데모 모드**: `--demo` 로 실행하면 제목, 프로젝트명, 경로, 프롬프트를 가린 채 화면을 띄웁니다. 화면 녹화용입니다.
+
+### 화면 구성
+
+짙은 회색 바탕 위에 패널을 12칸 격자로 배치하고, 패널마다 테두리와 제목 띠를 둬서 구역이 확실히 나뉩니다.
+
+| 위치 | 패널 |
+| --- | --- |
+| 첫 줄 | 지금 (왼쪽) · 시간별 토큰 48시간 (오른쪽) |
+| 둘째 줄 | 현재 작업 중 (세션 카드, 경과·작업시간 1초마다 갱신) |
+| 셋째 줄 | 일별 토큰 30일 · 모델별 점유율 |
+| 아래 | GPT 사용 한도 (Codex 기록이 있을 때) · 세션 목록 · 가격표 |
+
+- **색의 규칙**: 민트색은 "작업 중"에만, 호박색은 특보에만 씁니다. 모델별 색은 모든 차트·점·범례에서 같습니다. 종료된 세션에는 '종료' 도장이 붙습니다.
+- **라이트 테마**: 운영체제 설정을 따릅니다. 주소 뒤에 `?theme=light` 또는 `?theme=dark` 를 붙이면 바꿔 볼 수 있습니다.
+- **특보 미리보기**: `?force-advisory=1` 을 붙이면 조건과 상관없이 특보 배너를 띄웁니다(화면 확인용).
+- 디자인 원칙과 색·글자 크기 토큰은 [DESIGN.md](DESIGN.md), 제품 정의는 [PRODUCT.md](PRODUCT.md)에 있습니다.
 
 ### 스크린샷
 
@@ -124,6 +142,7 @@ Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
 
 - **중복 제거**: 같은 `message.id` 는 한 번만 셉니다. 한 응답이 여러 줄로 나뉘어 같은 usage가 반복되므로, 마지막 줄의 usage만 씁니다.
 - **증분 읽기**: 파일은 마지막으로 읽은 바이트 위치부터 추가된 부분만 읽습니다. 줄이 끝나지 않은 조각은 다음 갱신 때 이어서 처리합니다.
+- **최근 60분(`last60`)**: 분 단위로 집계한 값을 최근 3시간치만 보관하고, 지금부터 60분 전까지를 더합니다. 특보와 "평소의 N배"는 이 값을 최근 48시간 중 사용량이 있던 완료된 시간의 평균과 비교합니다.
 - **작업 시간(`activeMs`)**: 연속된 타임스탬프 간격이 5분 이하인 구간의 합입니다. 5분을 넘는 공백은 작업으로 치지 않습니다.
 - **서브에이전트**: `subagents/` 아래 하위 폴더(`subagents/workflows/<wf>/` 포함)까지 찾습니다.
 - **실행 중 판단**: Claude는 `sessions/<pid>.json` 파일이 있고 해당 프로세스가 살아 있을 때 실행 중으로 봅니다. Codex는 파일 수정 시각으로 판단합니다. 10분 이내에 작업이 시작됐으면 작업 중, 30분 이내면 대기입니다.
@@ -160,7 +179,8 @@ Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
 - `scanning`, `progress: {done, total}`: 초기 스캔 상태
 - `totals`, `today`, `last7d`: 토큰, 모델별, 작업 시간
 - `daily`: 최근 30일, 오래된 날짜부터
-- `hourly`: 최근 48시간 `{"YYYY-MM-DDTHH": 합계}`
+- `hourly`: 최근 48시간 `{"YYYY-MM-DDTHH": 합계}`, `hourlyByFamily`: 같은 구간의 모델 계열별 값
+- `last60`: 최근 60분 `{total, byFamily, cost}`
 - `live`: 실행 중인 세션, `sessions`: 전체 세션(마지막 활동 내림차순)
 - `pricing`: 비용 설명과 단가표
 
@@ -175,6 +195,9 @@ lib/codex.js        Codex 로그 해석
 lib/pricing.js      Claude / GPT 비용 추정 (순수 함수)
 lib/mask.js         데모 모드 가림 처리
 public/             화면 (index.html, app.js, style.css)
+PRODUCT.md          제품 정의 (사용자, 목적, 제약)
+DESIGN.md           디자인 시스템 (색·글자·격자 토큰, 규칙)
+.impeccable/        디자인 작업 기록 (방향 계약, 디자인 토큰 사이드카)
 config.json         설정
 start.bat           Windows 실행 스크립트
 demo.bat            Windows 데모 실행 스크립트 (포트 7778)
@@ -228,7 +251,7 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 
 ## English
 
-**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
+**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. The first row shows the last 60 minutes (with a "N× usual" ratio and an advisory banner above 2×) next to a 48-hour hourly chart; panels sit on a dark gray 12-column grid. Light theme follows the OS, or use `?theme=light|dark`. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
 
 - **Run:** `node server.js` (or `start.bat` on Windows), then open http://localhost:7777. Node 20+ recommended; developed and tested on Node 24.
 - **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths and prompts for screen recording.

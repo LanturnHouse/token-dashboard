@@ -735,7 +735,7 @@
   ],
   "narrative": {
     "northStar": "The Night Forecast Office",
-    "overview": "The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, divided into one 12-column cell grid by 1px hairlines. Nothing floats, nothing casts a shadow, and nothing is stacked as a rounded card.\n\nColor is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.\n\nThe page is built to stay open all day on a side monitor. Motion is limited to slow opacity pulses on live signals and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.",
+    "overview": "The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, laid out as bordered panels on one 12-column grid with 14px gutters of ground between them; each panel opens with a raised title band. Nothing casts a shadow.\n\nColor is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.\n\nThe page is built to stay open all day on a side monitor. Motion is limited to a slow opacity pulse on the 작업 중 dot and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.",
     "keyCharacteristics": [
       "Dark neutral gray ground (no blue cast, per the user) with a slightly lighter work surface, divided by 1px hairlines.",
       "One 12-column cell grid that every panel and the live-session cards lock to.",
@@ -747,7 +747,7 @@
     "rules": [
       {
         "name": "The Reserved Mint Rule",
-        "body": "Mint appears only where something is running now. If nothing is running, no mint is on screen except the current-hour marker.",
+        "body": "Mint appears only where something is running now. If nothing is running, no mint is on screen.",
         "section": "colors"
       },
       {
@@ -777,12 +777,12 @@
       }
     ],
     "dos": [
-      "**Do** put every new panel into the 12-column hairline grid as a span-4, span-8 or span-12 cell.",
+      "**Do** put every new panel into the 12-column grid as a bordered span-4, span-8 or span-12 panel with a title band.",
       "**Do** keep mint for running-now signals and amber for the 특보 only.",
       "**Do** take model colors from `FAMILY_COLOR`; the same family is the same ink in every chart, legend, swatch and theme.",
       "**Do** use tabular numerals for every value and right-align numbers in tables and fact lists.",
       "**Do** mark ended sessions with the tilted 종료 stamp rather than fading them.",
-      "**Do** keep motion to slow opacity pulses and the 0.2s drawer slide, and switch it off under `prefers-reduced-motion`.",
+      "**Do** keep motion to the 작업 중 dot pulse and the 0.2s drawer slide, and switch it off under `prefers-reduced-motion`.",
       "**Do** define colors as custom properties with both a dark (default) and a daylight value, honoring `prefers-color-scheme` and the `data-theme` override."
     ],
     "donts": [
