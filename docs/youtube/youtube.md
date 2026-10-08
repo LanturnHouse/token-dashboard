@@ -96,10 +96,8 @@ Claude Code, Claude, Anthropic, 토큰 사용량, AI 토큰, 토큰 대시보드
 ## 5. 고정 댓글 (pinned comment) 제안
 
 ```
-영상 보시고 궁금한 점 남겨주세요!
 GitHub 저장소: https://github.com/LanturnHouse/token-dashboard
 (비용은 API 정가 기준 추정치입니다. 실제 청구액과 다를 수 있어요.)
-Claude만 쓰시나요, GPT도 같이 쓰시나요? 여러분의 토큰 사용 패턴이 궁금합니다. 댓글로 알려주세요.
 ```
 
 ---
