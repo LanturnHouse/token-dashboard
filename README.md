@@ -6,7 +6,7 @@
 
 데모 영상: https://youtu.be/CYhLtgvjr_0
 
-**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.0.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
+**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.1.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
 
 ## 주요 기능
 
@@ -69,7 +69,7 @@ Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데�
 
 Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
 
-1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.0.0-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
+1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.1.0-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
 2. 파일을 더블클릭합니다. 기본 브라우저가 **http://localhost:7777** 을 자동으로 엽니다. 창을 닫으면 대시보드가 종료됩니다.
 3. 처음 실행하면 Windows SmartScreen 에 **"알 수 없는 게시자"** 경고가 뜰 수 있습니다. 이 프로그램은 코드 서명이 없기 때문입니다. **추가 정보** → **실행** 을 누르면 됩니다.
 4. `config.json` 과 `.cache/` 는 exe 가 있는 폴더에 만들어집니다. 설정을 바꾸려면 그 파일을 편집하세요.
