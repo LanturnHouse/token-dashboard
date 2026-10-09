@@ -6,6 +6,8 @@
     "assets":  {
                    "public/app.js":  "public/app.js",
                    "public/index.html":  "public/index.html",
+                   "public/skins/control.css":  "public/skins/control.css",
+                   "public/skins/control.js":  "public/skins/control.js",
                    "public/style.css":  "public/style.css"
                }
 }

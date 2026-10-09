@@ -6,47 +6,68 @@
 
 데모 영상: https://youtu.be/CYhLtgvjr_0
 
-**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.1.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
+**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.2.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
 
 ## 주요 기능
 
-- **지금**: 최근 60분 토큰을 큰 숫자로 보여주고, 그 아래에 평소(최근 48시간 중 사용량이 있던 시간의 평균) 대비 배율을 "평소의 N배"로 표시합니다. 오늘·7일·전체 토큰과 추정 비용, 오늘 작업시간, 작업 중 / 대기 세션 수도 같은 패널에 있습니다.
+- **지금**: 최근 60분 토큰을 큰 숫자로 보여주고, 그 아래에 평소(최근 48시간 중 사용량이 있던 시간의 평균) 대비 배율을 "평소의 N배"로 표시합니다. 오늘·7일·전체 토큰과 추정 비용, 오늘 작업시간, 세션·에이전트 수도 같은 패널에 있습니다. 입력·출력·캐시 분해는 접어 둔 항목을 펼치면 나옵니다.
 - **특보**: 최근 60분 사용량이 평소의 2배를 넘으면 화면 위에 호박색 특보 배너가 뜹니다. 그 시간 동안 닫아 둘 수 있습니다.
+- **작업 리듬**: 최근 30일을 하루 한 열, 시간 한 칸으로 그린 30일 x 24시간 활동 지도입니다. 칸의 밝기만으로 사용량을 나타내며, 위의 일별 막대(모델 계열별 색)와 함께 봅니다. 가장 많이 쓴 시간대도 표시합니다.
 - **세션 / 서브에이전트별 토큰 사용량**: input, output, cache write, cache read 토큰과 합계를 세션·에이전트 단위로 집계합니다.
 - **작업 시간**: 타임스탬프 간격이 5분 이하인 구간만 더한 활성 시간(`activeMs`)과 처음부터 마지막까지의 경과 시간(`wallMs`)을 보여줍니다.
-- **현재 작업 중 패널**: 실행 중인 세션을 작업 중 / 대기 상태와 경과 시간(1초 단위로 갱신)과 함께 표시합니다.
-- **차트**: 최근 48시간 시간별 막대, 최근 30일 일별 누적 막대(모델 계열별), 모델별 점유율.
+- **작업 중 패널**: 실행 중인 세션을 작업 중 / 대기 상태와 경과 시간(1초 단위로 갱신)과 함께 표시합니다. 작업 중인 세션을 먼저, 모두 최대 6줄까지 보여주고 나머지는 "대기 N개 더 보기"로 펼칩니다.
+- **차트**: 최근 48시간 시간별 막대, 모델별 점유율, 모델별 추정 비용.
 - **추정 비용**: API 정가 기준 추정치입니다. 구독 요금이 아닙니다.
 - **Claude / GPT / 전체 토글**: 두 제공자 중 보고 싶은 쪽만 볼 수 있습니다. 로그가 하나뿐이면 토글은 숨겨집니다.
 - **GPT 사용 한도 게이지**: Codex 로그에 기록된 5시간 / 주간 한도 사용률과 초기화 시각을 보여줍니다.
 - **세션 목록**: 검색, 필터(전체 / 실행 중 / 오늘 / 7일), 열 정렬. 행을 누르면 모델별·에이전트별 상세가 열립니다.
 - **데모 모드**: `--demo` 로 실행하면 제목, 프로젝트명, 경로, 프롬프트를 가린 채 화면을 띄웁니다. 화면 녹화용입니다.
+- **테마 (활동 기록 / 관제)**: 상단바의 `THEME` 에서 두 테마를 고릅니다. 관제는 세션을 하나 골라 컨텍스트 게이지, 압축 기록, 에이전트·스킬 경로를 봅니다. 자세한 내용은 아래 "테마"를 보세요.
 
 ### 화면 구성
 
-짙은 회색 바탕 위에 패널을 12칸 격자로 배치하고, 패널마다 테두리와 제목 띠를 둬서 구역이 확실히 나뉩니다.
+짙은 회색 바탕 위에 왼쪽 열과 오른쪽 열을 나란히 두고, 그 아래에 세션 목록과 가격표를 가로 전체로 놓았습니다. 패널마다 테두리와 제목 띠를 둬서 구역이 나뉩니다.
 
 | 위치 | 패널 |
 | --- | --- |
-| 첫 줄 | 지금 (왼쪽) · 시간별 토큰 48시간 (오른쪽) |
-| 둘째 줄 | 현재 작업 중 (세션 카드, 경과·작업시간 1초마다 갱신) |
-| 셋째 줄 | 일별 토큰 30일 · 모델별 점유율 |
-| 아래 | GPT 사용 한도 (Codex 기록이 있을 때) · 세션 목록 · 가격표 |
+| 맨 위 | 특보 배너 (최근 60분이 평소의 2배를 넘을 때만, 닫을 수 있음) |
+| 왼쪽 열 | **지금** (최근 60분 + "평소의 N배", 오늘·7일·전체 토큰과 추정 비용) · **작업 중** (실행 중 세션 + 최대 6줄, "대기 N개 더 보기") · **GPT 사용 한도** (Codex 기록이 있을 때) |
+| 오른쪽 열 | **작업 리듬** (30일 x 24시간 활동 지도, 위에 일별 막대) · **최근 48시간** (시간별 막대) · **모델별 점유율** + **모델별 추정 비용** |
+| 아래 (가로 전체) | 세션 목록 · 가격표 |
 
+- **작업 리듬 읽는 법**: 열은 하루, 칸은 1시간입니다. 밝을수록 그 시간에 토큰을 많이 썼다는 뜻이고, 색으로 구분하지 않고 밝기만 씁니다.
 - **색의 규칙**: 민트색은 "작업 중"에만, 호박색은 특보에만 씁니다. 모델별 색은 모든 차트·점·범례에서 같습니다. 종료된 세션에는 '종료' 도장이 붙습니다.
-- **라이트 테마**: 운영체제 설정을 따릅니다. 주소 뒤에 `?theme=light` 또는 `?theme=dark` 를 붙이면 바꿔 볼 수 있습니다.
+- **밝기**: 활동 기록 테마의 기본은 짙은 회색(다크)입니다. 라이트 테마는 운영체제 설정을 따르고, 주소 뒤에 `?theme=light` 또는 `?theme=dark` 를 붙이면 바꿔 볼 수 있습니다. (관제 테마는 항상 어둡게 표시됩니다.)
 - **특보 미리보기**: `?force-advisory=1` 을 붙이면 조건과 상관없이 특보 배너를 띄웁니다(화면 확인용).
 - 디자인 원칙과 색·글자 크기 토큰은 [DESIGN.md](DESIGN.md), 제품 정의는 [PRODUCT.md](PRODUCT.md)에 있습니다.
 
+### 테마 (활동 기록 / 관제)
+
+화면은 두 가지 테마로 볼 수 있습니다. 두 테마는 같은 데이터와 같은 5초 갱신을 씁니다.
+
+- **활동 기록** (기본): 위에서 설명한 화면입니다.
+- **관제**: 지금 열려 있는 세션(작업 중 + 대기)을 칩으로 늘어놓고(작업 중 먼저; 접힌 상태에서는 지금 화면 폭에서 두 줄에 들어가는 만큼만 보이고, 넘치면 `+N 더 보기` 로 펼침), 고른 세션 하나를 자세히 보여줍니다. 컨텍스트 크기 게이지(자동 압축 지점은 점선), 최근 호출의 컨텍스트 변화, 모델과 노력 수준, 오른쪽의 **THIS SESSION** 패널(그 세션의 최근 60분 토큰·비용을 그 세션의 가장 많이 쓴 1시간과 비교, 그 세션의 압축 횟수), 그리고 그 세션이 지금 쓰고 있는 에이전트·스킬의 경로도입니다. 사용 중인 경로는 강조색 선과 움직이는 점으로, 그 밖의 연결은 회색 선으로 그립니다. 아래에는 압축 기록, 재읽기 vs 신규, 노력 수준 분포(기록 없는 비율은 미기록으로 표시)와 함께 활동 기록 테마의 차트·세션 목록·가격표가 그대로 이어집니다.
+- **바꾸는 법**: 상단바의 `THEME` 버튼(활동 기록 / 관제)을 누르거나, 주소 뒤에 `?skin=activity` 또는 `?skin=control` 을 붙입니다. 버튼으로 고른 테마와 관제에서 고른 세션은 이 브라우저에 기억됩니다(localStorage).
+- **스킬 표시의 한계**: 로그에는 스킬을 호출한 시각만 남고 끝난 시각은 없습니다. 그래서 관제 화면은 호출 후 3분 이내의 스킬만 "사용 중"으로 그립니다.
+- **기간**: 관제 테마의 기간은 최근 30일로 고정되어 있습니다.
+
 ### 스크린샷
 
-![대시보드 전체 화면 (1440x900)](docs/images/dashboard.png)
+![활동 기록 테마 전체 화면 (1440x900)](docs/images/dashboard.png)
 
-![차트 영역](docs/images/charts.png)
+![활동 기록 테마 오른쪽 열: 작업 리듬, 최근 48시간, 모델별 점유율과 추정 비용](docs/images/charts.png)
 
-<p align="center"><img src="docs/images/mobile.png" alt="모바일 화면 (390x844)" width="300"></p>
+<p align="center"><img src="docs/images/mobile.png" alt="활동 기록 테마 모바일 화면 (375px 너비)" width="300"></p>
 
-> 스크린샷은 데모 모드(`demo.bat`, 포트 7778)에서 찍은 화면입니다. 실제 프로젝트명이나 프롬프트는 들어 있지 않습니다.
+> 스크린샷은 데모 모드(`node server.js --demo`)에서 찍은 화면입니다. 실제 프로젝트명이나 프롬프트는 들어 있지 않습니다.
+
+### 관제 테마 스크린샷
+
+위의 세 스크린샷은 활동 기록 테마입니다. 관제 테마는 아래 두 장으로 보여 줍니다.
+
+![관제 테마 전체 화면 (데스크톱)](docs/images/control.png)
+
+<p align="center"><img src="docs/images/control-mobile.png" alt="관제 테마 모바일 화면 (375px 너비)" width="300"></p>
 
 ## 요구 사항
 
@@ -85,9 +106,9 @@ Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데�
 
 ## Windows 실행 파일 (token-dashboard.exe)
 
-Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
+Node.js를 설치하지 않아도 되는 단일 실행 파일입니다. v1.2.0 exe에는 두 테마(활동 기록, 관제)가 모두 들어 있습니다.
 
-1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.1.0-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
+1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.2.0-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
 2. 파일을 더블클릭합니다. 기본 브라우저가 **http://localhost:7777** 을 자동으로 엽니다. 창을 닫으면 대시보드가 종료됩니다.
 3. 처음 실행하면 Windows SmartScreen 에 **"알 수 없는 게시자"** 경고가 뜰 수 있습니다. 이 프로그램은 코드 서명이 없기 때문입니다. **추가 정보** → **실행** 을 누르면 됩니다.
 4. `config.json` 과 `.cache/` 는 exe 가 있는 폴더에 만들어집니다. 설정을 바꾸려면 그 파일을 편집하세요.
@@ -142,6 +163,7 @@ Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
 
 - **중복 제거**: 같은 `message.id` 는 한 번만 셉니다. 한 응답이 여러 줄로 나뉘어 같은 usage가 반복되므로, 마지막 줄의 usage만 씁니다.
 - **증분 읽기**: 파일은 마지막으로 읽은 바이트 위치부터 추가된 부분만 읽습니다. 줄이 끝나지 않은 조각은 다음 갱신 때 이어서 처리합니다.
+- **작업 리듬(`heat`)**: 최근 30일(로컬 날짜 기준)을 오래된 날부터 하루씩 담고, 하루는 `{date, dow, hours[24], total}` 입니다. `hours` 는 0시~23시의 시간별 토큰 합계이고, 화면은 이 값의 밝기만으로 칸을 칠합니다.
 - **최근 60분(`last60`)**: 분 단위로 집계한 값을 최근 3시간치만 보관하고, 지금부터 60분 전까지를 더합니다. 특보와 "평소의 N배"는 이 값을 최근 48시간 중 사용량이 있던 완료된 시간의 평균과 비교합니다.
 - **작업 시간(`activeMs`)**: 연속된 타임스탬프 간격이 5분 이하인 구간의 합입니다. 5분을 넘는 공백은 작업으로 치지 않습니다.
 - **서브에이전트**: `subagents/` 아래 하위 폴더(`subagents/workflows/<wf>/` 포함)까지 찾습니다.
@@ -180,9 +202,16 @@ Node.js를 설치하지 않아도 되는 단일 실행 파일입니다.
 - `totals`, `today`, `last7d`: 토큰, 모델별, 작업 시간
 - `daily`: 최근 30일, 오래된 날짜부터
 - `hourly`: 최근 48시간 `{"YYYY-MM-DDTHH": 합계}`, `hourlyByFamily`: 같은 구간의 모델 계열별 값
+- `heat`: 최근 30 로컬 날짜, 오래된 날부터. 각 항목은 `{date, dow, hours[24], total}`
 - `last60`: 최근 60분 `{total, byFamily, cost}`
 - `live`: 실행 중인 세션, `sessions`: 전체 세션(마지막 활동 내림차순)
 - `pricing`: 비용 설명과 단가표
+- `routes`: `{rangeDays: 30, efforts, totalsByEffort: {low|medium|high|xhigh|max|unknown: {tokens, cost, calls}}, sessions: {id: {lastTs, lastModel, lastEffort}}}`. 노력 수준은 Claude `perTurnEffort`/`effort`, Codex `turn_context.effort` 이며, 없으면 `unknown`(기록 없음)
+- `ctx`: 컨텍스트 창. `sessions[id]` = `{provider, turns, current, peak(최근 200회), windowTokens(Codex만, Claude는 null), series/seriesTs(최근 80회, 실행 중 세션만; 나머지는 빈 배열 + trimmed), compactions(최근 6), compactCount, lastAutoPre, reread, fresh, lastModel, lastEffort}` (메인 transcript 기준, 컨텍스트 = input + cache_creation + cache_read). `recent`: 최근 30일 압축 10건, `last30d`: Claude 압축 통계(`compactCount, auto, manual, avgPre, avgPost, droppedTokens, avgDurationMs, codexCount`)
+- `agentsNow`: 작업 중(busy) 세션의 실행 중 에이전트 `{session, agentId, parentAgentId, agentType, description, model, effort, firstTs, lastTs, tokens, calls, running}`, `agentsDone`: 같은 세션에서 10분 안에 끝난 에이전트(최대 8, `endedTs`)
+- `skillsNow`: 작업 중 세션의 최근 60분 Skill 호출 `{session, skill, count, lastTs, ageSec, active(3분 이내), where: main|agent, agentId}` (최대 24), `skills30d`: 30일 상위 12 `{skill, count}`. 스킬 이름과 시각만 읽고 `args` 는 읽지 않습니다
+
+`/api/session/:id` 는 위에 더해 `ctx`(전체 series), `lastModel`, `lastEffort`, 에이전트별 `effort`, `parentAgentId` 를 줍니다. 데모 모드에서는 새 필드의 세션 id·에이전트 id·설명·세션 제목도 가려집니다.
 
 토큰 값은 `{input, output, cacheCreate, cacheRead, total}` 객체입니다. `total` 은 네 값의 합입니다.
 
@@ -194,7 +223,8 @@ lib/scanner.js      transcript 파싱, 증분 집계, 캐시, 실행 상태 판�
 lib/codex.js        Codex 로그 해석
 lib/pricing.js      Claude / GPT 비용 추정 (순수 함수)
 lib/mask.js         데모 모드 가림 처리
-public/             화면 (index.html, app.js, style.css)
+public/             화면 (index.html, app.js = 공통 코어와 활동 기록, style.css)
+public/skins/       관제 테마 (control.js, control.css)
 PRODUCT.md          제품 정의 (사용자, 목적, 제약)
 DESIGN.md           디자인 시스템 (색·글자·격자 토큰, 규칙)
 .impeccable/        디자인 작업 기록 (방향 계약, 디자인 토큰 사이드카)
@@ -251,11 +281,11 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 
 ## English
 
-**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. The first row shows the last 60 minutes (with a "N× usual" ratio and an advisory banner above 2×) next to a 48-hour hourly chart; panels sit on a dark gray 12-column grid. Light theme follows the OS, or use `?theme=light|dark`. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
+**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. The layout is two columns on a dark gray background: on the left, "now" (last 60 minutes with an "N× usual" ratio, plus an advisory banner above 2×), running sessions and the GPT limit gauge; on the right, a 30-day × 24-hour activity heat map (brightness only), a 48-hour chart and per-model share and estimated cost; the session list and price table span the full width below. Light theme follows the OS, or use `?theme=light|dark`. A second theme, **관제** ("control"), leads with the live sessions (running first, then waiting; `+N` expands the strip): pick one to see its context gauge, model and effort, a THIS SESSION panel (its own last-60-min tokens and cost against its busiest hour, its compactions), and a path diagram of the agents and skills it is using right now (skills count as active for 3 minutes after invocation, since the logs keep only the invocation time). Switch with the `THEME` picker in the top bar or `?skin=activity|control`; the choice is remembered in the browser. Both themes use the same data. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
 
 - **Run:** `node server.js` (or `start.bat` on Windows), then open http://localhost:7777. Node 20+ recommended; developed and tested on Node 24.
 - **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths and prompts for screen recording.
-- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`.
+- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`. The v1.2.0 exe contains both themes.
 - **Cost figures** are estimates at API list prices. They are not your subscription bill.
 - **Config:** `config.json` (`port`, `host`, `claudeDir`, `codexDir`, `codexPricing`) and env vars `PORT`, `CODEX_DIR`, `DASHBOARD_CACHE`, `DEMO`.
 - **Design notes:** `docs/specs/` (SPEC, SPEC-v2, SPEC-v3). Parts of these are outdated (e.g. PIN login).

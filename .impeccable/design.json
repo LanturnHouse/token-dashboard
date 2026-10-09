@@ -1,87 +1,87 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-08T22:39:37.473Z",
+  "generatedAt": "2026-10-09T00:02:41.722Z",
   "title": "Design System: AI 토큰 사용량 대시보드",
   "extensions": {
     "colorMeta": {
-      "night-ground": {
+      "ground": {
         "role": "neutral",
-        "displayName": "Night Ground",
-        "canonical": "#161616",
+        "displayName": "Charcoal Ground",
+        "canonical": "#121212",
         "purpose": "Page background and sticky top bar (dark default).",
         "tonalRamp": [
-          "#050b18",
-          "#1c2433",
-          "#374050",
-          "#555e70",
-          "#778193",
-          "#9ba5b9",
-          "#c0cbdf",
-          "#e4efff"
-        ]
-      },
-      "night-surface": {
-        "role": "neutral",
-        "displayName": "Night Surface",
-        "canonical": "#1e1e1e",
-        "purpose": "Cells, live cards, drawer, sticky table header.",
-        "tonalRamp": [
-          "#040a1b",
-          "#1a2437",
-          "#354054",
-          "#525e74",
-          "#748198",
-          "#98a5bd",
-          "#becbe4",
-          "#e1efff"
-        ]
-      },
-      "night-surface-raised": {
-        "role": "neutral",
-        "displayName": "Raised Surface",
-        "canonical": "#262626",
-        "purpose": "Hover fills, chart and gauge tracks, tooltip.",
-        "tonalRamp": [
-          "#030a1f",
           "#262626",
-          "#32405a",
-          "#4f5e7a",
-          "#71819e",
-          "#95a5c4",
-          "#bacbeb",
-          "#deefff"
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "hairline": {
+      "surface": {
         "role": "neutral",
-        "displayName": "Hairline",
-        "canonical": "#2e2e2e",
-        "purpose": "1px grid gaps and row rules.",
+        "displayName": "Panel Fill",
+        "canonical": "#1a1a1a",
+        "purpose": "Every panel, drawer and sticky table header.",
         "tonalRamp": [
-          "#030a1e",
-          "#18243a",
-          "#334058",
-          "#505e78",
-          "#72819c",
-          "#96a5c2",
-          "#bbcbe9",
-          "#deefff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "hairline-strong": {
+      "surface-2": {
         "role": "neutral",
-        "displayName": "Strong Hairline",
+        "displayName": "Raised Fill",
+        "canonical": "#222222",
+        "purpose": "Hover fills, tooltip, heat level 0.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Quiet Rule",
+        "canonical": "#2c2c2c",
+        "purpose": "Row rules, tracks, gridlines, divider inside panels.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "line-strong": {
+        "role": "neutral",
+        "displayName": "Panel Edge",
         "canonical": "#3d3d3d",
-        "purpose": "Control borders, table header rule, day separators.",
+        "purpose": "Panel borders, control borders, table header rule.",
         "tonalRamp": [
-          "#020921",
-          "#16233d",
-          "#30405c",
-          "#4d5e7c",
-          "#6f81a0",
-          "#93a5c6",
-          "#b8cbee",
-          "#dcefff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
       "ink": {
@@ -90,302 +90,382 @@
         "canonical": "#ececec",
         "purpose": "Primary text and values.",
         "tonalRamp": [
-          "#070b12",
-          "#1f242c",
-          "#3b4048",
-          "#585e67",
-          "#7a818a",
-          "#9fa5ae",
-          "#c4cbd5",
-          "#e8eff9"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "ink-secondary": {
+      "ink-2": {
         "role": "neutral",
         "displayName": "Secondary Ink",
         "canonical": "#bdbdbd",
-        "purpose": "Supporting values, prompt text, idle badge.",
+        "purpose": "Supporting values, prompt text, default gauge fill.",
         "tonalRamp": [
-          "#040b1a",
-          "#1a2435",
-          "#354052",
-          "#525e72",
-          "#748196",
-          "#98a6bb",
-          "#bdcce2",
-          "#e1f0ff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "ink-muted": {
+      "muted": {
         "role": "neutral",
         "displayName": "Muted Ink",
-        "canonical": "#a3a3a3",
-        "purpose": "Labels, axes, metadata, 종료 stamp.",
+        "canonical": "#9e9e9e",
+        "purpose": "Labels, axes, metadata.",
         "tonalRamp": [
-          "#030b1b",
-          "#192437",
-          "#344054",
-          "#515e74",
-          "#738198",
-          "#97a5bd",
-          "#bdcbe4",
-          "#e0efff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "live-mint": {
+      "live": {
         "role": "primary",
         "displayName": "Running Mint",
         "canonical": "#5be3c0",
         "purpose": "Running now only.",
         "tonalRamp": [
-          "#001706",
-          "#00341e",
-          "#00523a",
-          "#007257",
-          "#009779",
-          "#3dbd9e",
-          "#6ae4c3",
-          "#91ffe7"
+          "#0b4133",
+          "#136d56",
+          "#1a9878",
+          "#21c49a",
+          "#3bdeb4",
+          "#74e7c9",
+          "#b1f2e1",
+          "#e9fbf7"
         ]
       },
-      "advisory-amber": {
+      "advisory": {
         "role": "secondary",
         "displayName": "Advisory Amber",
         "canonical": "#ff9f43",
-        "purpose": "특보 only.",
+        "purpose": "The 특보 banner only.",
         "tonalRamp": [
-          "#290000",
-          "#490800",
-          "#6a2a00",
-          "#8d4a00",
-          "#b36d29",
-          "#db9251",
-          "#ffb877",
-          "#ffdc9a"
+          "#4d2500",
+          "#803e00",
+          "#b35700",
+          "#e67000",
+          "#ff8a1a",
+          "#ffac5c",
+          "#ffd0a3",
+          "#fff2e5"
         ]
       },
-      "focus-steel": {
+      "focus": {
         "role": "neutral",
-        "displayName": "Focus Steel",
+        "displayName": "Focus Gray",
         "canonical": "#b5b5b5",
-        "purpose": "Focus, selection, pressed states, gauge fill.",
+        "purpose": "Focus rings, carets, selection, row and flash tints.",
         "tonalRamp": [
-          "#000827",
-          "#0b2345",
-          "#274064",
-          "#445f85",
-          "#6682aa",
-          "#89a7d1",
-          "#aecdf8",
-          "#d1f1ff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "error-red": {
+      "err": {
         "role": "neutral",
         "displayName": "Error Red",
         "canonical": "#ff8080",
-        "purpose": "Errors and high-use gauges.",
+        "purpose": "Error banner and high-use gauge.",
         "tonalRamp": [
-          "#2d0000",
-          "#4f0006",
-          "#721b22",
-          "#953d3e",
-          "#bd6060",
-          "#e68583",
-          "#ffaaa8",
-          "#ffcecb"
-        ]
-      },
-      "day-ground": {
-        "role": "neutral",
-        "displayName": "Daylight Night Ground",
-        "canonical": "#ebebeb",
-        "purpose": "Light-theme value of night-ground (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#060c11",
-          "#1e252b",
-          "#394148",
-          "#575f66",
-          "#798189",
-          "#9da6ae",
-          "#c3ccd4",
-          "#e7f0f9"
-        ]
-      },
-      "day-surface": {
-        "role": "neutral",
-        "displayName": "Daylight Night Surface",
-        "canonical": "#fafafa",
-        "purpose": "Light-theme value of night-surface (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#090b0e",
-          "#212427",
-          "#3d4043",
-          "#5b5e61",
-          "#7d8184",
-          "#a1a5a9",
-          "#c7cbcf",
-          "#ebeff3"
-        ]
-      },
-      "day-surface-raised": {
-        "role": "neutral",
-        "displayName": "Daylight Raised Surface",
-        "canonical": "#f0f0f0",
-        "purpose": "Light-theme value of night-surface-raised (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#070c11",
-          "#1f252a",
-          "#3b4047",
-          "#585e65",
-          "#7b8188",
-          "#9fa5ad",
-          "#c4cbd3",
-          "#f0f0f0"
-        ]
-      },
-      "day-hairline": {
-        "role": "neutral",
-        "displayName": "Daylight Hairline",
-        "canonical": "#d6d6d6",
-        "purpose": "Light-theme value of hairline (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#040c16",
-          "#1a2530",
-          "#36414d",
-          "#535f6c",
-          "#75828f",
-          "#99a6b5",
-          "#beccdb",
-          "#e2f0ff"
-        ]
-      },
-      "day-hairline-strong": {
-        "role": "neutral",
-        "displayName": "Daylight Strong Hairline",
-        "canonical": "#b8b8b8",
-        "purpose": "Light-theme value of hairline-strong (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#020b1a",
-          "#172536",
-          "#324153",
-          "#4f5f73",
-          "#718296",
-          "#95a6bc",
-          "#bacce3",
-          "#def1ff"
-        ]
-      },
-      "day-ink": {
-        "role": "neutral",
-        "displayName": "Daylight Ink",
-        "canonical": "#1a1a1a",
-        "purpose": "Light-theme value of ink (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#010921",
-          "#14243e",
-          "#2f405c",
-          "#4c5e7c",
-          "#6e81a1",
-          "#92a6c7",
-          "#b7ccee",
-          "#daf0ff"
-        ]
-      },
-      "day-ink-secondary": {
-        "role": "neutral",
-        "displayName": "Daylight Secondary Ink",
-        "canonical": "#3d3d3d",
-        "purpose": "Light-theme value of ink-secondary (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#010a20",
-          "#14243c",
-          "#2f415a",
-          "#4c5f7a",
-          "#6e829f",
-          "#91a6c4",
-          "#b6ccec",
-          "#daf0ff"
-        ]
-      },
-      "day-ink-muted": {
-        "role": "neutral",
-        "displayName": "Daylight Muted Ink",
-        "canonical": "#575757",
-        "purpose": "Light-theme value of ink-muted (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#010a1f",
-          "#15243b",
-          "#304159",
-          "#4d5f79",
-          "#6e829d",
-          "#92a6c3",
-          "#b7ccea",
-          "#dbf0ff"
-        ]
-      },
-      "day-live-mint": {
-        "role": "primary",
-        "displayName": "Daylight Running Mint",
-        "canonical": "#08775a",
-        "purpose": "Light-theme value of live-mint (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#001604",
-          "#00321a",
-          "#005035",
-          "#006f53",
-          "#359375",
-          "#5eb999",
-          "#85e0be",
-          "#a9ffe2"
-        ]
-      },
-      "day-advisory-amber": {
-        "role": "secondary",
-        "displayName": "Daylight Advisory Amber",
-        "canonical": "#a94a07",
-        "purpose": "Light-theme value of advisory-amber (prefers-color-scheme: light, or data-theme=\"light\").",
-        "tonalRamp": [
-          "#2c0000",
           "#4d0000",
-          "#6f2400",
-          "#924415",
-          "#b9673c",
-          "#e28c60",
-          "#ffb285",
-          "#ffd6a8"
+          "#800000",
+          "#b30000",
+          "#e60000",
+          "#ff1a1a",
+          "#ff5c5c",
+          "#ffa3a3",
+          "#ffe5e5"
         ]
       },
-      "day-focus-steel": {
+      "heat-1": {
         "role": "neutral",
-        "displayName": "Daylight Focus Steel",
+        "displayName": "Heat 1",
+        "canonical": "#3a3a3a",
+        "purpose": "Lowest nonzero hour.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "heat-2": {
+        "role": "neutral",
+        "displayName": "Heat 2",
+        "canonical": "#5c5c5c",
+        "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "heat-3": {
+        "role": "neutral",
+        "displayName": "Heat 3",
+        "canonical": "#8f8f8f",
+        "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "heat-4": {
+        "role": "neutral",
+        "displayName": "Heat 4",
+        "canonical": "#c8c8c8",
+        "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "heat-5": {
+        "role": "neutral",
+        "displayName": "Heat 5",
+        "canonical": "#f0f0f0",
+        "purpose": "Busiest hours.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-ground": {
+        "role": "neutral",
+        "displayName": "Light Ground",
+        "canonical": "#ececec",
+        "purpose": "Light theme value of ground.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-surface": {
+        "role": "neutral",
+        "displayName": "Light Panel Fill",
+        "canonical": "#fafafa",
+        "purpose": "Light theme value of surface.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-surface-2": {
+        "role": "neutral",
+        "displayName": "Light Raised Fill",
+        "canonical": "#f0f0f0",
+        "purpose": "Light theme value of surface-2.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-line": {
+        "role": "neutral",
+        "displayName": "Light Quiet Rule",
+        "canonical": "#e2e2e2",
+        "purpose": "Light theme value of line.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-line-strong": {
+        "role": "neutral",
+        "displayName": "Light Panel Edge",
+        "canonical": "#d0d0d0",
+        "purpose": "Light theme value of line-strong.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-ink": {
+        "role": "neutral",
+        "displayName": "Light Ink",
+        "canonical": "#1a1a1a",
+        "purpose": "Light theme value of ink.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-ink-2": {
+        "role": "neutral",
+        "displayName": "Light Secondary Ink",
+        "canonical": "#3d3d3d",
+        "purpose": "Light theme value of ink-2.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-muted": {
+        "role": "neutral",
+        "displayName": "Light Muted Ink",
+        "canonical": "#595959",
+        "purpose": "Light theme value of muted.",
+        "tonalRamp": [
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
+        ]
+      },
+      "light-live": {
+        "role": "primary",
+        "displayName": "Light Running Mint",
+        "canonical": "#08775a",
+        "purpose": "Light theme value of live.",
+        "tonalRamp": [
+          "#054836",
+          "#08775a",
+          "#0ba77e",
+          "#0ed7a3",
+          "#28f1bc",
+          "#66f5cf",
+          "#a9f9e4",
+          "#e7fdf8"
+        ]
+      },
+      "light-advisory": {
+        "role": "secondary",
+        "displayName": "Light Advisory Amber",
+        "canonical": "#a94a07",
+        "purpose": "Light theme value of advisory.",
+        "tonalRamp": [
+          "#492003",
+          "#7a3605",
+          "#ab4b07",
+          "#dc6009",
+          "#f67a23",
+          "#f9a062",
+          "#fbcaa7",
+          "#fef0e7"
+        ]
+      },
+      "light-focus": {
+        "role": "neutral",
+        "displayName": "Light Focus Gray",
         "canonical": "#4a4a4a",
-        "purpose": "Light-theme value of focus-steel (prefers-color-scheme: light, or data-theme=\"light\").",
+        "purpose": "Light theme value of focus.",
         "tonalRamp": [
-          "#000236",
-          "#002156",
-          "#113f77",
-          "#315e99",
-          "#5382bf",
-          "#77a7e7",
-          "#9cceff",
-          "#bff2ff"
+          "#262626",
+          "#404040",
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
-      "day-error-red": {
+      "light-err": {
         "role": "neutral",
-        "displayName": "Daylight Error Red",
+        "displayName": "Light Error Red",
         "canonical": "#b91c1c",
-        "purpose": "Light-theme value of error-red (prefers-color-scheme: light, or data-theme=\"light\").",
+        "purpose": "Light theme value of err.",
         "tonalRamp": [
-          "#2d0000",
-          "#4f0000",
-          "#721d18",
-          "#963e36",
-          "#bd6157",
-          "#e6867b",
-          "#ffac9f",
-          "#ffcfc2"
+          "#420a0a",
+          "#6f1111",
+          "#9b1717",
+          "#c71e1e",
+          "#e13838",
+          "#ea7171",
+          "#f3afaf",
+          "#fce9e9"
         ]
       },
       "ink-opus": {
@@ -394,14 +474,14 @@
         "canonical": "#d97757",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#2d0000",
-          "#4f0000",
-          "#712000",
-          "#944125",
-          "#bc6448",
-          "#e4896b",
-          "#ffaf90",
-          "#ffd3b3"
+          "#3e1a0e",
+          "#682b18",
+          "#923d21",
+          "#bb4e2a",
+          "#d56744",
+          "#e1937a",
+          "#eec2b4",
+          "#faeeea"
         ]
       },
       "ink-sonnet": {
@@ -410,14 +490,14 @@
         "canonical": "#6a9bcc",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#00072e",
-          "#00244d",
-          "#10426d",
-          "#31618e",
-          "#5484b4",
-          "#78a9db",
-          "#9dd0ff",
-          "#c0f4ff"
+          "#142639",
+          "#21405f",
+          "#2e5985",
+          "#3b73ab",
+          "#548cc4",
+          "#85add5",
+          "#bbd1e8",
+          "#ecf2f8"
         ]
       },
       "ink-haiku": {
@@ -426,14 +506,14 @@
         "canonical": "#788c5d",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#040f00",
-          "#1a2a00",
-          "#35471a",
-          "#536538",
-          "#75885a",
-          "#98ad7d",
-          "#bed4a2",
-          "#e1f8c5"
+          "#272e1f",
+          "#424d33",
+          "#5c6b47",
+          "#768a5c",
+          "#90a375",
+          "#b0be9d",
+          "#d2dac8",
+          "#f3f5f0"
         ]
       },
       "ink-fable": {
@@ -442,30 +522,30 @@
         "canonical": "#b07cc6",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#1c002c",
-          "#39044a",
-          "#57276a",
-          "#77468b",
-          "#9b68b1",
-          "#c18dd8",
-          "#e9b2ff",
-          "#ffd6ff"
+          "#2c1735",
+          "#4a2759",
+          "#67367c",
+          "#8546a0",
+          "#9f5fb9",
+          "#ba8dce",
+          "#d8bfe3",
+          "#f4edf7"
         ]
       },
-      "ink-claude-other": {
+      "ink-other": {
         "role": "tertiary",
         "displayName": "Claude other ink",
         "canonical": "#888888",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#0b0b0b",
-          "#242424",
+          "#262626",
           "#404040",
-          "#5d5d5d",
-          "#808080",
-          "#a4a4a4",
-          "#cacaca",
-          "#eeeeee"
+          "#595959",
+          "#737373",
+          "#8c8c8c",
+          "#adadad",
+          "#d1d1d1",
+          "#f2f2f2"
         ]
       },
       "ink-gpt-astra": {
@@ -474,14 +554,14 @@
         "canonical": "#d4a72c",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#1f0100",
-          "#3c1b00",
-          "#5a3800",
-          "#7a5700",
-          "#9f7a0b",
-          "#c59f41",
-          "#ecc569",
-          "#ffea8d"
+          "#40320d",
+          "#6a5316",
+          "#94751e",
+          "#bf9627",
+          "#d8af40",
+          "#e3c677",
+          "#efdfb3",
+          "#fbf6ea"
         ]
       },
       "ink-gpt-sol": {
@@ -490,14 +570,14 @@
         "canonical": "#2bb3a3",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#001610",
-          "#003329",
-          "#005145",
-          "#007164",
-          "#009687",
-          "#38bcab",
-          "#67e3d2",
-          "#8efff6"
+          "#0f3e38",
+          "#19675e",
+          "#239083",
+          "#2cb9a9",
+          "#46d3c2",
+          "#7bdfd4",
+          "#b5ede7",
+          "#eafaf8"
         ]
       },
       "ink-gpt-terra": {
@@ -506,14 +586,14 @@
         "canonical": "#c06c84",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#290007",
-          "#4a001f",
-          "#6c203b",
-          "#8e4058",
-          "#b5627b",
-          "#de879f",
-          "#ffacc4",
-          "#ffd0e8"
+          "#361720",
+          "#592635",
+          "#7d364a",
+          "#a1455f",
+          "#ba5e79",
+          "#ce8d9f",
+          "#e3bfc9",
+          "#f7edf0"
         ]
       },
       "ink-gpt-luna": {
@@ -522,14 +602,14 @@
         "canonical": "#5cc8e8",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#000f2a",
-          "#002c47",
-          "#004b67",
-          "#006a88",
-          "#078ead",
-          "#46b4d4",
-          "#70dbfc",
-          "#96ffff"
+          "#093643",
+          "#105a70",
+          "#167e9c",
+          "#1ca2c9",
+          "#36bbe3",
+          "#70cfeb",
+          "#afe4f4",
+          "#e9f7fc"
         ]
       },
       "ink-gpt-other": {
@@ -538,73 +618,68 @@
         "canonical": "#9a9a6a",
         "purpose": "Fixed model-family identity color (FAMILY_COLOR in app.js), identical in every chart, legend and theme.",
         "tonalRamp": [
-          "#0f0c00",
-          "#272600",
-          "#434213",
-          "#616032",
-          "#848354",
-          "#a8a878",
-          "#cece9c",
-          "#f2f3bf"
+          "#2e2e1f",
+          "#4c4c34",
+          "#6a6a48",
+          "#89895d",
+          "#a2a276",
+          "#bdbd9e",
+          "#dadac8",
+          "#f5f5f0"
         ]
       }
     },
     "typographyMeta": {
       "display": {
         "displayName": "Reading",
-        "purpose": "The 지금 reading only; one per page, weight 300, tabular."
+        "purpose": "The 지금 numeral only; one per page, weight 300, 72px (60px under 400px)."
       },
       "headline": {
-        "displayName": "Cell heading",
-        "purpose": "Cell headings, brand, drawer title."
+        "displayName": "Panel heading",
+        "purpose": "Panel titles (h2, 15px/600), drawer title."
+      },
+      "brand": {
+        "displayName": "Brand",
+        "purpose": "Product name in the top bar (18px/600; 17px on mobile)."
       },
       "title": {
-        "displayName": "Card title",
-        "purpose": "Live-card session titles."
+        "displayName": "Row title",
+        "purpose": "Live-session titles and gauge labels (14px/600)."
       },
       "body": {
         "displayName": "Body",
-        "purpose": "Base text with tabular numerals."
+        "purpose": "Base text, 14px with tabular figures."
       },
       "body-dense": {
         "displayName": "Dense body",
-        "purpose": "Facts, key/value lists, sessions table, buttons, banners."
+        "purpose": "Tables, buttons, chips toolbar, model rows (13px)."
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Badges, segmented toggle, table header."
-      },
-      "axis": {
-        "displayName": "Axis",
-        "purpose": "Chart axes, gauge footnotes, 종료 stamp and demo badge."
+        "purpose": "Notes, axes, legends, table headers, metadata (12px)."
       }
     },
     "shadows": [
       {
         "name": "none",
         "value": "none",
-        "purpose": "The system is flat; depth is tonal (ground, surface, raised surface) with 1px hairlines."
+        "purpose": "The system is flat; separation is fill plus 1px strong border."
       },
       {
         "name": "drawer-scrim",
-        "value": "rgba(3, 7, 14, .6)",
+        "value": "rgba(0, 0, 0, .6)",
         "purpose": "Overlay behind the session drawer (a scrim, not a shadow)."
       }
     ],
     "motion": [
       {
         "name": "live-pulse",
-        "value": "livePulse 3s ease-in-out infinite (opacity 1 to 0.35)",
-        "purpose": "작업 중 status dot."
-      },
-      {
-        "name": "current-hour-pulse",
-        "value": "curPulse 3.6s ease-in-out infinite (opacity 1 to 0.45)",
-        "purpose": "Mint current-hour outline on the hourly strip."
+        "value": "livePulse 3.6s ease-in-out infinite (opacity 1 to 0.45)",
+        "purpose": "작업 중 dot."
       },
       {
         "name": "value-flash",
-        "value": "flashCell .6s ease-out (focus-steel 30% to transparent)",
+        "value": "flashCell .6s ease-out (focus 30% to transparent)",
         "purpose": "Brief highlight when a value increases."
       },
       {
@@ -620,6 +695,10 @@
     ],
     "breakpoints": [
       {
+        "name": "tiny",
+        "value": "400px"
+      },
+      {
         "name": "table-520",
         "value": "520px"
       },
@@ -628,16 +707,16 @@
         "value": "600px"
       },
       {
-        "name": "live-halves",
-        "value": "799px"
-      },
-      {
         "name": "table-820",
         "value": "820px"
       },
       {
-        "name": "grid-spans",
-        "value": "1000px"
+        "name": "one-column",
+        "value": "999px"
+      },
+      {
+        "name": "two-to-one",
+        "value": "1099px"
       },
       {
         "name": "table-1100",
@@ -650,101 +729,114 @@
     ],
     "themes": {
       "default": "dark",
-      "light": "prefers-color-scheme: light unless data-theme=\"dark\"; forced by ?theme=light|dark via data-theme",
+      "light": "prefers-color-scheme: light unless data-theme=\"dark\"; forced by ?theme=light|dark via data-theme on <html>",
       "lightTokens": [
-        "day-ground",
-        "day-surface",
-        "day-surface-raised",
-        "day-hairline",
-        "day-hairline-strong",
-        "day-ink",
-        "day-ink-secondary",
-        "day-ink-muted",
-        "day-live-mint",
-        "day-advisory-amber",
-        "day-focus-steel",
-        "day-error-red"
+        "light-ground",
+        "light-surface",
+        "light-surface-2",
+        "light-line",
+        "light-line-strong",
+        "light-ink",
+        "light-ink-2",
+        "light-muted",
+        "light-live",
+        "light-advisory",
+        "light-focus",
+        "light-err"
       ]
     }
   },
   "components": [
     {
-      "name": "Button",
-      "kind": "button",
-      "refersTo": "button",
-      "description": "Quiet outlined button (drawer 닫기).",
-      "html": "<button class=\"ds-btn\">닫기</button>",
-      "css": ".ds-btn{background:transparent;color:var(--ink,#ececec);border:1px solid var(--line-2,#3d3d3d);border-radius:3px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}.ds-btn:hover{background:var(--surface-2,#262626)}.ds-btn:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
+      "name": "Panel",
+      "kind": "card",
+      "refersTo": "panel",
+      "description": "Filled panel with a strong 1px edge and a heading row (title left, muted note right). Every section is one.",
+      "html": "<section class=\"ds-panel\"><div class=\"ds-ph\"><h2>최근 48시간</h2><span>API 정가 기준</span></div><p>Panel content</p></section>",
+      "css": ".ds-panel{background:var(--surface,#1a1a1a);border:1px solid var(--line-strong,#3d3d3d);border-radius:10px;padding:20px;color:var(--ink,#ececec);font-family:var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);font-size:14px}.ds-ph{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}.ds-ph h2{margin:0;font-size:15px;font-weight:600}.ds-ph span{font-size:12px;color:var(--muted,#9e9e9e)}.ds-panel p{margin:0}"
     },
     {
-      "name": "Filter chips",
-      "kind": "chip",
-      "refersTo": "chip",
-      "description": "Session filters; the active chip takes a focus-steel border and 18% fill.",
-      "html": "<div class=\"ds-chips\"><button class=\"ds-chip ds-chip-on\" aria-pressed=\"true\">전체</button><button class=\"ds-chip\">작업 중</button><button class=\"ds-chip\">오늘</button><button class=\"ds-chip\">7일</button></div>",
-      "css": ".ds-chips{display:flex;gap:6px}.ds-chip{background:transparent;border:1px solid var(--line-2,#3d3d3d);color:var(--ink-2,#bdbdbd);border-radius:3px;padding:3px 10px;font:inherit;font-size:12.5px;cursor:pointer}.ds-chip:hover{background:var(--surface-2,#262626);color:var(--ink,#ececec)}.ds-chip:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}.ds-chip-on{color:var(--ink,#ececec);border-color:var(--focus,#b5b5b5);background:color-mix(in srgb,var(--focus,#b5b5b5) 18%,transparent)}"
+      "name": "지금 reading",
+      "kind": "custom",
+      "refersTo": "panel",
+      "description": "72px weight-300 numeral, comparison line, family split bar, hairline-ruled fact rows. Mint only on the running count.",
+      "html": "<section class=\"ds-panel ds-now\"><h2>지금</h2><div class=\"ds-big\">119.0M</div><div class=\"ds-cap\">최근 60분</div><div class=\"ds-ratio\">평소의 1.4배</div><div class=\"ds-split\"><i style=\"flex-grow:5;background:#d97757\"></i><i style=\"flex-grow:4;background:#6a9bcc\"></i><i style=\"flex-grow:1;background:#788c5d\"></i></div><div class=\"ds-row\"><span>작업 중</span><b>3</b></div><div class=\"ds-row\"><span>오늘</span><b>474.4M</b></div></section>",
+      "css": ".ds-now{background:var(--surface,#1a1a1a);border:1px solid var(--line-strong,#3d3d3d);border-radius:10px;padding:20px;color:var(--ink,#ececec);font-family:var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);font-variant-numeric:tabular-nums;max-width:340px}.ds-now h2{margin:0;font-size:15px;font-weight:600}.ds-big{font-family:\"Segoe UI Variable Display\",\"Segoe UI Light\",\"Segoe UI\",system-ui,sans-serif;font-size:72px;font-weight:300;line-height:1;letter-spacing:-.02em;margin:4px 0 12px}.ds-cap{font-size:13px;color:var(--muted,#9e9e9e)}.ds-ratio{font-size:14px;color:var(--ink-2,#bdbdbd);margin-top:4px}.ds-split{display:flex;gap:2px;height:6px;margin-top:18px;border-radius:3px;overflow:hidden}.ds-split i{display:block;min-width:2px;border-radius:3px}.ds-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line,#2c2c2c);font-size:14px}.ds-row:first-of-type{margin-top:16px;border-top:1px solid var(--line,#2c2c2c)}.ds-row span{color:var(--ink-2,#bdbdbd)}.ds-row b{font-weight:600}.ds-row:first-of-type b{color:var(--live,#5be3c0)}"
+    },
+    {
+      "name": "Heat grid",
+      "kind": "custom",
+      "refersTo": "heat-5",
+      "description": "Contribution-graph cells: 13px tall, 2px radius, 3px gap, five neutral brightness steps plus level 0. Brightness only; no hue.",
+      "html": "<div class=\"ds-hleg\"><span>적음</span><span class=\"ds-sws\"><i class=\"l1\"></i><i class=\"l2\"></i><i class=\"l3\"></i><i class=\"l4\"></i><i class=\"l5\"></i></span><span>많음</span></div><div class=\"ds-cells\"><i class=\"l0\"></i><i class=\"l1\"></i><i class=\"l3\"></i><i class=\"l5\"></i><i class=\"l2\"></i><i class=\"l4\"></i></div>",
+      "css": ".ds-hleg{display:flex;align-items:center;gap:8px;font:12px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);color:var(--muted,#9e9e9e);margin-bottom:12px}.ds-sws{display:inline-flex;gap:4px}.ds-sws i{display:block;width:12px;height:12px;border-radius:2px}.ds-cells{display:flex;gap:3px}.ds-cells i{display:block;width:18px;height:13px;border-radius:2px}.ds-cells i:hover{outline:1px solid var(--ink,#ececec)}.l0{background:var(--heat-0,#222)}.l1{background:var(--heat-1,#3a3a3a)}.l2{background:var(--heat-2,#5c5c5c)}.l3{background:var(--heat-3,#8f8f8f)}.l4{background:var(--heat-4,#c8c8c8)}.l5{background:var(--heat-5,#f0f0f0)}"
     },
     {
       "name": "Provider toggle",
       "kind": "nav",
       "refersTo": "segmented-toggle",
-      "description": "Claude / GPT / 전체 segmented control in the top bar; shown only when both providers exist.",
+      "description": "Pill segmented control in the top bar (Claude / GPT / 전체); pressed segment takes the quiet rule fill. Shown only when both providers exist.",
       "html": "<div class=\"ds-seg\"><button>Claude</button><button>GPT</button><button aria-pressed=\"true\">전체</button></div>",
-      "css": ".ds-seg{display:inline-flex;border:1px solid var(--line-2,#3d3d3d);border-radius:3px;overflow:hidden}.ds-seg button{font:inherit;font-size:12px;padding:5px 12px;border:0;background:transparent;color:var(--muted,#a3a3a3);cursor:pointer}.ds-seg button+button{border-left:1px solid var(--line-2,#3d3d3d)}.ds-seg button:hover{color:var(--ink,#ececec)}.ds-seg button[aria-pressed=\"true\"]{color:var(--ink,#ececec);font-weight:600;background:color-mix(in srgb,var(--focus,#b5b5b5) 18%,transparent)}.ds-seg button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:-2px}"
+      "css": ".ds-seg{display:inline-flex;gap:2px;padding:3px;border:1px solid var(--line-strong,#3d3d3d);border-radius:999px;background:var(--surface,#1a1a1a)}.ds-seg button{font:13px/18px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);padding:4px 14px;border:0;border-radius:999px;background:transparent;color:var(--muted,#9e9e9e);cursor:pointer}.ds-seg button:hover{color:var(--ink,#ececec)}.ds-seg button[aria-pressed=\"true\"]{background:var(--line,#2c2c2c);color:var(--ink,#ececec);font-weight:600}.ds-seg button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:1px}"
+    },
+    {
+      "name": "Filter chips",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Session filters; pill, strong 1px edge; active takes the quiet rule fill and weight 600.",
+      "html": "<div class=\"ds-chips\"><button class=\"ds-chip active\">전체</button><button class=\"ds-chip\">작업 중</button><button class=\"ds-chip\">오늘</button><button class=\"ds-chip\">7일</button></div>",
+      "css": ".ds-chips{display:flex;gap:6px}.ds-chip{font:12px/18px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);color:var(--ink-2,#bdbdbd);background:transparent;border:1px solid var(--line-strong,#3d3d3d);border-radius:999px;padding:5px 12px;cursor:pointer}.ds-chip:hover{background:var(--surface-2,#222);color:var(--ink,#ececec)}.ds-chip.active{background:var(--line,#2c2c2c);color:var(--ink,#ececec);font-weight:600}.ds-chip:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
     },
     {
       "name": "Search field",
       "kind": "input",
       "refersTo": "search-input",
-      "description": "Sessions search.",
-      "html": "<input class=\"ds-search\" type=\"search\" placeholder=\"제목, 프로젝트, 경로, 모델 검색\">",
-      "css": ".ds-search{background:transparent;color:var(--ink,#ececec);border:1px solid var(--line-2,#3d3d3d);border-radius:3px;padding:6px 10px;min-width:270px;font:inherit;outline:none}.ds-search::placeholder{color:var(--muted,#a3a3a3);opacity:1}.ds-search:focus{border-color:var(--focus,#b5b5b5);outline:2px solid var(--focus,#b5b5b5);outline-offset:1px}"
+      "description": "Sessions search, 34px tall, 8px radius, ground-colored fill inside a panel.",
+      "html": "<input class=\"ds-search\" type=\"search\" placeholder=\"제목, 프로젝트, 모델, 경로 검색\">",
+      "css": ".ds-search{width:300px;max-width:100%;height:34px;padding:0 12px;border:1px solid var(--line-strong,#3d3d3d);border-radius:8px;background:var(--ground,#121212);color:var(--ink,#ececec);font:13px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);outline:0}.ds-search::placeholder{color:var(--muted,#9e9e9e);opacity:1}.ds-search:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:1px}"
+    },
+    {
+      "name": "Sort header",
+      "kind": "custom",
+      "refersTo": "table-header",
+      "description": "Table header button with the chevron to the LEFT of the label; chevron 45% opacity at rest, full ink when sorted.",
+      "html": "<div class=\"ds-th\"><button><svg width=\"10\" height=\"10\" viewBox=\"0 0 10 10\"><path d=\"M2 3.5 5 6.5 8 3.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>토큰(본인)</button></div>",
+      "css": ".ds-th button{display:flex;gap:5px;align-items:center;background:none;border:0;padding:0 0 9px;color:var(--muted,#9e9e9e);font:500 12px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);cursor:pointer;border-bottom:1px solid var(--line-strong,#3d3d3d)}.ds-th button:hover{color:var(--ink,#ececec)}.ds-th svg{opacity:.45}.ds-th button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
     },
     {
       "name": "Status badges",
       "kind": "chip",
-      "refersTo": "badge-ended",
-      "description": "작업 중 (pulsing mint dot), 대기 (hollow ring), 종료 (tilted stamp).",
-      "html": "<div class=\"ds-badges\"><span class=\"ds-badge ds-busy\"><i></i>작업 중</span><span class=\"ds-badge ds-idle\"><i></i>대기</span><span class=\"ds-badge ds-ended\">종료</span></div>",
-      "css": ".ds-badges{display:flex;gap:16px;align-items:center}.ds-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink-2,#bdbdbd)}.ds-badge i{width:6px;height:6px;border-radius:50%;background:currentColor;display:inline-block;box-sizing:border-box}.ds-busy{color:var(--live,#5be3c0)}.ds-busy i{animation:ds-pulse 3s ease-in-out infinite}.ds-idle i{background:transparent;border:1px solid currentColor}.ds-ended{color:var(--muted,#a3a3a3);font-size:11px;letter-spacing:.04em;border:1px solid currentColor;border-radius:2px;padding:0 6px;line-height:1.5;transform:rotate(-4deg)}@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.35}}@media (prefers-reduced-motion:reduce){.ds-busy i{animation:none}}"
+      "refersTo": "status-badge",
+      "description": "작업 중 (mint filled dot, slow opacity pulse), 대기 (hollow ring, muted), 종료 (small bordered label, no dot).",
+      "html": "<div class=\"ds-badges\"><span class=\"ds-badge busy\"><i></i>작업 중</span><span class=\"ds-badge idle\"><i></i>대기</span><span class=\"ds-badge ended\">종료</span></div>",
+      "css": ".ds-badges{display:flex;gap:16px;align-items:center}.ds-badge{display:inline-flex;align-items:center;gap:7px;font:500 13px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);color:var(--ink-2,#bdbdbd)}.ds-badge i{width:8px;height:8px;border-radius:50%;background:currentColor}.busy{color:var(--live,#5be3c0)}.busy i{animation:ds-pulse 3.6s ease-in-out infinite}.idle{color:var(--muted,#9e9e9e)}.idle i{background:transparent;border:1.5px solid currentColor}.ended{font-size:11px;line-height:16px;font-weight:400;border:1px solid var(--muted,#9e9e9e);border-radius:3px;padding:0 6px}.ended i{display:none}@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.45}}@media (prefers-reduced-motion:reduce){.busy i{animation:none}}"
     },
     {
       "name": "Advisory banner",
       "kind": "custom",
-      "refersTo": "advisory-banner",
-      "description": "특보: shown only when the last hour exceeds 2x the average of nonzero hours in the 48-hour window.",
+      "refersTo": "advisory",
+      "description": "특보: the only amber on screen; 60% border, 11% fill over surface, full-strength 14px/600 text, pill dismiss button.",
       "html": "<div class=\"ds-adv\"><span>특보 · 최근 60분 토큰 사용량이 평소의 2.4배 (119.0M)</span><button>이번 시간 닫기</button></div>",
-      "css": ".ds-adv{display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap;padding:10px 16px;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);border-radius:3px;background:color-mix(in srgb,var(--advisory,#ff9f43) 11%,transparent);color:var(--advisory,#ff9f43);font-size:14px;font-weight:600}.ds-adv button{background:transparent;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);color:inherit;border-radius:3px;padding:3px 10px;font:inherit;font-size:12px;font-weight:600;cursor:pointer}.ds-adv button:hover{background:color-mix(in srgb,var(--advisory,#ff9f43) 16%,transparent)}.ds-adv button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
-    },
-    {
-      "name": "지금 reading",
-      "kind": "custom",
-      "refersTo": "cell",
-      "description": "Forecast-temperature reading with a model-ink split bar and a hairline fact list.",
-      "html": "<section class=\"ds-now\"><h2>지금</h2><div class=\"ds-reading\">119.0M</div><div class=\"ds-cap\">최근 60분</div><div class=\"ds-split\"><i style=\"flex-grow:5;background:#d97757\"></i><i style=\"flex-grow:4;background:#6a9bcc\"></i><i style=\"flex-grow:1;background:#788c5d\"></i></div><dl class=\"ds-facts\"><dt>오늘 토큰</dt><dd>474.4M</dd><dt>작업 중</dt><dd><b>3</b> · 대기 7</dd></dl></section>",
-      "css": ".ds-now{background:var(--surface,#1e1e1e);color:var(--ink,#ececec);padding:20px 22px;font-variant-numeric:tabular-nums;max-width:420px}.ds-now h2{margin:0;font-size:15px;font-weight:600;letter-spacing:-.01em}.ds-reading{font-size:clamp(3rem,5.2vw,4.75rem);font-weight:300;line-height:1;letter-spacing:-.03em;margin:14px 0 8px}.ds-cap{color:var(--muted,#a3a3a3);font-size:12px;margin-bottom:14px}.ds-split{display:flex;height:4px;background:var(--surface-2,#262626);border-radius:2px;overflow:hidden;margin-bottom:16px}.ds-split i{display:block}.ds-facts{display:grid;grid-template-columns:auto 1fr;margin:0;font-size:13px}.ds-facts dt,.ds-facts dd{margin:0;padding:8px 0;border-top:1px solid var(--line,#2e2e2e)}.ds-facts dt{color:var(--muted,#a3a3a3)}.ds-facts dd{text-align:right}.ds-facts b{color:var(--live,#5be3c0);font-weight:700}"
-    },
-    {
-      "name": "Live session card",
-      "kind": "card",
-      "refersTo": "live-card",
-      "description": "Square, hairline-ruled card in the live grid; raises on hover; idle swatches dim to 0.55.",
-      "html": "<div class=\"ds-live\" tabindex=\"0\"><div class=\"ds-top\"><span class=\"ds-on\"><i></i>작업 중</span><span class=\"ds-meta\">경과 1시간 13분</span></div><h3>세션 31</h3><div class=\"ds-meta\">project-C · <i class=\"ds-sw\"></i>opus-5-5</div><div class=\"ds-foot\"><span>세션 토큰 <b>56.7M</b></span><span>추정 비용 <b>$14.26</b></span></div></div>",
-      "css": ".ds-live{background:var(--surface,#1e1e1e);color:var(--ink,#ececec);padding:14px 16px;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line,#2e2e2e);border-left:1px solid var(--line,#2e2e2e);cursor:pointer;max-width:420px;font-variant-numeric:tabular-nums}.ds-live:hover{background:var(--surface-2,#262626)}.ds-live:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:-2px}.ds-live h3{margin:0;font-size:14px;font-weight:600}.ds-top,.ds-foot{display:flex;justify-content:space-between;gap:8px}.ds-on{display:inline-flex;align-items:center;gap:6px;color:var(--live,#5be3c0);font-weight:600;font-size:12px}.ds-on i{width:6px;height:6px;border-radius:50%;background:currentColor}.ds-meta,.ds-foot{color:var(--muted,#a3a3a3);font-size:12px}.ds-foot b{color:var(--ink,#ececec);font-weight:600}.ds-sw{display:inline-block;width:9px;height:9px;border-radius:2px;background:#d97757;margin-right:6px;vertical-align:-1px}"
+      "css": ".ds-adv{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px 16px;padding:10px 16px;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);border-radius:10px;background:color-mix(in srgb,var(--advisory,#ff9f43) 11%,var(--surface,#1a1a1a));color:var(--advisory,#ff9f43);font:600 14px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif)}.ds-adv button{background:transparent;border:1px solid color-mix(in srgb,var(--advisory,#ff9f43) 60%,transparent);color:inherit;border-radius:999px;padding:3px 12px;font:600 12px var(--font, \"Segoe UI Variable Text\", \"Segoe UI\", \"Malgun Gothic\", system-ui, sans-serif);cursor:pointer}.ds-adv button:hover{background:color-mix(in srgb,var(--advisory,#ff9f43) 16%,transparent)}.ds-adv button:focus-visible{outline:2px solid var(--focus,#b5b5b5);outline-offset:2px}"
     }
   ],
   "narrative": {
-    "northStar": "The Night Forecast Office",
-    "overview": "The dashboard reads token usage the way a weather service reads the sky. One large, light-weight numeral (지금, the last 60 minutes) is the temperature; a 48-hour hourly strip is the forecast; an amber 특보 appears only when the burn is abnormal and is otherwise absent. Everything sits on a dark neutral gray ground, laid out as bordered panels on one 12-column grid with 14px gutters of ground between them; each panel opens with a raised title band. Nothing casts a shadow.\n\nColor is spent like a signal budget. Mint means exactly one thing (running now), amber means exactly one thing (an advisory), and the model-family inks are a fixed transit-map legend that never changes meaning between charts, dots and legends. All remaining chrome is neutral gray, ink and hairline. Density is that of an instrument panel: 13-14px tabular text, compact controls, generous reading numerals.\n\nThe page is built to stay open all day on a side monitor. Motion is limited to a slow opacity pulse on the 작업 중 dot and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is a daylight transposition of the same world, not a different one.",
+    "northStar": "The Contribution Graph",
+    "overview": "Token usage is read as a work rhythm, the way a developer reads a contribution graph: when you worked with agents (30 days by 24 hours) is the picture, and the live state sits beside it in a calm 360px side column. The page refuses a row of KPI cards stacked over two charts. A dark neutral gray ground carries filled panels, each closed off by a 1px strong border and a 10px radius, with 16px gutters of ground between them. Nothing casts a shadow.\n\nThe heat grid speaks in brightness only: six neutral steps from the panel's own raised fill to near white, so the rhythm reads before any color does. Color is a short list of meanings. Mint means exactly one thing (running now), amber means exactly one thing (the 특보), and the ten model-family inks are a fixed legend that appears only in bars, split strips and dots. Everything else is gray ink on gray fill. One large, light numeral (지금, the last 60 minutes) is the reading; tabular figures keep every other number aligned.\n\nBuilt to stay open all day: no blur, no gradients, no icon fonts, system fonts only. Motion is a slow opacity pulse on the 작업 중 dot, a 0.6s value flash and a 0.2s drawer slide, all disabled under reduced motion. Dark is the default; the light theme is the same grays inverted, not a different world.",
     "keyCharacteristics": [
-      "Dark neutral gray ground (no blue cast, per the user) with a slightly lighter work surface, divided by 1px hairlines.",
-      "One 12-column cell grid that every panel and the live-session cards lock to.",
-      "Mint reserved for running now; amber reserved for 특보.",
-      "Fixed model-family inks, identical everywhere, brightest when active.",
-      "System sans with tabular numerals; a 300-weight forecast-temperature reading.",
-      "Ended sessions carry a tilted 종료 stamp instead of fading out."
+      "Dark neutral gray ground (#121212, never blue-tinted) with clearly separated filled panels.",
+      "Contribution-graph form: daily stacked strip aligned above a day-by-hour heat grid sharing one column axis.",
+      "Heat in brightness only; mint for running now; amber for the 특보; fixed model inks.",
+      "One 72px weight-300 reading; everything else 12-15px.",
+      "No shadows, no current-time marker on the 48-hour chart, nothing heavy.",
+      "Table sort arrows sit left of header labels."
     ],
     "rules": [
+      {
+        "name": "The Brightness-Only Heat Rule",
+        "body": "The heat grid and its legend use only the neutral ramp. No hue, no model ink, no mint, no amber in a heat cell, ever.",
+        "section": "colors"
+      },
       {
         "name": "The Reserved Mint Rule",
         "body": "Mint appears only where something is running now. If nothing is running, no mint is on screen.",
@@ -752,17 +844,17 @@
       },
       {
         "name": "The Advisory-Only Amber Rule",
-        "body": "Amber is spent only on the 특보 and the hot-hour comparison. It is never a warning color for anything else.",
+        "body": "Amber is spent only on the 특보 banner. It is never a warning color, a hover color or an accent.",
         "section": "colors"
       },
       {
         "name": "The Fixed Inks Rule",
-        "body": "A model family has one ink everywhere, in both themes. Provider badges (Claude / GPT) stay neutral ink on a strong hairline so they never compete with model inks. Inactive sessions dim their swatch (0.55 opacity); active ones show full strength.",
+        "body": "A model family has one ink everywhere. Provider badges (Claude / GPT) stay neutral ink on a strong border so they never compete with model inks.",
         "section": "colors"
       },
       {
-        "name": "The Forecast Reading Rule",
-        "body": "The headline number is large and light (weight 300), never bold. Weight goes to headings and labels, size goes to the reading.",
+        "name": "The Light Reading Rule",
+        "body": "The headline number is large and light (weight 300), never bold. Size carries the reading; weight goes to headings.",
         "section": "typography"
       },
       {
@@ -771,25 +863,28 @@
         "section": "typography"
       },
       {
-        "name": "The Hairline Grid Rule",
-        "body": "Panels are separated by 1px lines, not by shadows, gaps of ground, or rounded card silhouettes. A new panel joins the 12-column grid as another cell.",
+        "name": "The Separated Panel Rule",
+        "body": "Panels are unmistakably separate: fill, strong border, radius and a gutter of ground, never shadows. A new section is a new panel with a heading row, not a divider inside an existing one.",
         "section": "elevation"
       }
     ],
     "dos": [
-      "**Do** put every new panel into the 12-column grid as a bordered span-4, span-8 or span-12 panel with a title band.",
+      "**Do** put every new section in a panel: `surface` fill, 1px `line-strong` border, 10px radius, 20px padding, heading row.",
+      "**Do** render any frequency or intensity as the neutral heat ramp (`heat-0` to `heat-5`), brightness only.",
       "**Do** keep mint for running-now signals and amber for the 특보 only.",
-      "**Do** take model colors from `FAMILY_COLOR`; the same family is the same ink in every chart, legend, swatch and theme.",
-      "**Do** use tabular numerals for every value and right-align numbers in tables and fact lists.",
-      "**Do** mark ended sessions with the tilted 종료 stamp rather than fading them.",
-      "**Do** keep motion to the 작업 중 dot pulse and the 0.2s drawer slide, and switch it off under `prefers-reduced-motion`.",
-      "**Do** define colors as custom properties with both a dark (default) and a daylight value, honoring `prefers-color-scheme` and the `data-theme` override."
+      "**Do** take model colors from `FAMILY_COLOR`; the same family is the same ink in every chart, legend and dot, in both themes.",
+      "**Do** use tabular numerals and right-align numbers in tables and fact lists.",
+      "**Do** place sort chevrons to the left of header labels in every sortable table.",
+      "**Do** define colors as custom properties with dark default and light values, honoring `prefers-color-scheme`, `data-theme` and `?theme=light|dark`.",
+      "**Do** keep motion to the dot pulse, the value flash and the drawer slide, and switch it off under `prefers-reduced-motion`."
     ],
     "donts": [
-      "**Don't** add box-shadows or floating, rounded card stacks; depth is tonal and lines are 1px.",
-      "**Don't** use mint or amber as generic accents, hover colors, or brand color.",
-      "**Don't** recolor a model family per chart or per theme, or tint provider badges with model inks.",
-      "**Don't** load web fonts, icon fonts or CDN assets; the stack is system sans only.",
+      "**Don't** tint the ground or panels blue; grays stay neutral.",
+      "**Don't** add box-shadows, gradients, blur or any effect that costs CPU or GPU in an always-open tab.",
+      "**Don't** add a \"지금\" marker or current-hour highlight to the 48-hour chart.",
+      "**Don't** use mint or amber as generic accents, hover colors or brand color, and never inside the heat grid.",
+      "**Don't** recolor a model family per chart or theme, or tint provider badges with model inks.",
+      "**Don't** load web fonts, icon fonts or CDN assets; the stack is system fonts only.",
       "**Don't** bold the 지금 reading; it stays at weight 300.",
       "**Don't** let the page scroll horizontally; hide table columns in order instead."
     ]

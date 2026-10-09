@@ -15,10 +15,13 @@ function Invoke-Checked([string]$What, [scriptblock]$Cmd) {
     if ($LASTEXITCODE -ne 0) { throw "$What failed (exit code $LASTEXITCODE)" }
 }
 
-Write-Host '[1/6] Regenerating build/sea-config.json assets from public/'
+Write-Host '[1/6] Regenerating build/sea-config.json assets from public/ (recursive: includes public/skins/)'
 $assets = [ordered]@{}
-Get-ChildItem -Path (Join-Path $Root 'public') -File | Sort-Object Name | ForEach-Object {
-    $assets["public/$($_.Name)"] = "public/$($_.Name)"
+$PublicDir = Join-Path $Root 'public'
+Get-ChildItem -Path $PublicDir -File -Recurse | ForEach-Object {
+    $_.FullName.Substring($PublicDir.Length + 1).Replace('\', '/')
+} | Sort-Object | ForEach-Object {
+    $assets["public/$_"] = "public/$_"
 }
 $cfg = [ordered]@{
     main = 'dist/bundle.cjs'
