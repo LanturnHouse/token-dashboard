@@ -6,7 +6,7 @@
 
 데모 영상: https://youtu.be/CYhLtgvjr_0
 
-**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.2.0-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
+**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.2.1-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
 
 ## 주요 기능
 
@@ -22,7 +22,7 @@
 - **GPT 사용 한도 게이지**: Codex 로그에 기록된 5시간 / 주간 한도 사용률과 초기화 시각을 보여줍니다.
 - **세션 목록**: 검색, 필터(전체 / 실행 중 / 오늘 / 7일), 열 정렬. 행을 누르면 모델별·에이전트별 상세가 열립니다.
 - **데모 모드**: `--demo` 로 실행하면 제목, 프로젝트명, 경로, 프롬프트를 가린 채 화면을 띄웁니다. 화면 녹화용입니다.
-- **테마 (활동 기록 / 관제)**: 상단바의 `THEME` 에서 두 테마를 고릅니다. 관제는 세션을 하나 골라 컨텍스트 게이지, 압축 기록, 에이전트·스킬 경로를 봅니다. 자세한 내용은 아래 "테마"를 보세요.
+- **테마 (활동 기록 / 관제)**: 같은 데이터를 두 가지 화면으로 봅니다. 자세한 내용은 [테마](#테마)를 보세요.
 
 ### 화면 구성
 
@@ -37,21 +37,28 @@
 
 - **작업 리듬 읽는 법**: 열은 하루, 칸은 1시간입니다. 밝을수록 그 시간에 토큰을 많이 썼다는 뜻이고, 색으로 구분하지 않고 밝기만 씁니다.
 - **색의 규칙**: 민트색은 "작업 중"에만, 호박색은 특보에만 씁니다. 모델별 색은 모든 차트·점·범례에서 같습니다. 종료된 세션에는 '종료' 도장이 붙습니다.
-- **밝기**: 활동 기록 테마의 기본은 짙은 회색(다크)입니다. 라이트 테마는 운영체제 설정을 따르고, 주소 뒤에 `?theme=light` 또는 `?theme=dark` 를 붙이면 바꿔 볼 수 있습니다. (관제 테마는 항상 어둡게 표시됩니다.)
 - **특보 미리보기**: `?force-advisory=1` 을 붙이면 조건과 상관없이 특보 배너를 띄웁니다(화면 확인용).
 - 디자인 원칙과 색·글자 크기 토큰은 [DESIGN.md](DESIGN.md), 제품 정의는 [PRODUCT.md](PRODUCT.md)에 있습니다.
 
-### 테마 (활동 기록 / 관제)
+### 테마
 
-화면은 두 가지 테마로 볼 수 있습니다. 두 테마는 같은 데이터와 같은 5초 갱신을 씁니다.
+화면은 두 가지 테마로 볼 수 있습니다. 두 테마는 같은 데이터를 같은 5초 주기로 갱신합니다.
 
-- **활동 기록** (기본): 위에서 설명한 화면입니다.
-- **관제**: 지금 열려 있는 세션(작업 중 + 대기)을 칩으로 늘어놓고(작업 중 먼저; 접힌 상태에서는 지금 화면 폭에서 두 줄에 들어가는 만큼만 보이고, 넘치면 `+N 더 보기` 로 펼침), 고른 세션 하나를 자세히 보여줍니다. 컨텍스트 크기 게이지(자동 압축 지점은 점선), 최근 호출의 컨텍스트 변화, 모델과 노력 수준, 오른쪽의 **THIS SESSION** 패널(그 세션의 최근 60분 토큰·비용을 그 세션의 가장 많이 쓴 1시간과 비교, 그 세션의 압축 횟수), 그리고 그 세션이 지금 쓰고 있는 에이전트·스킬의 경로도입니다. 사용 중인 경로는 강조색 선과 움직이는 점으로, 그 밖의 연결은 회색 선으로 그립니다. 아래에는 압축 기록, 재읽기 vs 신규, 노력 수준 분포(기록 없는 비율은 미기록으로 표시)와 함께 활동 기록 테마의 차트·세션 목록·가격표가 그대로 이어집니다.
-- **바꾸는 법**: 상단바의 `THEME` 버튼(활동 기록 / 관제)을 누르거나, 주소 뒤에 `?skin=activity` 또는 `?skin=control` 을 붙입니다. 버튼으로 고른 테마와 관제에서 고른 세션은 이 브라우저에 기억됩니다(localStorage).
-- **스킬 표시의 한계**: 로그에는 스킬을 호출한 시각만 남고 끝난 시각은 없습니다. 그래서 관제 화면은 호출 후 3분 이내의 스킬만 "사용 중"으로 그립니다.
-- **기간**: 관제 테마의 기간은 최근 30일로 고정되어 있습니다.
+- **활동 기록** (기본): 위의 [화면 구성](#화면-구성)에서 설명한 화면입니다.
+- **관제**: 실행 중이거나 대기 중인 세션을 칩으로 늘어놓고, 그중 하나를 골라 자세히 봅니다.
+  - **세션 줄**: 작업 중인 세션을 먼저, 그다음 대기 세션을 보여 줍니다. 접힌 상태에서는 두 줄까지만 보이고, 넘치는 세션은 `+N 더 보기` 로 펼칩니다.
+  - **선택한 세션**: 컨텍스트 크기 게이지(자동 압축 지점은 점선), 최근 호출의 컨텍스트 변화, 모델과 노력 수준을 보여 줍니다. 오른쪽 **THIS SESSION · LAST 60 MIN** 패널은 그 세션의 최근 60분 토큰·비용을 그 세션에서 가장 많이 쓴 1시간과 비교하고, 압축 횟수를 보여 줍니다.
+  - **에이전트·스킬 경로도**: 세션의 에이전트와 스킬을 한 장의 그림으로 그립니다. 회색 선은 연결이고, 라임색 선과 움직이는 점은 지금 사용 중인 것입니다. 서브에이전트는 자기를 호출한 에이전트 아래에 매달려 그려집니다. 스킬은 호출 후 3분 이내일 때만 그립니다. 로그에는 호출 시각만 남고 끝난 시각은 없기 때문입니다.
+  - **아래 영역**: 압축 기록, 재읽기 vs 신규, 노력 수준 분포가 나옵니다. 노력 수준 분포에서 기록이 없는 비율은 **미기록**으로 따로 표시합니다. 그 아래에는 활동 기록 테마와 같은 차트, 세션 목록, 가격표가 이어집니다.
+- **바꾸는 법**: 상단바의 `THEME` 버튼(활동 기록 / 관제)을 누르거나, 주소 뒤에 `?skin=activity` 또는 `?skin=control` 을 붙입니다. 고른 테마와 관제에서 고른 세션은 이 브라우저에 기억됩니다(localStorage).
+- **제약**:
+  - 관제의 기간은 최근 30일로 고정되어 있습니다.
+  - 관제 테마는 항상 어둡게 표시됩니다. 활동 기록 테마의 기본은 짙은 회색(다크)이고, 라이트 테마는 운영체제 설정을 따릅니다. 주소 뒤에 `?theme=light` 또는 `?theme=dark` 를 붙여 바꿔 볼 수 있습니다.
+  - Claude 게이지의 눈금은 1M을 기준으로 한 표시용 값입니다. 로그에 모델의 창 크기가 없기 때문입니다. Codex 게이지는 로그에 기록된 실제 창 크기를 씁니다.
 
 ### 스크린샷
+
+**활동 기록 테마**
 
 ![활동 기록 테마 전체 화면 (1440x900)](docs/images/dashboard.png)
 
@@ -59,15 +66,13 @@
 
 <p align="center"><img src="docs/images/mobile.png" alt="활동 기록 테마 모바일 화면 (375px 너비)" width="300"></p>
 
-> 스크린샷은 데모 모드(`node server.js --demo`)에서 찍은 화면입니다. 실제 프로젝트명이나 프롬프트는 들어 있지 않습니다.
-
-### 관제 테마 스크린샷
-
-위의 세 스크린샷은 활동 기록 테마입니다. 관제 테마는 아래 두 장으로 보여 줍니다.
+**관제 테마**
 
 ![관제 테마 전체 화면 (데스크톱)](docs/images/control.png)
 
 <p align="center"><img src="docs/images/control-mobile.png" alt="관제 테마 모바일 화면 (375px 너비)" width="300"></p>
+
+> 스크린샷은 데모 모드(`node server.js --demo`)에서 찍은 화면입니다. 실제 프로젝트명이나 프롬프트는 들어 있지 않습니다.
 
 ## 요구 사항
 
@@ -99,6 +104,7 @@ node server.js --demo        # 또는 환경변수 DEMO=1
 Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데모 모드에서는 다음이 바뀝니다.
 
 - 세션 제목은 `세션 N`, 프로젝트는 `project-A` 처럼 바뀌고 경로와 프롬프트는 `(가려짐)` 으로 표시됩니다.
+- 스킬 이름도 가려집니다. `claude-api`, `anthropic-skills:*` 같은 일반적인 이름만 그대로 두고, 직접 만든 스킬은 `custom-skill #n` 으로 표시합니다.
 - 상단에 `DEMO · 개인정보 가림` 배지가 붙습니다.
 - 데모용 캐시 파일(`scan-cache-demo.json`)을 따로 씁니다.
 
@@ -106,9 +112,9 @@ Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데�
 
 ## Windows 실행 파일 (token-dashboard.exe)
 
-Node.js를 설치하지 않아도 되는 단일 실행 파일입니다. v1.2.0 exe에는 두 테마(활동 기록, 관제)가 모두 들어 있습니다.
+Node.js를 설치하지 않아도 되는 단일 실행 파일입니다. v1.2.1 exe에는 두 테마(활동 기록, 관제)가 모두 들어 있습니다.
 
-1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.2.0-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
+1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.2.1-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
 2. 파일을 더블클릭합니다. 기본 브라우저가 **http://localhost:7777** 을 자동으로 엽니다. 창을 닫으면 대시보드가 종료됩니다.
 3. 처음 실행하면 Windows SmartScreen 에 **"알 수 없는 게시자"** 경고가 뜰 수 있습니다. 이 프로그램은 코드 서명이 없기 때문입니다. **추가 정보** → **실행** 을 누르면 됩니다.
 4. `config.json` 과 `.cache/` 는 exe 가 있는 폴더에 만들어집니다. 설정을 바꾸려면 그 파일을 편집하세요.
@@ -281,11 +287,11 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 
 ## English
 
-**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. The layout is two columns on a dark gray background: on the left, "now" (last 60 minutes with an "N× usual" ratio, plus an advisory banner above 2×), running sessions and the GPT limit gauge; on the right, a 30-day × 24-hour activity heat map (brightness only), a 48-hour chart and per-model share and estimated cost; the session list and price table span the full width below. Light theme follows the OS, or use `?theme=light|dark`. A second theme, **관제** ("control"), leads with the live sessions (running first, then waiting; `+N` expands the strip): pick one to see its context gauge, model and effort, a THIS SESSION panel (its own last-60-min tokens and cost against its busiest hour, its compactions), and a path diagram of the agents and skills it is using right now (skills count as active for 3 minutes after invocation, since the logs keep only the invocation time). Switch with the `THEME` picker in the top bar or `?skin=activity|control`; the choice is remembered in the browser. Both themes use the same data. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
+**token-dashboard** is a read-only, local web dashboard. It reads your local Claude Code logs (`~/.claude`) and OpenAI Codex logs (`~/.codex/sessions`) and shows token usage, active work time, live sessions, and estimated API list-price cost. Two themes show the same data, refreshed every 5 seconds: **활동 기록** (activity, the default: current usage with an "N× usual" ratio, a 30-day × 24-hour heat map, per-model charts and the session list) and **관제** ("control": live sessions as chips, running first, with the selected session's context gauge, compactions, and a path diagram of the agents and skills it is using right now; a skill counts as active for 3 minutes after it is invoked). Switch with the `THEME` picker in the top bar or `?skin=activity|control`; the choice is remembered in the browser. The light theme (activity only) follows the OS, or use `?theme=light|dark`. It uses only Node.js built-in modules, binds to `127.0.0.1`, has no auth, and makes no network calls.
 
 - **Run:** `node server.js` (or `start.bat` on Windows), then open http://localhost:7777. Node 20+ recommended; developed and tested on Node 24.
-- **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths and prompts for screen recording.
-- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`. The v1.2.0 exe contains both themes.
+- **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths, prompts and skill names (custom skills show as `custom-skill #n`) for screen recording.
+- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`. The v1.2.1 exe contains both themes.
 - **Cost figures** are estimates at API list prices. They are not your subscription bill.
 - **Config:** `config.json` (`port`, `host`, `claudeDir`, `codexDir`, `codexPricing`) and env vars `PORT`, `CODEX_DIR`, `DASHBOARD_CACHE`, `DEMO`.
 - **Design notes:** `docs/specs/` (SPEC, SPEC-v2, SPEC-v3). Parts of these are outdated (e.g. PIN login).
