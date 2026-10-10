@@ -421,3 +421,11 @@ html[data-skin="control"] .banner { border-radius: 4px; border-color: var(--c-li
   /* expanded strip on phones: a bounded scroll box (~5 chips) so the selected card does not drop far below */
   #skin-control .c-strip.xp { max-height: 318px; overflow-y: auto; overscroll-behavior: contain; padding: 2px 4px 2px 2px; margin: -2px -4px -2px -2px; scrollbar-width: thin; scrollbar-color: #3d403c transparent; }
 }
+/* path: per-group fold node (`+N 더 보기` / `접기`), node-sized, dashed lime outline */
+#skin-control button.pmore { width: 100%; min-height: 92px; margin: 0; padding: 0 10px; background: transparent; border: 1.5px dashed rgba(191, 242, 58, .45); border-radius: 12px; color: var(--ink-2); font-family: var(--c-mono); font-size: 13px; letter-spacing: .06em; cursor: pointer; }
+#skin-control button.pmore.hot { border-color: var(--c-acc); color: var(--c-acc); }
+#skin-control button.pmore:hover { background: rgba(191, 242, 58, .06); }
+#skin-control button.pmore:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+#skin-control button.pmore[aria-expanded="true"] { min-height: 56px; }
+/* path: each group is N independent column stacks (masonry-style), so no holes open under shorter neighbours */
+#skin-control .pcolm { display: flex; flex-direction: column; gap: 14px; min-width: 0; }

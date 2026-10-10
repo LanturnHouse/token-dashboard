@@ -18,7 +18,8 @@
   var LEVELS = ['low', 'medium', 'high', 'xhigh', 'max'];
   var SEL_KEY = 'cud.sel';
   var STRIP_ROWS = 2;      // collapsed strip: as many chips as fit in 2 rows at the current width (+N)
-  var TCAP = 8, MAXD = 3;  // path: top-level cap, nesting depth cap
+  var TCAP = 999, MAXD = 8;  // path: effectively no cap (every running agent gets a node), generous nesting depth
+  var PATH_ROWS = 4;          // path: per group, top-level nodes beyond 4 wrapped rows fold into a `+N 더 보기` node
   var SKILL_ACTIVE_S = 180;  // a skill counts as "in use" for 3 min after its invocation (logs keep only that time)
   var DONE_MS = 600000;    // ended agents stay visible (gray) for 10 min
   var SPEED = 150;         // px/s of the traveling circles
@@ -109,7 +110,7 @@
   var host = null, built = false, on = false, ro = null;
   var cs = {
     M: null, selId: null, shownSel: null, painted: false, restored: false,
-    pathKey: '', ovSig: '', raf: 0, fadeT: 0, fading: false, expanded: false, cols: 0
+    pathKey: '', ovSig: '', raf: 0, fadeT: 0, fading: false, expanded: false, cols: 0, pcols: {}, pexp: {}, pmap: {}
   };
 
   function build() {
@@ -137,6 +138,16 @@
       e.preventDefault();
       if (indexOf(M, M.liveChips[i].s.id) < 0) cs.expanded = true;
       select(M.liveChips[i].s.id, true);
+    });
+    $('c-pathw').addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('[data-pmore]') : null;
+      if (!b || !cs.M || !cs.selId) return;
+      var g = b.getAttribute('data-pmore'), k = cs.selId + '|' + g;
+      cs.pexp[k] = !cs.pexp[k];   // page-session only
+      patchSel(cs.M);
+      var nb = $('c-pathw').querySelector('[data-pmore="' + g + '"]');
+      if (nb) nb.focus();
+      sched();
     });
     $('c-hh').addEventListener('click', function (e) {
       var b = e.target.closest ? e.target.closest('[data-more-toggle]') : null;
@@ -268,7 +279,7 @@
     return Math.max(1, Math.floor((w + 8) / 270));
   }
 
-  // visible tree of one session: top-level cap 8 (+N), depth cap 3
+  // visible tree of one session: no practical cap on top-level nodes (the backend already limits ended agents)
   function buildTree(N) {
     N = N || [];
     var byId = {};
@@ -291,7 +302,7 @@
     function byOrd(a, b) { return a.ord - b.ord; }
     var key = [];
     function walk(n, d) { key.push(d + n.kind[0] + (n.ended ? 'e' : 'r') + n.id); kidsOf(n).forEach(function (c) { walk(c, d + 1); }); }
-    var rA = keepRoots.filter(function (n) { return n.kind === 'agent'; }).sort(byOrd), rS = keepRoots.filter(function (n) { return n.kind === 'skill'; }).sort(byOrd);
+    var rA = keepRoots.filter(function (n) { return n.kind === 'agent'; }).sort(function (a, b) { return a.rank - b.rank || a.ord - b.ord; }), rS = keepRoots.filter(function (n) { return n.kind === 'skill'; }).sort(byOrd);
     rA.concat(rS).forEach(function (n) { walk(n, 0); });
     return {
       rootsA: rA, rootsS: rS, kidsOf: kidsOf, hidA: hid.A, hidS: hid.S, total: N.length,
@@ -459,18 +470,49 @@
       return '<div class="tn" data-id="' + esc(n.id) + '" data-act="' + (n.ended ? 0 : 1) + '">' + nodeHTML(n, now) + (k.length ? '<div class="kids">' + treeHTML(tl, k, now) + '</div>' : '') + '</div>';
     }).join('');
   }
-  function moreHTML(c) { return '<div class="tn" data-more="1" data-act="0"><div class="more" title="' + c + '개 더 있음">+' + c + '</div></div>'; }
+  function subtree(tl, n) { var c = 1; tl.kidsOf(n).forEach(function (k) { c += subtree(tl, k); }); return c; }
+  function subRun(tl, n) { return (n.kind === 'skill' || !n.ended) || tl.kidsOf(n).some(function (k) { return subRun(tl, k); }); }
+  // one group's top-level nodes, folded to PATH_ROWS wrapped rows at the measured column count (+N node = last item of row 4)
+  // One group's top-level nodes as N independent column stacks (N = the grid's current column count), so a node sits
+  // right under the previous node of its column (+ its hanging children): no holes under shorter neighbours.
+  // Columns are assigned round-robin by first appearance and remembered (per session, group and N), so a node never
+  // jumps to another column on refresh (an agent that ends just moves to the end of its own column); new nodes append.
+  // Fold: when a column holds more than PATH_ROWS nodes, every column shows its first PATH_ROWS and the 4th slot of the
+  // right-most column that has a 4th node becomes `+N 더 보기` (N = hidden nodes incl. their children). Expanded: all
+  // nodes, `접기` takes the slot the next node would take (end of the last row).
+  function foldGroup(tl, list, g, sid, now, keyOut) {
+    var N = Math.max(1, cs.pcols[g] || 1), mk = sid + '|' + g + '|' + N, fk = sid + '|' + g, exp = !!cs.pexp[fk];
+    var map = cs.pmap[mk] || (cs.pmap[mk] = { col: {}, next: 0 });
+    list.forEach(function (n) { if (map.col[n.id] == null) { map.col[n.id] = map.next % N; map.next++; } });
+    var cols = [], c;
+    for (c = 0; c < N; c++) cols.push([]);
+    list.forEach(function (n) { cols[map.col[n.id]].push(n); });
+    var over = cols.some(function (cl) { return cl.length > PATH_ROWS; }), btnCol = -1, hid = [];
+    if (over && !exp) {
+      for (c = N - 1; c >= 0 && btnCol < 0; c--) if (cols[c].length >= PATH_ROWS) btnCol = c;
+      cols = cols.map(function (cl, ci) { var keep = ci === btnCol ? PATH_ROWS - 1 : PATH_ROWS; hid = hid.concat(cl.slice(keep)); return cl.slice(0, keep); });
+    } else if (over) btnCol = map.next % N;
+    var btn = '';
+    if (over) {
+      var nHid = hid.reduce(function (acc, n) { return acc + subtree(tl, n); }, 0);
+      var hot = hid.some(function (n) { return subRun(tl, n); });
+      btn = '<div class="tn" data-more="1" data-act="0"><button type="button" class="more pmore' + (hot ? ' hot' : '') + '" data-pmore="' + g + '" aria-expanded="' + (exp ? 'true' : 'false') + '"' +
+        (exp ? '' : ' title="' + nHid + '개 노드 숨김' + (hot ? ' (실행 중 포함)' : '') + '"') + '>' + (exp ? '접기' : '+' + nHid + ' 더 보기') + '</button></div>';
+    }
+    keyOut.push(g + N + (over ? (exp ? 'x' : 'c') + btnCol : '') + ':' + cols.map(function (cl) { return cl.map(function (n) { return n.id; }).join('.'); }).join('/'));
+    return cols.map(function (cl, ci) { return '<div class="pcolm">' + treeHTML(tl, cl, now) + (ci === btnCol ? btn : '') + '</div>'; }).join('');
+  }
   function pathHTML(x, now) {
-    var tl = x.tl, A = tl.rootsA, Sx = tl.rootsS;
-    var nA = A.length + (tl.hidA > 0 ? 1 : 0), nS = Sx.length + (tl.hidS > 0 ? 1 : 0), grp = [];
-    var showA = A.length > 0 || tl.hidA > 0 || (Sx.length === 0 && tl.hidS === 0), showS = Sx.length > 0 || tl.hidS > 0;
+    var tl = x.tl, A = tl.rootsA, Sx = tl.rootsS, sid = x.s.id, fk = [];
+    var nA = A.length, nS = Sx.length, grp = [];
+    var showA = A.length > 0 || Sx.length === 0, showS = Sx.length > 0;
     if (showA) {
-      var body = A.length || tl.hidA ? treeHTML(tl, A, now) + (tl.hidA > 0 ? moreHTML(tl.hidA) : '') : '<div class="tn" data-empty="1" data-act="0"><div class="nd nemp">에이전트·스킬 없음</div></div>';
+      var body = A.length ? foldGroup(tl, A, 'A', sid, now, fk) : '<div class="tn" data-empty="1" data-act="0"><div class="nd nemp">에이전트·스킬 없음</div></div>';
       grp.push({ w: Math.max(1, Math.min(6, nA)), html: '<section class="grp" data-g="A"><div class="gch"><span class="pchip' + (tl.nRun ? ' on' : '') + '">AGENTS<b>' + tl.nRun + ' RUNNING</b></span></div><div class="items">' + body + '</div></section>' });
     }
-    if (showS) grp.push({ w: nS <= 2 ? 1 : (nS <= 4 ? 2 : 3), html: '<section class="grp" data-g="S"><div class="gch"><span class="pchip on">SKILLS<b>' + tl.nSkMain + ' ACTIVE</b></span></div><div class="items">' + treeHTML(tl, Sx, now) + (tl.hidS > 0 ? moreHTML(tl.hidS) : '') + '</div></section>' });
+    if (showS) grp.push({ w: nS <= 2 ? 1 : (nS <= 4 ? 2 : 3), html: '<section class="grp" data-g="S"><div class="gch"><span class="pchip on">SKILLS<b>' + tl.nSkMain + ' ACTIVE</b></span></div><div class="items">' + foldGroup(tl, Sx, 'S', sid, now, fk) + '</div></section>' });
     var cols = grp.length > 1 ? grp.map(function (g) { return 'minmax(190px,' + g.w + 'fr)'; }).join(' ') : 'minmax(0,1fr)';
-    return '<div class="pbox" id="c-pbox" data-tn="' + tl.total + '"><div class="lg" style="grid-template-columns:' + cols + '">' + grp.map(function (g) { return g.html; }).join('') + '</div></div>';
+    return { html: '<div class="pbox" id="c-pbox" data-tn="' + tl.total + '"><div class="lg" style="grid-template-columns:' + cols + '">' + grp.map(function (g) { return g.html; }).join('') + '</div></div>', key: fk.join(',') };
   }
 
   // ---------- hero rendering + selection ----------
@@ -534,8 +576,8 @@
     }
   }
   function detailParts(M) {
-    var i = indexAll(M, cs.selId), x = M.liveChips[i];
-    return { x: x, detail: cardHTML(x, M) + '<div class="sidew"><div class="side' + (x.run ? '' : ' wait') + '">' + sessSideHTML(x, M) + '</div></div>', path: pathHTML(x, M.now), key: x.s.id + '#' + x.tl.key };
+    var i = indexAll(M, cs.selId), x = M.liveChips[i], ph;
+    return { x: x, detail: cardHTML(x, M) + '<div class="sidew"><div class="side' + (x.run ? '' : ' wait') + '">' + sessSideHTML(x, M) + '</div></div>', path: (ph = pathHTML(x, M.now)).html, key: x.s.id + '#' + x.tl.key + '#' + ph.key };
   }
   function paintSel(M) {
     var d = detailParts(M), det = $('c-detail'), pw = $('c-pathw');
@@ -650,6 +692,13 @@
       var nc = stripCols(stripEl);
       if (nc !== cs.cols) { cs.cols = nc; renderHero(cs.M); }
     }
+    var pchg = false;
+    [].forEach.call(hero.querySelectorAll('#c-pbox .grp'), function (g) {
+      var k = g.getAttribute('data-g'), it = g.querySelector(':scope > .items');
+      var c = it ? (getComputedStyle(it).gridTemplateColumns.match(/[\d.]+px/g) || []).length : 0;
+      if (c && c !== cs.pcols[k]) { cs.pcols[k] = c; pchg = true; }
+    });
+    if (pchg && cs.M && cs.painted && !cs.fading) patchSel(cs.M);   // fold point moved (width change): rebuild the path once
     var hr = hero.getBoundingClientRect(), W = Math.round(hr.width), H = Math.round(hr.height);
     if (!W || !H) return;
     function rc(el) { var r = el.getBoundingClientRect(); return { l: Math.round(r.left - hr.left), r: Math.round(r.right - hr.left), t: Math.round(r.top - hr.top), b: Math.round(r.bottom - hr.top) }; }
@@ -673,12 +722,13 @@
       };
       var grps = [].map.call(pbox.querySelectorAll('.grp'), function (g) {
         var gc = rc(g.querySelector('.gch'));
-        var items = [].map.call(g.querySelectorAll(':scope > .items > .tn'), function (tn) {
+        var items = [].filter.call(g.querySelectorAll(':scope > .items > .tn, :scope > .items > .pcolm > .tn'), function (tn) { return !tn.hasAttribute('data-more'); }).map(function (tn) {
           var plain = tn.hasAttribute('data-more') || tn.hasAttribute('data-empty'), q = rc(tn.querySelector(':scope > .nd, :scope > .more'));
           q.tn = tn; q.act = tn.getAttribute('data-act') === '1'; q.plain = plain; q.my = plain ? Math.round((q.t + q.b) / 2) : q.t + 17; return q;
         });
         var minT = Math.min.apply(null, items.map(function (q) { return q.t; }));
-        items.forEach(function (q) { q.first = q.t - minT < 8; });
+        // first node of its column stack drops straight from the bus; the others hook off the column's left gutter trunk
+        items.forEach(function (q) { var pc = q.tn.parentNode; q.first = pc.classList.contains('pcolm') ? pc.firstElementChild === q.tn : q.t - minT < 8; });
         return { busY: Math.round((gc.t + gc.b) / 2), items: items };
       });
       if (grps.length) {
@@ -727,7 +777,7 @@
       var p = pt.p.filter(function (q, i) { return i === 0 || Math.abs(q[0] - pt.p[i - 1][0]) > .1 || Math.abs(q[1] - pt.p[i - 1][1]) > .1; });
       var d = 'M' + p.map(function (q) { return q[0] + ' ' + q[1]; }).join('L'), len = 0;
       for (var i = 1; i < p.length; i++) len += Math.abs(p[i][0] - p[i - 1][0]) + Math.abs(p[i][1] - p[i - 1][1]);
-      var id = 'c-ap' + ix, dur = Math.max(.8, len / SPEED), beg = '-' + ((ix * 1.1) % dur).toFixed(2) + 's', s0 = p[0], e0 = p[p.length - 1];
+      var id = 'c-ap' + ix, dur = Math.max(.8, len / SPEED), beg = '-' + (dur * ((ix * 0.618034) % 1)).toFixed(2) + 's', s0 = p[0], e0 = p[p.length - 1];
       ds += '<path id="' + id + '" d="' + d + '" fill="none" stroke="#bff23a" stroke-width="2" stroke-linejoin="miter"/>';
       ns += '<circle cx="' + e0[0] + '" cy="' + e0[1] + '" r="7" fill="rgba(' + ACCRGB + ',.18)" stroke="#bff23a" stroke-width="1.1" stroke-opacity=".7"/><circle cx="' + e0[0] + '" cy="' + e0[1] + '" r="3.5" fill="#fff"/>';
       if (pt.child) ns += '<circle cx="' + s0[0] + '" cy="' + s0[1] + '" r="5" fill="rgba(' + ACCRGB + ',.18)" stroke="#bff23a" stroke-width="1.1" stroke-opacity=".7"/><circle cx="' + s0[0] + '" cy="' + s0[1] + '" r="2.5" fill="#fff"/>';

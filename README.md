@@ -6,7 +6,7 @@
 
 데모 영상: https://youtu.be/CYhLtgvjr_0
 
-**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.2.2-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
+**⬇ Windows 실행 파일 다운로드 (설치 불필요):** [최신 릴리즈](https://github.com/LanturnHouse/token-dashboard/releases/latest) — `token-dashboard-v1.2.3-win-x64.zip` 을 받아 압축을 풀고 `token-dashboard.exe` 를 더블클릭하세요.
 
 ## 주요 기능
 
@@ -48,7 +48,7 @@
 - **관제**: 실행 중이거나 대기 중인 세션을 칩으로 늘어놓고, 그중 하나를 골라 자세히 봅니다.
   - **세션 줄**: 작업 중인 세션을 먼저, 그다음 대기 세션을 보여 줍니다. 접힌 상태에서는 두 줄까지만 보이고, 넘치는 세션은 `+N 더 보기` 로 펼칩니다.
   - **선택한 세션**: 컨텍스트 크기 게이지(자동 압축 지점은 점선), 최근 호출의 컨텍스트 변화, 모델과 노력 수준을 보여 줍니다. 오른쪽 **THIS SESSION · LAST 60 MIN** 패널은 그 세션의 최근 60분 토큰·비용을 그 세션에서 가장 많이 쓴 1시간과 비교하고, 압축 횟수를 보여 줍니다.
-  - **에이전트·스킬 경로도**: 세션의 에이전트와 스킬을 한 장의 그림으로 그립니다. 회색 선은 연결이고, 라임색 선과 움직이는 점은 지금 사용 중인 것입니다. 서브에이전트는 자기를 호출한 에이전트 아래에 매달려 그려집니다. 스킬은 호출 후 3분 이내일 때만 그립니다. 로그에는 호출 시각만 남고 끝난 시각은 없기 때문입니다.
+  - **에이전트·스킬 경로도**: 세션의 에이전트와 스킬을 한 장의 그림으로 그립니다. 회색 선은 연결이고, 라임색 선과 움직이는 점은 지금 사용 중인 것입니다. 서브에이전트는 자기를 호출한 에이전트 아래에 매달려 그려집니다. 노드는 모두 그리되, 그룹마다 지금 화면 폭에서 4줄을 넘으면 4번째 줄 끝이 `+N 더 보기` 노드가 되어 나머지를 펼칠 수 있습니다(종료된 에이전트가 먼저 접힙니다). 스킬은 호출 후 3분 이내일 때만 그립니다. 로그에는 호출 시각만 남고 끝난 시각은 없기 때문입니다.
   - **아래 영역**: 압축 기록, 재읽기 vs 신규, 노력 수준 분포가 나옵니다. 노력 수준 분포에서 기록이 없는 비율은 **미기록**으로 따로 표시합니다. 그 아래에는 활동 기록 테마와 같은 차트, 세션 목록, 가격표가 이어집니다.
 - **바꾸는 법**: 상단바의 `THEME` 버튼(활동 기록 / 관제)을 누르거나, 주소 뒤에 `?skin=activity` 또는 `?skin=control` 을 붙입니다. 고른 테마와 관제에서 고른 세션은 이 브라우저에 기억됩니다(localStorage).
 - **제약**:
@@ -112,9 +112,9 @@ Windows에서는 `demo.bat` 을 실행하면 포트 **7778** 로 뜹니다. 데�
 
 ## Windows 실행 파일 (token-dashboard.exe)
 
-Node.js를 설치하지 않아도 되는 단일 실행 파일입니다. v1.2.2 exe에는 두 테마(활동 기록, 관제)가 모두 들어 있습니다.
+Node.js를 설치하지 않아도 되는 단일 실행 파일입니다. v1.2.3 exe에는 두 테마(활동 기록, 관제)가 모두 들어 있습니다.
 
-1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.2.2-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
+1. [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) 에서 `token-dashboard-v1.2.3-win-x64.zip` (또는 `.exe`) 를 받습니다. 받은 파일은 `SHA256SUMS.txt` 로 확인할 수 있습니다.
 2. 파일을 더블클릭합니다. 기본 브라우저가 **http://localhost:7777** 을 자동으로 엽니다. 창을 닫으면 대시보드가 종료됩니다.
 3. 처음 실행하면 Windows SmartScreen 에 **"알 수 없는 게시자"** 경고가 뜰 수 있습니다. 이 프로그램은 코드 서명이 없기 때문입니다. **추가 정보** → **실행** 을 누르면 됩니다.
 4. `config.json` 과 `.cache/` 는 exe 가 있는 폴더에 만들어집니다. 설정을 바꾸려면 그 파일을 편집하세요.
@@ -291,7 +291,7 @@ MIT. 자세한 내용은 [LICENSE](LICENSE) 를 보세요.
 
 - **Run:** `node server.js` (or `start.bat` on Windows), then open http://localhost:7777. Node 20+ recommended; developed and tested on Node 24.
 - **Demo mode:** `node server.js --demo` (or `demo.bat`, port 7778) masks session titles, project names, paths, prompts and skill names (custom skills show as `custom-skill #n`) for screen recording.
-- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`. The v1.2.2 exe contains both themes.
+- **Windows exe:** download `token-dashboard.exe` from [GitHub Releases](https://github.com/LanturnHouse/token-dashboard/releases/latest) and double-click it (no Node.js needed). Unsigned, so SmartScreen may warn: More info → Run. `--demo`, `--no-open` supported. Build it yourself with `build.bat`. The v1.2.3 exe contains both themes.
 - **Cost figures** are estimates at API list prices. They are not your subscription bill.
 - **Config:** `config.json` (`port`, `host`, `claudeDir`, `codexDir`, `codexPricing`) and env vars `PORT`, `CODEX_DIR`, `DASHBOARD_CACHE`, `DEMO`.
 - **Design notes:** `docs/specs/` (SPEC, SPEC-v2, SPEC-v3). Parts of these are outdated (e.g. PIN login).
