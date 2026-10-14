@@ -485,8 +485,20 @@
     var map = cs.pmap[mk] || (cs.pmap[mk] = { col: {}, next: 0 });
     list.forEach(function (n) { if (map.col[n.id] == null) { map.col[n.id] = map.next % N; map.next++; } });
     var cols = [], c;
-    for (c = 0; c < N; c++) cols.push([]);
-    list.forEach(function (n) { cols[map.col[n.id]].push(n); });
+    function deal() {
+      cols = [];
+      for (c = 0; c < N; c++) cols.push([]);
+      list.forEach(function (n) { cols[map.col[n.id]].push(n); });
+    }
+    deal();
+    // sticky columns only while they stay compact: an empty column among the first min(N, count) (nodes that ended and
+    // vanished left a gap) => re-deal everything round-robin in the stable order (running first, then by start)
+    for (c = 0; c < Math.min(N, list.length); c++) if (!cols[c].length) break;
+    if (c < Math.min(N, list.length)) {
+      map.col = {}; map.next = 0;
+      list.forEach(function (n) { map.col[n.id] = map.next % N; map.next++; });
+      deal();
+    }
     var over = cols.some(function (cl) { return cl.length > PATH_ROWS; }), btnCol = -1, hid = [];
     if (over && !exp) {
       for (c = N - 1; c >= 0 && btnCol < 0; c--) if (cols[c].length >= PATH_ROWS) btnCol = c;
